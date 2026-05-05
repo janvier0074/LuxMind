@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxMind - Learn and Innovate</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: url('Xavier.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* Glass card for readability */
+.glass-card {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background: rgba(31, 41, 55, 0.7);
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight:700;
+    font-size:22px;
+    color:#10b981;
+}
+
+nav {
+    display:flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration:none;
+    color:#e5e7eb;
+    transition:0.3s;
+}
+
+nav a:hover {
+    color:#10b981;
+}
+
+/* HERO SECTION */
+.hero {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    color: white;
+    padding: 0 20px;
+    background: rgba(0,0,0,0.4); /* subtle overlay for text readability */
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 22px;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.hero .cta-btn {
+    padding: 15px 30px;
+    margin: 5px;
+    background: #10b981;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.hero .cta-btn:hover {
+    background: #0e9f6e;
+}
+
+/* Courses grid */
+.container {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    backdrop-filter: blur(10px);
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(16,185,129,0.3);
+}
+
+.card h2, .card p, .card a.cta-btn {
+    color: white;
+}
+
+.cta-btn {
+    padding:12px 25px;
+    background:#10b981;
+    border-radius:30px;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* Why Choose LuxMind */
+.why-choose {
+    text-align:center;
+    padding:60px 20px;
+    background: rgba(0,0,0,0.6);
+}
+
+.features {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.feature-card {
+    background:#10b981;
+    padding:20px;
+    border-radius:10px;
+    min-width:200px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+}
+
+footer a {
+    color: #10b981;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+/* Responsive */
+@media (max-width:768px) {
+    .hero h1 { font-size: 32px; }
+    .hero p { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">LuxMind</div>
+    <nav>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#">Practice</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <h1>Welcome to LuxMind</h1>
+    <p>Learn web development, artificial intelligence, and expand your knowledge with interactive lessons, real projects, and practical examples.</p>
+    <div>
+        <a href="#courses" class="cta-btn">Start Learning</a>
+        <a href="#about" class="cta-btn">About LuxMind</a>
+    </div>
+    <p style="margin-top: 20px; font-size: 16px;">Founded by <strong>Xavier Janvier Harerimana</strong></p>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="glass-card">
+        <h2>About LuxMind</h2>
+        <p>
+            LuxMind, founded by <strong>Xavier Janvier Harerimana</strong>, is dedicated to improving knowledge in web development,
+            artificial intelligence, and general computer sciences. Our mission is to help learners achieve real-world skills
+            and unlock their potential in technology and innovation.
+        </p>
+    </div>
+</section>
+
+<!-- Courses -->
+<section class="container" id="courses">
+    <div class="card">
+        <h2>🌐 HTML</h2>
+        <p>Structure of web pages</p>
+        <a href="#" class="cta-btn" onclick="goToCourse('html.html')">Start HTML</a>
+    </div>
+    <div class="card">
+        <h2>🎨 CSS</h2>
+        <p>Design and style websites</p>
+        <a href="css.html" class="cta-btn">Start CSS</a>
+    </div>
+    <div class="card">
+        <h2>⚡ JavaScript</h2>
+        <p>Make websites interactive</p>
+        <a href="js.html" class="cta-btn">Start JS</a>
+    </div>
+    <div class="card">
+        <h2>📐 Mathematics</h2>
+        <p>Learn the fundamentals of math</p>
+        <a href="#" class="cta-btn" id="startMathematicsBtn">Start Mathematics</a>
+       
+    </div>
+    <div class="card">
+        <h2>🔭 Physics</h2>
+        <p>Explore the laws of nature</p>
+        <a href="#" class="cta-btn" id="startPhysicsBtn">Start Physics</a>
+    </div>
+    <div class="card">
+        <h2>⚗️ Chemistry</h2>
+        <p>Understand substances and reactions</p>
+        <a href="chemistry.html" class="cta-btn">Start Chemistry</a>
+    </div>
+</section>
+
+<!-- Why Choose -->
+<section class="why-choose">
+    <h2>Why Choose LuxMind?</h2>
+    <div class="features">
+        <div class="feature-card">📘 Structured Courses</div>
+        <div class="feature-card">⚡ Fast Learning</div>
+        <div class="feature-card">💻 Practical Examples</div>
+    </div>
+</section>
+
+<script>
+// Navigate to physics page
+document.getElementById("startPhysicsBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    window.location.href = "physics.html";
+});
+</script>
+<script>
+const user = localStorage.getItem("user");
+
+const nav = document.querySelector("nav");
+
+if (user) {
+    // Replace Login with user + logout
+    nav.innerHTML = `
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#">Practice</a>
+       <span>👤 ${user.split("@")[0]}</span>
+        <a href="#" onclick="logout()">Logout</a>
+    `;
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    location.reload();
+}
+</script>
+<script>
+function goToCourse(page) {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    window.location.href = page;
+}
+</script>
+<script>
+function goToCourse(page) {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>
+
+<footer>
+    <p>© 2026 Xavier Janvier Harerimana - LuxMind</p>
+    <div>
+        <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">GitHub</a>
+    </div>
+</footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+</script>
+<script src="courses.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("startMathematicsBtn");
+
+    if (btn) {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = "math.html"; // or physics.html etc
+        });
+    } else {
+        console.log("Math button not found");
+    }
+});
+</script>
+</body>
+</html>       

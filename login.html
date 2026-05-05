@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LuxMind — Login</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#10b981;
+  --green-dark:#0e9f6e;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --radius:12px;
+  --gap:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+html,body{height:100%;background:var(--bg);color:#111;}
+.container{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:48px;
+  padding:32px;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 12px 30px rgba(2,6,23,0.08);
+  padding:40px;
+  max-width:420px;
+  width:100%;
+}
+
+/* Hero side */
+.hero{
+  max-width:520px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero img{
+  width:100%;
+  height:auto;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(2,6,23,0.12);
+  object-fit:cover;
+}
+
+/* Headings */
+.brand{
+  color:var(--green);
+  font-weight:600;
+  text-align:center;
+  margin-bottom:18px;
+}
+.hint{font-size:14px;color:var(--muted);text-align:center;margin-bottom:18px;}
+
+/* Form */
+form{display:flex;flex-direction:column;gap:12px;}
+label{font-size:14px;color:#374151;display:inline-flex;flex-direction:column;gap:8px;}
+.input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  font-size:15px;
+  background:white;
+  transition:box-shadow .15s, border-color .15s;
+}
+.input:focus{outline:none;border-color:var(--green);box-shadow:0 6px 18px rgba(16,185,129,0.08);}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.checkbox{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#374151;}
+.link{color:var(--green);text-decoration:none;font-weight:600;}
+.link:hover{text-decoration:underline;}
+.btn{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:0;
+  background:var(--green);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .15s,transform .05s;
+}
+.btn:hover{background:var(--green-dark);}
+.btn[disabled]{opacity:.7;cursor:not-allowed;transform:none;}
+
+/* Inline error */
+.error{
+  color:#b91c1c;
+  font-size:13px;
+  margin-top:4px;
+}
+
+/* utilities */
+.helper{font-size:13px;color:var(--muted);text-align:center;margin-top:12px;}
+.show-pass{background:none;border:0;color:var(--muted);cursor:pointer;font-size:13px;padding:6px 8px;border-radius:8px;}
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;}
+
+/* Responsive */
+@media (max-width:900px){
+  .container{flex-direction:column;gap:20px;padding:20px;}
+  .hero{order:2;}
+  .card{order:1;max-width:560px;}
+}
+</style>
+</head>
+<body>
+<div class="container" role="main">
+  <div class="hero" aria-hidden="false">
+    <img src="Xavier.jpg" alt="Person using LuxMind app on a phone" loading="lazy">
+  </div>
+
+  <section class="card" aria-labelledby="login-heading">
+    <h1 id="login-heading" class="brand">Login to LuxMind</h1>
+    <p class="hint">Enter your details to continue</p>
+
+    <form id="loginForm" novalidate>
+      <label for="email">
+        Email
+        <input id="email" class="input" name="email" type="email" inputmode="email" autocomplete="email" required aria-required="true" />
+        <span id="emailError" class="error" role="alert" aria-live="polite"></span>
+      </label>
+
+      <label for="password">
+        Password
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="password" class="input" name="password" type="password" autocomplete="current-password" required minlength="6" aria-required="true" />
+          <button type="button" class="show-pass" id="togglePass" aria-pressed="false" title="Show password">Show</button>
+        </div>
+        <span id="passwordError" class="error" role="alert" aria-live="polite"></span>
+      </label>
+
+      <div class="row" style="align-items:center;">
+        <label class="checkbox"><input id="remember" name="remember" type="checkbox" /> Remember me</label>
+        <a class="link" href="#" id="forgot">Forgot password?</a>
+      </div>
+
+      <button class="btn" type="submit" id="submitBtn">Login</button>
+
+      <div id="formError" class="error" role="alert" aria-live="polite"></div>
+    </form>
+
+    <p class="helper">Don't have an account? <a class="link" href="#">Sign up</a></p>
+  </section>
+</div>
+
+<script>
+/* Minimal front-end improvements:
+ - Prevent default submit
+ - Basic client validation with inline errors
+ - Mock fetch to demonstrate how to connect to backend
+ - Do NOT use this for production auth; replace with real endpoint and secure cookie handling
+*/
+
+const form = document.getElementById('loginForm');
+const emailEl = document.getElementById('email');
+const passEl = document.getElementById('password');
+const submitBtn = document.getElementById('submitBtn');
+const emailError = document.getElementById('emailError');
+const passError = document.getElementById('passwordError');
+const formError = document.getElementById('formError');
+const togglePass = document.getElementById('togglePass');
+const rememberEl = document.getElementById('remember');
+
+function clearErrors(){
+  emailError.textContent = '';
+  passError.textContent = '';
+  formError.textContent = '';
+}
+
+function validate(){
+  clearErrors();
+  let ok = true;
+  const email = emailEl.value.trim();
+  const pass = passEl.value;
+
+  if(!email){
+    emailError.textContent = 'Email is required.';
+    ok = false;
+  } else if(!/^\S+@\S+\.\S+$/.test(email)){
+    emailError.textContent = 'Enter a valid email.';
+    ok = false;
+  }
+
+  if(!pass){
+    passError.textContent = 'Password is required.';
+    ok = false;
+  } else if(pass.length < 6){
+    passError.textContent = 'Password must be at least 6 characters.';
+    ok = false;
+  }
+
+  return ok;
+}
+
+togglePass.addEventListener('click', () => {
+  const isHidden = passEl.type === 'password';
+  passEl.type = isHidden ? 'text' : 'password';
+  togglePass.textContent = isHidden ? 'Hide' : 'Show';
+  togglePass.setAttribute('aria-pressed', String(isHidden));
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(!validate()) return;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Signing in...';
+  clearErrors();
+
+  // prepare payload
+  const payload = {
+    email: emailEl.value.trim(),
+    password: passEl.value,
+    remember: rememberEl.checked
+  };
+
+  try {
+    // Replace '/api/login' with your real auth endpoint.
+    // Backend should return a secure HttpOnly cookie or token exchange flow.
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+      credentials: 'include' // if you expect cookies
+    });
+
+    if (!res.ok) {
+      // Attempt to read server-provided message
+      const err = await res.json().catch(() => ({}));
+      formError.textContent = err.message || 'Invalid email or password.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Login';
+      return;
+    }
+
+    // On success, server should redirect or return info; we redirect client-side as fallback
+    const data = await res.json().catch(() => ({}));
+    // Example: if server returns {redirect:'/dashboard'}
+    const redirect = data.redirect || 'index.html';
+    window.location.href = redirect;
+
+  } catch (err) {
+    console.error(err);
+    formError.textContent = 'Network error. Please try again.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Login';
+  }
+});
+</script>
+</body>
+</html>

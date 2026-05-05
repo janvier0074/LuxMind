@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics Course - LuxMind</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+<style>
+ 
+body { font-family: 'Inter', sans-serif; margin:0; background:#f0f2f5; color:#111827; }
+header { background:#fff; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #d1d5db; position:sticky; top:0; z-index:1000; }
+header a { color:#374151; text-decoration:none; margin-left:20px; font-weight:500; }
+header a:hover { color:#10b981; }
+.container { display:flex; min-height:100vh; }
+/* Sidebar (unchanged) */
+.sidebar { 
+  width:250px; 
+  background:#1f2937; 
+  color:white; 
+  border-right:1px solid #374151; 
+  padding-top:10px;
+
+  position: fixed;
+  top: 70px;     /* below header */
+  left: 0;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+.menu-header { padding:12px 16px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#9ca3af; }
+.menu-list { list-style:none; padding:0; margin:0; }
+.menu-list li { padding:12px 16px; margin:4px 10px; border-radius:8px; cursor:pointer; transition:0.3s; background:#1f2937; color:white; }
+.menu-list li:hover { background:#10b981; color:white; }
+.menu-list li.active { background:#059669; color:white; font-weight:600; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+/* Main content layout */
+.main-content {
+  margin-left: 250px;
+}
+.sidebar {
+  display: none;
+}
+/* Hero Section */
+.hero { background:url('jaja.jpg') center/cover no-repeat; border-radius:12px; color:white; padding:80px 40px; position:relative; overflow:hidden; margin-bottom:40px; }
+.hero::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); border-radius:12px; }
+.hero-content { position:relative; z-index:1; }
+.hero-content h1 { font-size:48px; margin-bottom:20px; color:#10b981; }
+.hero-content p { font-size:18px; line-height:1.8; max-width:600px; }
+/* Feature Cards */
+.features { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-bottom:40px; }
+.card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 6px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; display:flex; align-items:center; gap:15px; }
+.card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.15); }
+.card img { height:50px; border-radius:8px; flex-shrink:0; }
+.card div { font-size:16px; line-height:1.6; color:#374151; }
+/* Why Physics Section */
+.why-physics { background:#e0f2fe; padding:30px 20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:40px; }
+.why-physics h2 { margin-top:0; color:#0369a1; }
+.why-physics p { font-size:16px; line-height:1.8; color:#1e293b; }
+/* Call-to-action button */
+.cta { display:inline-block; padding:12px 28px; background:#10b981; color:white; font-weight:600; border-radius:8px; text-decoration:none; transition:background 0.3s, transform 0.2s; }
+.cta:hover { background:#059669; transform:translateY(-2px); }
+/* Quiz styles */
+.quiz-option { display:block; margin:8px 0; padding:8px 12px; background:#f3f4f6; border-radius:6px; cursor:pointer; transition:0.2s; }
+.quiz-option:hover { background:#d1fae5; }
+.quiz-feedback { margin-top:10px; font-weight:600; }
+.nav-buttons { display:flex; justify-content:space-between; margin-top:20px; }
+.nav-buttons button { padding:12px 30px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:#10b981; color:white; transition:0.2s; }
+.nav-buttons button:hover { background:#059669; }
+@media(max-width:768px){ .container{ flex-direction:column; } .sidebar{ position:absolute; top:60px; left:0; height:100%; z-index:1000; width:220px; display:none; } .hero{ padding:60px 20px; font-size:90%; } }
+</style>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #00539C;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #aaa;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #d0e4f5;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+ <style>
+/* Compact and left-aligned lesson tables */
+.lesson-table {
+  border-collapse: collapse;
+  width: auto;           /* shrink width to content */
+  max-width: 400px;      /* optional max width for smaller tables */
+  margin: 10px 0 10px 0; /* top & bottom spacing, left aligned */
+  font-size: 12px;       /* smaller font */
+  text-align: left;
+}
+
+.lesson-table th, .lesson-table td {
+  padding: 4px 6px;      /* smaller cells */
+}
+
+.lesson-table th {
+  background-color: #10b981;
+  color: white;
+}
+
+.lesson-table td {
+  padding: 2px 6px;      /* compact rows */
+}
+
+.lesson-table tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.lesson-table tr:hover {
+  background-color: #d1fae5;
+}
+ /* ADD THIS at the end of your first <style> */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dark {
+  background:#111827;
+  color:white;
+}
+.quiz-progress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: #10b981;
+  border-radius: 6px;
+  transition: width 0.3s;
+}
+
+.question {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.quiz-option {
+  display:block;
+  margin:8px 0;
+  padding:8px;
+  border:1px solid #d1d5db;
+  border-radius:6px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div style="display:flex; align-items:center;">
+<span id="toggleSidebarBtn" style="cursor:pointer; margin-right:10px; font-size:22px;">&#9776;</span>
+<div class="logo" style="color:#10b981; font-weight:600;">LuxMind</div>
+</div>
+<nav style="display: flex; justify-content: flex-end; gap: 20px;">
+  <a href="#" onclick="goHome()">Home</a>
+  <a href="html.html">HTML</a>
+  <a href="css.html">CSS</a>
+  <a href="js.html">JS</a>
+</nav>
+<div style="height:6px; background:#e5e7eb;">
+  <div id="progressBar" style="height:6px; width:0%; background:#10b981;"></div>
+</div>
+<button onclick="toggleDark()" style="margin-left:20px;">🌙</button>
+</header>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebarMenuArea">
+        <nav class="physics-menu">
+            <h3 class="menu-header">Physics Course</h3>
+            <input type="text" placeholder="Search lessons..." 
+style="width:90%; margin:10px; padding:8px; border-radius:6px; border:none;"
+onkeyup="searchLessons(this.value)">
+            <ul class="menu-list" id="lessonList">
+    <!-- Original lessons at the top -->
+    <li onclick="showLesson(0)">Introduction to Physics</li>
+    <li onclick="showLesson(1)">Units and Measurements</li>
+
+    <!-- Grouped lessons -->
+    <li onclick="showLesson(2)">Motion & Forces</li>
+    <li onclick="showLesson(3)">Work, Energy & Power</li>
+    <li onclick="showLesson(4)">Momentum & Pressure</li>
+    <li onclick="showLesson(5)">Matter, Heat & Thermodynamics</li>
+    <li onclick="showLesson(6)">Waves & Oscillations</li>
+    <li onclick="showLesson(7)">Light & Optics</li>
+    <li onclick="showLesson(8)">Electricity & Magnetism</li>
+    <li onclick="showLesson(9)">Rotational Motion & Torque</li>
+    <li onclick="showLesson(10)">Fluids & Their Properties</li>
+    <li onclick="showLesson(11)">Modern & Nuclear Physics</li>
+    <li onclick="showLesson(12)">Elasticity & Equilibrium</li>
+
+    <!-- Additional lessons -->
+    <li onclick="showLesson(13)">Advanced Oscillations</li>
+    <li onclick="showLesson(14)">Wave Phenomena</li>
+    <li onclick="showLesson(15)">Advanced Optics</li>
+    <li onclick="showLesson(16)">Electric Circuits</li>
+    <li onclick="showLesson(17)">Magnetism Advanced</li>
+    <li onclick="showLesson(18)">Quantum & Nuclear Physics Detailed</li>
+</ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to LuxMind Physics</h1>
+                <p>Explore the fundamental principles of the universe, from classical mechanics to modern quantum theory. This course combines clear explanations, visuals, and interactive examples to make physics engaging and intuitive.</p>
+                <a href="#" class="cta" onclick="showLesson(0)">Start Learning Now</a>
+            </div>
+        </section>
+<section class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 10px;">
+
+  <div class="card" style="background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; flex-direction:column; width:180px; height:180px; cursor:pointer; transition:0.3s ease;">
+    <img src="tt.jpg" alt="Newton's Laws" style="width:100%; height:100px; object-fit:cover;">
+    <div style="padding:8px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <strong style="display:block; font-size:14px; margin-bottom:4px; color:#10b981;">Newton's Laws:</strong>
+      <span style="font-size:12px; color:#374151;">Understand how forces govern motion in real-world and scientific contexts.</span>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; flex-direction:column; width:180px; height:180px; cursor:pointer; transition:0.3s ease;">
+    <img src="hh.jpg" alt="Energy Diagram" style="width:100%; height:100px; object-fit:cover;">
+    <div style="padding:8px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <strong style="display:block; font-size:14px; margin-bottom:4px; color:#10b981;">Energy & Work:</strong>
+      <span style="font-size:12px; color:#374151;">Learn how energy is transferred, stored, and conserved in various systems.</span>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; flex-direction:column; width:180px; height:180px; cursor:pointer; transition:0.3s ease;">
+    <img src="uu.jpg" alt="Electric Circuit" style="width:100%; height:100px; object-fit:cover;">
+    <div style="padding:8px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <strong style="display:block; font-size:14px; margin-bottom:4px; color:#10b981;">Electricity & Magnetism:</strong>
+      <span style="font-size:12px; color:#374151;">Explore circuits, magnetic fields, and electromagnetism fundamentals.</span>
+    </div>
+  </div>
+
+</section>
+
+        <section class="why-physics" style="background:#f4f8ff; padding:30px; border-radius:12px; max-width:800px; margin:40px auto; box-shadow:0 4px 10px rgba(0,0,0,0.1); font-family:Arial, sans-serif;">
+    
+    <h2 style="color:#2c3e50; margin-bottom:15px; text-align:center;">
+        Why Study <span style="color:#007BFF;">Physics</span>?
+    </h2>
+    
+    <ul style="list-style:none; padding:0; color:#555; font-size:16px;">
+        <li style="margin:10px 0;">
+            🔍 <span style="color:#007BFF; font-weight:bold;">Understand</span> how the universe works
+        </li>
+        <li style="margin:10px 0;">
+            🧠 Develop <span style="color:#28a745; font-weight:bold;">analytical thinking</span>
+        </li>
+        <li style="margin:10px 0;">
+            🛠️ Build strong <span style="color:#dc3545; font-weight:bold;">problem-solving skills</span>
+        </li>
+        <li style="margin:10px 0;">
+            🚀 Prepare for <span style="color:#6f42c1; font-weight:bold;">careers in science</span>
+        </li>
+    </ul>
+
+</section>
+    </div>
+</div>
+
+<script>
+const toggleBtn = document.getElementById('toggleSidebarBtn');
+const sidebarEl = document.getElementById('sidebarMenuArea');
+toggleBtn.addEventListener('click', () => {
+  // Only allow toggle if a lesson is open
+  if(currentLesson !== null){
+    sidebarEl.style.display = sidebarEl.style.display === 'block' ? 'none' : 'block';
+  }
+});
+// Lessons
+const lessons = [
+  {
+    title: "Introduction to Physics",
+    content: `
+      <h2 style="font-size:36px; color:#10b981; border-bottom:4px solid #059669; padding-bottom:8px; margin-bottom:30px; display:inline-block;">
+        Chapter 1: Introduction to Physics 🧪
+      </h2>
+
+      <section style="display:flex; align-items:flex-start; gap:25px; margin-bottom:30px;">
+        <div style="flex:1;">
+          <h3>What is Physics? ⚙️</h3>
+          <p>Physics is the <strong>study of matter, energy, and the forces of nature</strong>. It explains <strong>how things move, why they move, and how the universe works</strong>.</p>
+        </div>
+        <img src="ww.jpg" alt="Physics concept illustration" style="flex-shrink:0; width:50%; max-width:300px; border-radius:12px;">
+      </section>
+
+    <section style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;">
+  <!-- Left side: list -->
+  <div style="flex:1;">
+    <h3>Why Physics is Important 🌟</h3>
+    <ul style="margin-left:20px;">
+      <li>Helps us <strong>understand nature</strong> (gravity 🌌, light 🌈, electricity ⚡)</li>
+      <li>Forms the basis of <strong>technology</strong> (computers 💻, cars 🚗, medical devices 🩺)</li>
+      <li>Improves <strong>problem-solving and critical thinking</strong> 🧠</li>
+    </ul>
+  </div>
+
+  <!-- Right side: image -->
+  <div style="flex-shrink:0; width:300px; max-width:40%;">
+    <img src="rr.jpg" alt="Why Physics is Important" style="width:100%; border-radius:12px; display:block;">
+  </div>
+</section>
+
+      <section style="margin-bottom:30px;">
+        <h3>Branches of Physics 📚</h3>
+
+        <h4>1. Classical Physics ⚙️</h4>
+        <p>Deals with everyday phenomena and laws discovered <strong>before the 20th century</strong>.</p>
+        <section style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;">
+  <!-- Left side: list -->
+  <ul style="flex:1; margin:0; padding-left:20px; list-style: disc;">
+    <li><strong>Mechanics 🏃:</strong> Motion, forces, energy, momentum</li>
+    <li><strong>Thermodynamics 🔥:</strong> Heat, temperature, energy transfer</li>
+    <li><strong>Waves & Oscillations 🌊:</strong> Sound, light waves, vibrations</li>
+    <li><strong>Optics 🌈:</strong> Behavior of light</li>
+    <li><strong>Electricity & Magnetism ⚡🧲:</strong> Electric and magnetic forces</li>
+  </ul>
+
+  <!-- Right side: image -->
+  <div style="flex-shrink:0; width:300px; max-width:40%;">
+    <img src="YY.png" alt="Branches of Physics" style="width:100%; border-radius:12px; display:block;">
+  </div>
+</section>
+       <section style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;">
+  <!-- Left side: list -->
+  <div style="flex:1;">
+    <h4>2. Modern Physics 🧪</h4>
+    <p>Studies phenomena at <strong>atomic, subatomic, or very fast-moving scales</strong>.</p>
+    <ul style="margin-left:20px;">
+      <li><strong>Quantum Mechanics ⚛️:</strong> Behavior of particles at atomic/subatomic level</li>
+      <li><strong>Relativity ⏱️🌌:</strong> Space, time, and gravity at very high speeds</li>
+      <li><strong>Nuclear Physics ☢️:</strong> Structure and behavior of atomic nuclei</li>
+      <li><strong>Particle Physics 🔬:</strong> Fundamental particles and forces</li>
+    </ul>
+  </div>
+
+  <!-- Right side: image -->
+  <div style="flex-shrink:0; width:300px; max-width:40%;">
+    <img src="modern.png" alt="Modern Physics Illustration" style="width:100%; border-radius:12px; display:block;">
+  </div>
+</section>
+
+       <section style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;">
+  <!-- Left side: list -->
+  <ul style="flex:1; margin:0; padding-left:20px; list-style: disc;">
+    <li><strong>Mechanics 🏃:</strong> Motion, forces, energy, momentum</li>
+    <li><strong>Thermodynamics 🔥:</strong> Heat, temperature, energy transfer</li>
+    <li><strong>Waves & Oscillations 🌊:</strong> Sound, light waves, vibrations</li>
+    <li><strong>Optics 🌈:</strong> Behavior of light</li>
+    <li><strong>Electricity & Magnetism ⚡🧲:</strong> Electric and magnetic forces</li>
+  </ul>
+
+  <!-- Right side: image -->
+  <div style="flex-shrink:0; width:300px; max-width:40%;">
+    <img src="jump.png" alt="Branches of Physics" style="width:100%; border-radius:12px; display:block;">
+  </div>
+</section>
+
+        <h4>4. Interdisciplinary Branches 🌍</h4>
+        <p>Physics overlaps with other fields:</p>
+        <ul style="margin-left:20px;">
+          <li><strong>Biophysics 🧬:</strong> Physics in biological systems</li>
+          <li><strong>Astrophysics 🌟:</strong> Physics of stars, planets, galaxies, universe</li>
+          <li><strong>Geophysics 🌎:</strong> Physics of Earth (seismology, gravity, magnetism)</li>
+          <li><strong>Chemical Physics ⚗️:</strong> Physical principles in chemical processes</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:30px;">
+        <h3>Key Concepts in Physics 🔑</h3>
+        <ul style="margin-left:20px;">
+          <li><strong>Matter 🧱:</strong> Anything that has mass and occupies space</li>
+          <li><strong>Energy 🔋:</strong> Ability to do work</li>
+          <li><strong>Force 🏋️:</strong> Push or pull that changes motion</li>
+          <li><strong>Motion 🛤️:</strong> Change in an object’s position</li>
+          <li><strong>Space & Time 🕰️🌌:</strong> Framework for measuring events</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:30px;">
+        <h3>Basic Laws 📏</h3>
+        <ul style="margin-left:20px;">
+          <li><strong>Newton’s Laws of Motion 🏃⚡</strong> – How objects move</li>
+          <li><strong>Conservation of Energy 🔋</strong> – Energy cannot be created or destroyed</li>
+          <li><strong>Conservation of Momentum 🏋️</strong> – Momentum stays constant in a system</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:40px;">
+        <h3>Summary 📌</h3>
+        <p>This lesson introduces the foundations of physics, its importance, main branches, and key concepts.</p>
+      </section>
+    `,
+    
+    quiz: [
+     
+
+      {
+        question: "What is physics the study of?",
+        options: [
+          "Life and organisms",
+          "Matter, energy, and forces of nature",
+          "Languages and communication"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which branch of physics studies phenomena at atomic or subatomic scales?",
+        options: [
+          "Classical Physics",
+          "Modern Physics",
+          "Applied Physics"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which of the following is a key concept in physics?",
+        options: [
+          "Matter",
+          "Literature",
+          "Painting"
+        ],
+        answer: 0
+      },
+      {
+        question: "Newton’s Laws of Motion explain:",
+        options: [
+          "How objects move",
+          "How to cook food",
+          "How plants grow"
+        ],
+        answer: 0
+      },
+      {
+        question: "Which branch of physics deals with designing machines and structures?",
+        options: [
+          "Medical Physics",
+          "Engineering Physics",
+          "Quantum Mechanics"
+        ],
+        answer: 1
+      }
+    ]
+  },
+  {
+  title: "Units and Measurements",
+  content: `
+
+  <h2 style="font-size:38px; color:#10b981; border-bottom:4px solid #059669; padding-bottom:10px; margin-bottom:35px;">
+    Chapter 2: Units and Measurements 📏
+  </h2>
+
+  <!-- INTRO -->
+  <section style="display:flex; gap:30px; margin-bottom:40px; align-items:center;">
+    <div style="flex:1;">
+      <h3>What is Measurement? 🧮</h3>
+      <p>
+        In physics, <strong>measurement</strong> is the process of assigning a numerical value to a physical quantity.
+        Every measurement consists of two parts:
+      </p>
+     <section style="display:flex; align-items:center; gap:25px;">
+  
+  <div style="flex:1;">
+    <ul>
+      <li><strong>Magnitude (number)</strong></li>
+      <li><strong>Unit (standard reference)</strong></li>
+    </ul>
+  </div>
+
+  <div>
+    <img src="unit.png" style="width:180px; border-radius:10px;">
+  </div>
+
+</section>
+
+      <p>
+        A <strong>unit</strong> gives meaning to the number. Without units, measurements are incomplete and useless.
+      </p>
+
+      <p>
+        Example:
+        <br><strong>"Length = 5"</strong> ❌ (No meaning)
+        <br><strong>"Length = 5 meters"</strong> ✅ (Complete measurement)
+      </p>
+
+      <p>
+        Measurements are essential in science because they allow us to describe the physical world in a clear,
+        consistent, and reproducible way.
+      </p>
+    </div>
+    <img src="units.png" style="width:260px; border-radius:12px;">
+  </section>
+
+  <!-- TYPES OF QUANTITIES -->
+  <section style="margin-bottom:45px;">
+  <h3 style="margin-bottom:20px;">Types of Physical Quantities 📊</h3>
+
+  <div style="display:flex; flex-wrap:wrap; gap:25px;">
+
+    <!-- Fundamental -->
+    <div style="flex:1; min-width:260px; background:#ecfeff; padding:20px; border-radius:14px; border-left:6px solid #06b6d4;">
+      <h4 style="margin-bottom:10px;">🔑 Fundamental Quantities</h4>
+      <p>
+        These are the <strong>basic building blocks</strong> of physics. They <strong>cannot be derived</strong>
+        from any other quantities and are defined independently.
+      </p>
+
+      <ul style="margin:10px 0;">
+        <li>Length (meter)</li>
+        <li>Mass (kilogram)</li>
+        <li>Time (second)</li>
+      </ul>
+
+      <p style="font-size:14px; color:#555;">
+        👉 All other physical quantities are built from these.
+      </p>
+    </div>
+
+    <!-- Derived -->
+    <div style="flex:1; min-width:260px; background:#f0fdf4; padding:20px; border-radius:14px; border-left:6px solid #22c55e;">
+      <h4 style="margin-bottom:10px;">🔗 Derived Quantities</h4>
+      <p>
+        These quantities are <strong>formed by combining fundamental quantities</strong>
+        using mathematical formulas.
+      </p>
+
+      <ul style="margin:10px 0;">
+        <li>Velocity = distance / time</li>
+        <li>Force = mass × acceleration</li>
+        <li>Energy = force × distance</li>
+      </ul>
+
+      <p style="font-size:14px; color:#555;">
+        👉 They depend on fundamental quantities.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Comparison Box -->
+  <div style="margin-top:25px; background:#f9fafb; padding:18px; border-radius:12px;">
+    <strong>📌 Key Difference:</strong>
+    <p style="margin-top:8px;">
+      Fundamental quantities are <strong>independent</strong>, while derived quantities are
+      <strong>dependent</strong> on them.
+    </p>
+  </div>
+
+</section>
+
+
+  
+  <!-- SI SYSTEM -->
+  <section style="margin-bottom:40px;">
+    <h3>SI System (International System of Units) 🔑</h3>
+
+    <p>
+      The <strong>SI system</strong> is the globally accepted system of measurement used in science and engineering.
+      It ensures consistency and accuracy across all scientific work.
+    </p>
+
+    <table class="lesson-table">
+      <tr><th>Quantity</th><th>Unit</th><th>Symbol</th><th>Description</th></tr>
+      <tr><td>Length</td><td>meter</td><td>m</td><td>Distance between two points</td></tr>
+      <tr><td>Mass</td><td>kilogram</td><td>kg</td><td>Amount of matter</td></tr>
+      <tr><td>Time</td><td>second</td><td>s</td><td>Duration of events</td></tr>
+      <tr><td>Electric Current</td><td>ampere</td><td>A</td><td>Flow of electric charge</td></tr>
+      <tr><td>Temperature</td><td>kelvin</td><td>K</td><td>Measure of heat</td></tr>
+      <tr><td>Amount of Substance</td><td>mole</td><td>mol</td><td>Number of particles</td></tr>
+      <tr><td>Luminous Intensity</td><td>candela</td><td>cd</td><td>Brightness of light</td></tr>
+    </table>
+  </section>
+
+  <!-- DERIVED -->
+  <section style="margin-bottom:40px;">
+    <h3>Derived Quantities 🔗</h3>
+
+    <p>
+      Derived quantities are obtained by combining base quantities using mathematical formulas.
+    </p>
+
+    <table class="lesson-table">
+      <tr><th>Quantity</th><th>Formula</th><th>Unit</th><th>Meaning</th></tr>
+      <tr><td>Velocity</td><td>distance / time</td><td>m/s</td><td>Speed with direction</td></tr>
+      <tr><td>Acceleration</td><td>Δv / t</td><td>m/s²</td><td>Rate of change of velocity</td></tr>
+      <tr><td>Force</td><td>m × a</td><td>Newton (N)</td><td>Push or pull on an object</td></tr>
+      <tr><td>Energy</td><td>F × d</td><td>Joule (J)</td><td>Ability to do work</td></tr>
+      <tr><td>Power</td><td>W / t</td><td>Watt (W)</td><td>Rate of doing work</td></tr>
+      <tr><td>Pressure</td><td>F / A</td><td>Pascal (Pa)</td><td>Force per unit area</td></tr>
+    </table>
+  </section>
+
+  <!-- PREFIXES -->
+  <section style="margin-bottom:40px;">
+    <h3>SI Prefixes 📐</h3>
+
+    <p>Prefixes are used to represent very large or very small quantities.</p>
+
+    <table class="lesson-table">
+      <tr><th>Prefix</th><th>Symbol</th><th>Value</th></tr>
+      <tr><td>kilo</td><td>k</td><td>10³</td></tr>
+      <tr><td>centi</td><td>c</td><td>10⁻²</td></tr>
+      <tr><td>milli</td><td>m</td><td>10⁻³</td></tr>
+      <tr><td>micro</td><td>μ</td><td>10⁻⁶</td></tr>
+      <tr><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
+    </table>
+
+    <p><strong>Example:</strong> 1 km = 1000 m</p>
+  </section>
+
+  <!-- ACCURACY VS PRECISION -->
+  <section style="margin-bottom:40px;">
+    <h3>Accuracy vs Precision 🎯</h3>
+
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <div style="flex:1; background:#ecfeff; padding:20px; border-radius:12px;">
+        <strong>Accuracy</strong>
+        <p>
+          Refers to how close a measured value is to the true or accepted value.
+        </p>
+        <p><strong>Example:</strong> Measuring 9.8 m/s² for gravity (true value = 9.81)</p>
+      </div>
+
+      <div style="flex:1; background:#f0fdf4; padding:20px; border-radius:12px;">
+        <strong>Precision</strong>
+        <p>
+          Refers to how close repeated measurements are to each other.
+        </p>
+        <p><strong>Example:</strong> Getting 9.5, 9.5, 9.5 repeatedly (consistent but not accurate)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERRORS -->
+  <section style="margin-bottom:40px;">
+    <h3>Measurement Errors ⚠️</h3>
+
+    <ul>
+      <li><strong>Systematic Errors:</strong> Caused by faulty instruments</li>
+      <li><strong>Random Errors:</strong> Caused by unpredictable variations</li>
+      <li><strong>Human Errors:</strong> Mistakes in reading or recording data</li>
+    </ul>
+
+    <p>
+      Reducing errors improves both accuracy and precision in experiments.
+    </p>
+  </section>
+
+  <!-- SUMMARY -->
+  <section style="background:#f9fafb; padding:25px; border-radius:14px;">
+    <h3>Summary 📌</h3>
+    <ul>
+      <li>Measurement = number + unit</li>
+      <li>SI system standardizes scientific measurements worldwide</li>
+      <li>Fundamental quantities form the base of physics</li>
+      <li>Derived quantities are calculated from base units</li>
+      <li>Accuracy and precision are different concepts</li>
+      <li>Errors affect measurement quality</li>
+    </ul>
+  </section>
+
+  `,
+  
+  quiz: [
+    {
+      question: "Which of the following is a fundamental quantity?",
+      options: ["Force", "Mass", "Velocity"],
+      answer: 1
+    },
+    {
+      question: "The SI unit of temperature is:",
+      options: ["Celsius", "Kelvin", "Fahrenheit"],
+      answer: 1
+    },
+    {
+      question: "Which is a derived quantity?",
+      options: ["Time", "Length", "Pressure"],
+      answer: 2
+    },
+    {
+      question: "Accuracy means:",
+      options: [
+        "Consistency of results",
+        "Closeness to true value",
+        "Unit conversion"
+      ],
+      answer: 1
+    },
+    {
+      question: "What is the unit of force?",
+      options: ["Joule", "Newton", "Watt"],
+      answer: 1
+    }
+  ]
+},
+{
+  title: "Motion & Forces",
+  content: `
+<h2 style="font-size:36px; color:#10b981; border-bottom:4px solid #059669; padding-bottom:8px; margin-bottom:25px; font-weight:bold;">
+  Chapter: Motion & Forces ⚡
+</h2>
+
+<h3 style="font-size:28px; color:#1E90FF; text-decoration: underline; font-weight:bold; margin-bottom:20px;">
+  A. FORCE
+</h3>
+
+<!-- Force Overview -->
+<section style="margin-bottom:30px; display:flex; flex-direction:column; gap:20px;">
+
+  <!-- What is Force -->
+  <div style="display:flex; flex-wrap:wrap; gap:20px; background:#fef2f2; padding:18px; border-radius:12px; box-shadow:1px 1px 8px rgba(0,0,0,0.1);">
+    <div style="flex:1; min-width:250px; font-size:16px; line-height:1.5;">
+      <strong style="font-size:18px; color:#ef4444;">1. What is Force 💪</strong>
+      <p>A <strong>force</strong> is a <strong>push or pull</strong> that changes the motion, speed, or shape of an object.</p>
+      <p><strong>Unit:</strong> Newton (N)</p>
+      <p><strong>Formula:</strong> <span style="color:#d97706;">F = m × a</span></p>
+      <p>Example: 2 kg object, a=3 m/s² → F=6 N</p>
+      <p>Exercise: 5 kg box, a=4 m/s² → Calculate force</p>
+    </div>
+    <div style="flex-shrink:0;">
+      <img src="force1.png" alt="Force Diagram" style="width:230px; border-radius:10px;">
+    </div>
+  </div>
+
+  <!-- Types of Forces -->
+  <div style="background:#f9f9f9; padding:16px; border-radius:12px; box-shadow:1px 1px 8px rgba(0,0,0,0.1);">
+    <strong style="font-size:18px; color:#7c3aed;">2. Types of Forces ⚖️</strong>
+
+    <!-- Contact Forces -->
+    <div style="margin-top:12px;">
+      <strong style="color:#0284c7;">💠 Contact Forces</strong>
+      <p>Act when objects touch each other.</p>
+
+      <!-- Applied Force -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#ecfeff; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#0369a1;">Applied Force</strong>
+          <p>Definition: Force applied directly by a person/object.<br>
+          Formula: F = m × a<br>
+          Example: Push 10 kg box at 2 m/s² → F=20 N<br>
+          Exercise: Push 15 kg cart at 1.5 m/s² → Find F</p>
+        </div>
+        <div style="flex-shrink:0;">
+          <img src="apply.jpg" alt="Applied Force" style="width:400px; border-radius:10px;">
+        </div>
+      </div>
+
+      <!-- Friction Force -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#f0fdf4; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#15803d;">Frictional Force</strong>
+          <p>Definition: Opposes motion.<br>
+          Formula: f = μ × N<br>
+          Example: N=50 N, μ=0.2 → f=10 N<br>
+          Exercise: 20 kg object, μ=0.3, g=10 → Find f</p>
+        </div>
+        <div style="flex-shrink:0; display:flex; gap:10px;">
+          <img src="fric.jpg" alt="Friction 1" style="width:200px; border-radius:10px;">
+          <img src="friction.jpg" alt="Friction 2" style="width:200px; border-radius:10px;">
+        </div>
+      </div>
+
+      <!-- Normal Force -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#fff7ed; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#c2410c;">Normal Force</strong>
+          <p>Definition: Upward force by a surface.<br>
+          Formula: N = m × g<br>
+          Example: 2 kg book → N=20 N<br>
+          Exercise: 5 kg block → Calculate N</p>
+        </div>
+        <div style="flex-shrink:0; display:flex; gap:10px;">
+          <img src="normal2.jpg" alt="Normal 1" style="width:200px; border-radius:10px;">
+          <img src="normal.jpg" alt="Normal 2" style="width:200px; border-radius:10px;">
+        </div>
+      </div>
+
+      <!-- Tension Force -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#fef3c7; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#b45309;">Tension Force</strong>
+          <p>Definition: Force through rope/string.<br>
+          Formula: T = m × (g + a)<br>
+          Example: 3 kg bucket, a=2 → T=36 N<br>
+          Exercise 1: 4 kg bucket, a=1 → Find T<br>
+          Exercise 2: 6 kg box, a=3 → Calculate T</p>
+        </div>
+        <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px;">
+      
+          <img src="tens2.jpg" alt="Tension 2" style="width:210px; border-radius:10px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-Contact Forces -->
+    <div style="margin-top:15px;">
+      <strong style="color:#0284c7;">💠 Non-Contact Forces</strong>
+      <p>Act without touching.</p>
+
+      <!-- Gravitational -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#fee2e2; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#b91c1c;">Gravitational Force</strong>
+          <p>Definition: Attraction between masses.<br>
+          Formula: F = m × g<br>
+          Example: 0.2 kg apple → F=2 N<br>
+          Exercise 1: 10 kg → Calculate F<br>
+          Exercise 2: 5 kg box → Find F</p>
+        </div>
+        <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px;">
+          <img src="grav1.jpg" alt="Grav 1" style="width:210px; border-radius:10px;">
+         
+        </div>
+      </div>
+
+      <!-- Magnetic -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#dbeafe; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#1d4ed8;">Magnetic Force</strong>
+          <p>Definition: Force between magnets/materials.<br>
+          Formula: F = q × v × B<br>
+          Example: Magnet attracts nails<br>
+          Exercise: Give 2 real-life examples</p>
+        </div>
+        <div style="flex-shrink:0;">
+          <img src="mag1.jpg" alt="Magnetic" style="width:220px; border-radius:10px;">
+        </div>
+      </div>
+
+      <!-- Electrostatic -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; background:#f0fdf4; padding:12px; border-radius:10px;">
+        <div style="flex:1; min-width:200px;">
+          <strong style="color:#15803d;">Electrostatic Force</strong>
+          <p>Definition: Force between charged objects.<br>
+          Formula: F = k × q₁ × q₂ / r²<br>
+          Example: Balloon on hair → attracts paper<br>
+          Exercise: q₁=2μC, q₂=3μC, r=0.5 m → Find F</p>
+        </div>
+        <div style="flex-shrink:0;">
+          <img src="ell.png" alt="Electrostatic" style="width:210px; border-radius:10px;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+<section style="margin-bottom:40px; font-family: Arial, sans-serif; line-height:1.6;">
+
+  <!-- B. Motion -->
+  <h1 style="font-size:50px; color:#1E90FF; text-decoration: underline; font-weight: bold; margin-bottom:30px;">
+    B. Motion ⚡
+  </h1>
+
+  <!-- Motion Introduction -->
+ <div style="background:#e0f7fa; padding:22px; border-radius:14px; margin-bottom:20px; 
+            box-shadow:2px 2px 12px rgba(0,0,0,0.15); font-size:18px; border-left:6px solid #0284c7;">
+  <strong style="color:#0284c7; font-size:20px;">Definition:</strong> Motion is the <span style="color:#1d4ed8; font-weight:bold;">change in the position</span> of an object with respect to time.<br>
+  It is described using <strong style="color:#9333ea;">distance, displacement, speed, velocity, and acceleration</strong>.
+
+  <p style="margin-top:12px; color:#9333ea; font-size:17px;">
+    <strong>Example 🏎️:</strong> A car moves 100 m in 5 s → <span style="color:#d97706; font-weight:bold;">Speed = 20 m/s</span>
+  </p>
+
+  <p style="margin-top:8px; color:#059669; font-size:17px;">
+    <strong>Exercise 🚴:</strong> A bike travels 60 m in 4 s → Calculate <span style="font-weight:bold;">speed</span>.
+  </p>
+</div>
+
+  <div style="background:#fff3e0; padding:22px; border-radius:14px; margin-bottom:20px; box-shadow:2px 2px 15px rgba(0,0,0,0.1); font-size:18px; line-height:1.6; position:relative;">
+  <h3 style="color:#f97316; font-size:24px; font-weight:bold; border-bottom: 2px solid #f97316; padding-bottom:8px; margin-bottom:15px;">Types of Motion</h3>
+<!-- Linear Motion -->
+<div style="position:relative; margin-bottom:25px; min-height:100px;">
+  <img src="linear.png" alt="Linear Motion" style="position:absolute; right:10px; top:10px; width:180px; z-index:0;">
+  <p style="position:relative; z-index:1; font-weight:bold;">
+    <span style="background:#fcd34d; padding:4px 8px; border-radius:6px; color:#1f2937;">★ Linear Motion</span>: Motion along a straight line. 
+    <em style="color:#6b7280;">Example:</em> Car on a straight road.
+  </p>
+</div>
+
+<!-- Circular Motion -->
+<div style="position:relative; margin-bottom:25px; min-height:100px;">
+  <img src="circular.png" alt="Circular Motion" style="position:absolute; right:10px; top:10px; width:180px; z-index:0;">
+  <p style="position:relative; z-index:1; font-weight:bold;">
+    <span style="background:#60a5fa; padding:4px 8px; border-radius:6px; color:#1f2937;">★ Circular Motion</span>: Motion along a circular path. 
+    <em style="color:#6b7280;">Example:</em> Earth around the Sun.
+  </p>
+</div>
+
+<!-- Oscillatory Motion -->
+<div style="position:relative; margin-bottom:25px; min-height:100px;">
+  <img src="oscilla.jpg" alt="Oscillatory Motion" style="position:absolute; right:10px; top:10px; width:180px; z-index:0;">
+  <p style="position:relative; z-index:1; font-weight:bold;">
+    <span style="background:#34d399; padding:4px 8px; border-radius:6px; color:#1f2937;">★ Oscillatory Motion</span>: Repeated back and forth motion. 
+    <em style="color:#6b7280;">Example:</em> Pendulum swinging.
+  </p>
+</div>
+
+<!-- Rotational Motion -->
+<div style="position:relative; margin-bottom:25px; min-height:100px;">
+  <img src="rot.png" alt="Rotational Motion" style="position:absolute; right:10px; top:10px; width:180px; z-index:0;">
+  <p style="position:relative; z-index:1; font-weight:bold;">
+    <span style="background:#f87171; padding:4px 8px; border-radius:6px; color:#1f2937;">★ Rotational Motion</span>: Motion around an axis. 
+    <em style="color:#6b7280;">Example:</em> Spinning wheel.
+  </p>
+</div>
+
+  <!-- Distance & Displacement -->
+  <div style="background:#fefce8; padding:22px; border-radius:14px; margin-bottom:20px; box-shadow:2px 2px 10px rgba(0,0,0,0.1); font-size:18px; line-height:1.6;">
+  <!-- Distance -->
+  <h2 style="color:#f59e0b; margin-bottom:10px;">1️⃣ Distance</h2>
+  <p><strong>What it is:</strong> Total length of the path traveled by an object.</p>
+  <p><strong>Type:</strong> Scalar (only magnitude, no direction)</p>
+
+  <h3 style="color:#9333ea; margin-top:15px;">Examples:</h3>
+  <ul style="padding-left:20px;">
+    <li>Walking 3 m east and 4 m north → Distance = 3 + 4 = 7 m</li>
+    <li>A car travels 100 m on a curved road → Distance = 100 m</li>
+    <li>A person runs a 400 m lap around a track → Distance = 400 m</li>
+  </ul>
+
+  <p style="margin-top:10px; color:#059669;"><strong>Exercise:</strong> A runner completes a 400 m track and returns to start → Distance = 400 m.</p>
+
+  <!-- Displacement -->
+  <h2 style="color:#f59e0b; margin-top:20px; margin-bottom:10px;">2️⃣ Displacement</h2>
+  <p><strong>What it is:</strong> Straight-line change in position from start to end.</p>
+  <p><strong>Type:</strong> Vector (magnitude + direction)</p>
+
+  <h3 style="color:#9333ea; margin-top:15px;">Examples:</h3>
+  <ul style="padding-left:20px;">
+    <li>Walking 3 m east and 4 m north → Displacement = <span style="color:#d97706; font-weight:bold;">√(3² + 4²) = 5 m</span> northeast</li>
+    <li>Running 5 m north, then 5 m south → Displacement = 0 m (since you return to start)</li>
+    <li>A person walks 100 m in a straight line → Displacement = 100 m in that direction</li>
+  </ul>
+
+  <p style="margin-top:10px; color:#059669;"><strong>Exercise:</strong> Walking 3 m east and 4 m north → Find Displacement.</p>
+</div>
+  <!-- Speed & Velocity -->
+ <div style="background:#ede9fe; padding:22px; border-radius:14px; margin-bottom:20px; box-shadow:2px 2px 10px rgba(0,0,0,0.1); font-size:18px; line-height:1.6;">
+  <!-- Speed -->
+  <h2 style="color:#8b5cf6; margin-bottom:10px;">3️⃣ Speed</h2>
+  <p><strong>What it is:</strong> How fast an object moves.</p>
+  <p><strong>Type:</strong> Scalar</p>
+  <p><strong>Formula:</strong> <span style="color:#d97706; font-weight:bold;">Speed = Distance / Time</span></p>
+
+  <h3 style="color:#9333ea; margin-top:15px;">Examples:</h3>
+  <ul style="padding-left:20px;">
+    <li>A car travels 100 m in 5 s → Speed = 100 ÷ 5 = 20 m/s</li>
+    <li>A runner covers 400 m in 50 s → Speed = 400 ÷ 50 = 8 m/s</li>
+    <li>A train moves 120 km in 2 h → Speed = 120 ÷ 2 = 60 km/h</li>
+  </ul>
+
+  <p style="margin-top:10px; color:#059669;"><strong>Exercise:</strong> A bike travels 60 m in 4 s → Calculate speed.</p>
+
+  <!-- Velocity -->
+  <h2 style="color:#8b5cf6; margin-top:20px; margin-bottom:10px;">4️⃣ Velocity</h2>
+  <p><strong>What it is:</strong> Speed in a specific direction.</p>
+  <p><strong>Type:</strong> Vector</p>
+  <p><strong>Formula:</strong> <span style="color:#d97706; font-weight:bold;">Velocity = Displacement / Time</span></p>
+
+  <h3 style="color:#9333ea; margin-top:15px;">Examples:</h3>
+  <ul style="padding-left:20px;">
+    <li>A car moves 100 m east in 5 s → Velocity = 100 ÷ 5 = 20 m/s east</li>
+    <li>A runner moves 400 m north in 50 s → Velocity = 400 ÷ 50 = 8 m/s north</li>
+    <li>A boat moves 30 km upstream in 2 h → Velocity = 30 ÷ 2 = 15 km/h upstream</li>
+  </ul>
+
+  <p style="margin-top:10px; color:#059669;"><strong>Exercise:</strong> Object moves 50 m south in 10 s → Find velocity.</p>
+</div>
+
+  <!-- Acceleration -->
+ <div style="background:#e0f2fe; padding:22px; border-radius:14px; margin-bottom:20px; box-shadow:2px 2px 10px rgba(0,0,0,0.1); font-size:18px;">
+  <h2 style="color:#0284c7; margin-bottom:10px;"> 5️⃣Acceleration</h2>
+
+  <p><strong>What it is:</strong> Rate of change of velocity with time.</p>
+  <p><strong>Type:</strong> Vector</p>
+  <p><strong>Formula:</strong> <span style="color:#d97706; font-weight:bold;">a = Δv / Δt</span></p>
+
+  <h3 style="color:#9333ea; margin-top:15px;">Examples:</h3>
+  <ul style="padding-left:20px;">
+    <li>Car speeds up from 0 to 20 m/s in 5 s → a = 20 ÷ 5 = 4 m/s²</li>
+    <li>Motorbike slows down from 30 m/s to 10 m/s in 4 s → a = (10-30) ÷ 4 = -5 m/s² (deceleration)</li>
+    <li>Train increases velocity from 5 m/s to 25 m/s in 10 s → a = (25-5) ÷ 10 = 2 m/s²</li>
+  </ul>
+
+  <p style="margin-top:10px; color:#059669;"><strong>Exercise:</strong> A car changes velocity from 15 m/s to 35 m/s in 4 s → Calculate acceleration.</p>
+</div>
+
+  <!-- Formulas Summary -->
+  <div style="background:#fff0f5; padding:22px; border-radius:14px; margin-bottom:20px; box-shadow:2px 2px 10px rgba(0,0,0,0.1); font-size:18px;">
+    <strong style="color:#db2777; font-size:20px;">📌 Motion Formulas Summary</strong>
+    <ul style="margin-top:10px; padding-left:20px; color:#b91c1c;">
+      <li>Speed: <span style="color:#d97706; font-weight:bold;">speed = distance / time</span></li>
+      <li>Velocity: <span style="color:#d97706; font-weight:bold;">velocity = displacement / time</span></li>
+      <li>Acceleration: <span style="color:#d97706; font-weight:bold;">a = (v_f - v_i) / t</span></li>
+    </ul>
+  </div>
+
+ 
+
+</section>
+
+</section>
+`,
+
+ quiz: [
+  // FORCE QUESTIONS
+  { 
+    question: "1️⃣ Which of the following is a contact force?", 
+    options: ["Gravitational", "Friction", "Electrostatic"], 
+    answer: 1 
+  },
+  { 
+    question: "2️⃣ The SI unit of force is:", 
+    options: ["Joule", "Newton", "Watt"], 
+    answer: 1 
+  },
+  { 
+    question: "3️⃣ Which formula represents Newton’s 2nd law?", 
+    options: ["F = m × a", "F = k q₁q₂ / r²", "f = μ × N"], 
+    answer: 0 
+  },
+  { 
+    question: "4️⃣ Tension force is transmitted through:", 
+    options: ["Rope/String", "Table Surface", "Magnetic field"], 
+    answer: 0 
+  },
+  { 
+    question: "5️⃣ Friction opposes:", 
+    options: ["Motion", "Gravity", "Electric charge"], 
+    answer: 0 
+  },
+
+  // MOTION QUESTIONS
+  { 
+    question: "6️⃣ Speed is a measure of:", 
+    options: ["Distance/time", "Displacement/time", "Force/mass"], 
+    answer: 0 
+  },
+  { 
+    question: "7️⃣ Velocity differs from speed because it includes:", 
+    options: ["Only magnitude", "Direction", "Mass"], 
+    answer: 1 
+  },
+  { 
+    question: "8️⃣ Acceleration is calculated using the formula:", 
+    options: ["a = Δv / Δt", "v = d / t", "F = m × a"], 
+    answer: 0 
+  },
+  { 
+    question: "9️⃣ A runner covers 100 m north in 10 s. What is the displacement?", 
+    options: ["100 m north", "100 m total path", "0 m"], 
+    answer: 0 
+  },
+  { 
+    question: "🔟 A car accelerates from 0 to 20 m/s in 5 s. What is the acceleration?", 
+    options: ["4 m/s²", "5 m/s²", "20 m/s²"], 
+    answer: 0 
+  }
+]
+}
+]
+
+let currentLesson = null;
+
+function highlightSidebar(index){
+  document.querySelectorAll('#lessonList li').forEach((el,i)=> el.classList.toggle('active', i===index));
+}
+
+// Show lesson
+function showLesson(index)
+{
+  updateProgress(index);
+  currentLesson = index;
+  localStorage.setItem("lastLesson", index);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+   
+  // 👇 ADD THIS LINE
+  document.getElementById('sidebarMenuArea').style.display = 'block';
+
+  highlightSidebar(index);
+const lesson = lessons[index] || lessons[lessons.length - 1];
+  const main = document.getElementById('mainContent');
+let contentHTML = `
+
+  <!-- 🔼 TOP NAV -->
+  <div class="nav-buttons" style="margin-bottom:20px;">
+    <button id="prevBtnTop" ${index===0?'disabled':''}>Previous</button>
+    <button id="nextBtnTop" ${index===19?'disabled':''}>Next</button>
+  </div>
+
+  ${lesson.content}
+
+  ${lesson.quiz.length>0?'<hr style="margin:30px 0;"><section class="lesson-quiz"><h2>Quiz</h2><div id="quizContainer"></div></section>':''}
+
+  <!-- 🔽 BOTTOM NAV -->
+  <div class="nav-buttons">
+    <button id="prevBtnBottom" ${index===0?'disabled':''}>Previous</button>
+    <button id="nextBtnBottom" ${index===19?'disabled':''}>Next</button>
+  </div>
+`;
+  main.innerHTML = contentHTML;
+
+  // 👇 ADD THIS
+if (lesson.quiz && lesson.quiz.length > 0) {
+  startQuiz(lesson.quiz);
+}
+  // Safe event listeners
+ // TOP
+document.getElementById('prevBtnTop').onclick = () => {
+  if(currentLesson > 0) showLesson(currentLesson - 1);
+};
+
+document.getElementById('nextBtnTop').onclick = () => {
+  if(currentLesson < 19) showLesson(currentLesson + 1);
+};
+
+// BOTTOM
+document.getElementById('prevBtnBottom').onclick = () => {
+  if(currentLesson > 0) showLesson(currentLesson - 1);
+};
+
+document.getElementById('nextBtnBottom').onclick = () => {
+  if(currentLesson < 19) showLesson(currentLesson + 1);
+};
+}
+
+function startQuiz(quizQuestions){
+  let qIndex = 0;
+  let score = 0;
+  let userAnswers = [];
+
+  const container = document.getElementById('quizContainer');
+
+  function showQuestion(){
+    if(qIndex >= quizQuestions.length){
+      container.innerHTML = `
+        <h3>Quiz Completed 🎉</h3>
+        <p>Your Score: ${score} / ${quizQuestions.length}</p>
+        <p>${getFeedback(score, quizQuestions.length)}</p>
+        <button onclick="startQuiz(${JSON.stringify(quizQuestions)})">Retry</button>
+      `;
+      return;
+    }
+
+    const q = quizQuestions[qIndex];
+
+    let html = `
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" style="width:${(qIndex/quizQuestions.length)*100}%"></div>
+      </div>
+
+      <p class="question"><strong>Q${qIndex+1}/${quizQuestions.length}:</strong> ${q.question}</p>
+    `;
+
+    q.options.forEach((opt,i)=> {
+      html += `
+        <label class="quiz-option">
+          <input type="radio" name="quizOption" value="${i}">
+          ${opt}
+        </label>
+      `;
+    });
+
+    html += `
+      <p class="quiz-feedback" id="quizFeedback"></p>
+      <div class="nav-buttons">
+        <button id="backBtn" ${qIndex===0?'disabled':''}>Back</button>
+        <button id="submitAnswerBtn">Submit</button>
+      </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Restore previous answer
+    if(userAnswers[qIndex] !== undefined){
+      document.querySelector(`input[value="${userAnswers[qIndex]}"]`).checked = true;
+    }
+
+    // BACK BUTTON
+    document.getElementById('backBtn').onclick = () => {
+      qIndex--;
+      showQuestion();
+    };
+
+    // SUBMIT BUTTON
+    document.getElementById('submitAnswerBtn').onclick = () => {
+      const selected = document.querySelector('input[name="quizOption"]:checked');
+      if(!selected){
+        alert("Please select an answer!");
+        return;
+      }
+
+      const answer = parseInt(selected.value);
+      const correct = q.answer;
+      userAnswers[qIndex] = answer;
+
+      const feedback = document.getElementById('quizFeedback');
+
+      // Highlight answers
+      document.querySelectorAll('.quiz-option').forEach((label, i) => {
+        if(i === correct){
+          label.style.background = "#bbf7d0"; // green
+        }
+        if(i === answer && answer !== correct){
+          label.style.background = "#fecaca"; // red
+        }
+      });
+
+      if(answer === correct){
+        feedback.textContent = "Correct ✅";
+        feedback.style.color = "green";
+        score++;
+      } else {
+        feedback.textContent = "Wrong ❌";
+        feedback.style.color = "red";
+      }
+
+      setTimeout(()=>{
+        qIndex++;
+        showQuestion();
+      }, 1200);
+    };
+  }
+
+  showQuestion();
+}
+// Show homepage content
+function goHome() {
+  document.getElementById('mainContent').innerHTML = `
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to LuxMind Physics</h1>
+        <p>Explore the fundamental principles of the universe, from classical mechanics to modern quantum theory.</p>
+        <a href="#" class="cta" onclick="showLesson(0)">Start Learning Now</a>
+      </div>
+    </section>
+
+    <!-- ✅ YOUR REAL FEATURES SECTION -->
+    <section class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 10px;">
+
+      <div class="card">
+        <img src="tt.jpg">
+        <div>
+          <strong>Newton's Laws:</strong>
+          <span>Understand how forces govern motion.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="hh.jpg">
+        <div>
+          <strong>Energy & Work:</strong>
+          <span>Learn how energy is transferred.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="uu.jpg">
+        <div>
+          <strong>Electricity & Magnetism:</strong>
+          <span>Explore circuits and fields.</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="why-physics">
+      <h2>Why Study Physics?</h2>
+      <p>Understand the universe, build skills, and prepare for science careers.</p>
+    </section>
+  `;
+}
+
+// ADD THIS at the end of your script
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.card, .why-physics, .hero').forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
+});
+function updateProgress(index){
+  let percent = ((index+1)/20)*100;
+  document.getElementById("progressBar").style.width = percent + "%";
+}
+function searchLessons(query){
+  document.querySelectorAll('#lessonList li').forEach(li=>{
+    li.style.display = li.textContent.toLowerCase().includes(query.toLowerCase())
+      ? 'block' : 'none';
+  });
+}
+let last = localStorage.getItem("lastLesson");
+
+if (last !== null) {
+  // optional delay or condition
+  goHome(); // show home first
+} else {
+  goHome();
+}
+
+function getFeedback(score, total){
+  let percent = (score/total)*100;
+
+  if(percent === 100) return "Perfect! 🏆";
+  if(percent >= 70) return "Great job! 👍";
+  if(percent >= 50) return "Not bad, keep going!";
+  return "Try again 💪";
+}
+</script>
+<footer style="background:#1f2937; color:#d1d5db; padding:20px; text-align:center; margin-top:40px;">
+    
+    <p style="font-size:14px; margin:0;">
+        © 2026 Xavier_Janvier. All rights reserved.
+    </p>
+
+</footer>
+</body>
+</html>

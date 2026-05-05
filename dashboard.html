@@ -1,0 +1,19 @@
+<h1>Welcome to LuxMind Dashboard</h1>
+
+<p id="userEmail"></p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("userEmail").textContent = user.email;
+  }
+});
+
+function logout(){
+  firebase.auth().signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}
+</script>

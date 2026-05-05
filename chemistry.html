@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry Course - LuxMind</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0f172a;
+  --accent:#10b981;
+  --accent2:#0ea5e9;
+  --bg:#f8fafc;
+  --text:#1e293b;
+  --muted:#64748b;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+
+.hero{
+  background:linear-gradient(rgba(15,23,42,.8),rgba(15,23,42,.8)),url('back.jpg') center/cover;
+  color:#fff;text-align:center;padding:120px 20px
+}
+
+.hero h1{font-size:56px;font-weight:700;margin-bottom:15px}
+.hero p{font-size:22px;opacity:.9;margin-bottom:30px}
+
+.cta-btn{padding:14px 36px;background:var(--accent);border:none;border-radius:999px;color:#fff;font-size:18px;font-weight:600;cursor:pointer;transition:.3s}
+.cta-btn:hover{background:#059669;transform:translateY(-2px)}
+
+.sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;padding:60px 10%}
+
+.section-card{background:#fff;border-radius:16px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.06);transition:.3s}
+.section-card:hover{transform:translateY(-8px)}
+.section-card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px}
+.section-card h3{font-size:22px;margin-bottom:10px}
+.section-card p{color:var(--muted)}
+
+.sidebar{width:280px;height:100vh;position:fixed;top:0;left:0;background:var(--primary);color:#fff;padding:25px;overflow-y:auto;display:none}
+.sidebar h2{text-align:center;margin-bottom:20px}
+.sidebar h3{color:#7dd3fc;margin:15px 0 10px}
+.sidebar li{padding:10px;margin-bottom:8px;border-radius:8px;background:rgba(255,255,255,.05);cursor:pointer}
+.sidebar li:hover{background:var(--accent)}
+
+#physical-chemistry{display:none;margin-left:300px;padding:60px}
+
+.container{display:flex;gap:50px;align-items:flex-start}
+
+.text{max-width:60%}
+
+.text h3{
+  font-size:40px;
+  margin-bottom:20px;
+  border-left:6px solid var(--accent);
+  padding-left:15px;
+}
+
+.section-title{
+  font-size:26px;
+  margin-top:30px;
+  margin-bottom:15px;
+  color:var(--accent2);
+  font-weight:700;
+}
+
+.text p{
+  font-size:18px;
+  line-height:1.8;
+  margin-bottom:15px;
+}
+
+.highlight{color:var(--accent);font-weight:600}
+.bold{font-weight:700}
+
+.topic{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:25px;
+  padding:20px;
+  background:#ffffff;
+  border-left:4px solid var(--accent);
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+.topic-img{
+  width:200px;
+  height:130px;
+  object-fit:cover;
+  border-radius:10px;
+  flex-shrink:0;
+}
+
+.topic strong{color:var(--accent2)}
+
+.image{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.image-large{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+
+.image-row{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.image-row img{
+  width:220px;
+  height:140px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.topic{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin-bottom:25px;
+  padding:18px;
+  background:#ffffff;
+  border-left:4px solid var(--accent);
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+.topic-content{
+  flex:1;
+}
+
+.image-block{display:flex;flex-direction:column;gap:20px;max-width:35%}
+
+footer{background:var(--primary);color:#fff;text-align:center;padding:18px}
+
+@media(max-width:768px){
+  .container{flex-direction:column}
+  #physical-chemistry{margin-left:0;padding:30px}
+  .text{max-width:100%}
+  .image-block{max-width:100%}
+}
+.quiz-box{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
+
+.option{
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+  background:#f1f5f9;
+  transition:0.2s;
+}
+
+.option:hover{
+  background:#e2e8f0;
+}
+
+.option input{
+  margin-right:10px;
+}
+
+#submitBtn{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  background:#10b981;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#submitBtn:hover{
+  background:#059669;
+}
+#lessons-sidebar li.active {
+  background: var(--accent2);
+  color: #fff;
+  font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<h1>Welcome to LuxMind Chemistry</h1>
+<p>Explore the world of Chemistry with interactive lessons and practical examples.</p>
+<button class="cta-btn" onclick="showLessons()">Start Learning</button>
+</section>
+
+<section class="sections" id="start-learning">
+
+<div class="section-card">
+<img src="organic.avif">
+<h3>Organic Chemistry</h3>
+<p>Study carbon-containing compounds and their structures.</p>
+</div>
+
+<div class="section-card">
+<img src="inorganic.jpg">
+<h3>Inorganic Chemistry</h3>
+<p>Explore the chemistry of non-carbon compounds.</p>
+</div>
+
+<div class="section-card">
+<img src="analy.avif">
+<h3>Analytical Chemistry</h3>
+<p>Learn the techniques used to analyze substances.</p>
+</div>
+
+<div class="section-card">
+<img src="bio.avif">
+<h3>Biochemistry</h3>
+<p>Understand the chemical processes in living organisms.</p>
+</div>
+
+</section>
+
+<div class="sidebar" id="lessons-sidebar">
+<h2>Chemistry Lessons</h2>
+
+<div class="section">
+<h3>Physical Chemistry</h3>
+<ul>
+<li>1. Introduction to Physical Chemistry</li>
+<li>2. The Kinetic Molecular Theory of Gases</li>
+<li>3. Thermodynamics: Laws of Energy</li>
+<li>4. Heat and Temperature</li>
+<li>5. Chemical Equilibrium</li>
+<li>6. Reaction Rates and Kinetics</li>
+<li>7. Electrochemistry</li>
+<li>8. Ideal Gas Law</li>
+<li>9. Colligative Properties</li>
+<li>10. Quantum Chemistry</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Inorganic Chemistry</h3>
+<ul>
+<li>1. Introduction to Inorganic Chemistry</li>
+<li>2. Atomic Structure and Periodicity</li>
+<li>3. Chemical Bonding</li>
+<li>4. Coordination Compounds</li>
+<li>5. Transition Metals</li>
+<li>6. Acids and Bases</li>
+<li>7. Solid State Chemistry</li>
+<li>8. Crystal Field Theory</li>
+<li>9. Organometallic Chemistry</li>
+<li>10. Bioinorganic Chemistry</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Analytical Chemistry</h3>
+<ul>
+<li>1. Introduction to Analytical Chemistry</li>
+<li>2. Qualitative Analysis</li>
+<li>3. Quantitative Analysis</li>
+<li>4. Titration Methods</li>
+<li>5. Spectroscopy Basics</li>
+<li>6. Chromatography Techniques</li>
+<li>7. Electroanalytical Methods</li>
+<li>8. Mass Spectrometry</li>
+<li>9. Error Analysis</li>
+<li>10. Instrumental Analysis</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Biochemistry</h3>
+<ul>
+<li>1. Introduction to Biochemistry</li>
+<li>2. Biomolecules</li>
+<li>3. Proteins and Enzymes</li>
+<li>4. Carbohydrates and Lipids</li>
+<li>5. DNA and RNA Structure</li>
+<li>6. Metabolism Basics</li>
+<li>7. Cellular Respiration</li>
+<li>8. Photosynthesis</li>
+<li>9. Molecular Biology</li>
+<li>10. Biotechnology</li>
+</ul>
+</div>
+
+</div>
+<section id="physical-chemistry"></section>
+<script>
+
+const lessons = [
+{
+  title: "Introduction to Physical Chemistry",
+
+  content: `
+    <h2 style="font-size:40px; color:#10b981; border-bottom:5px solid #059669; padding-bottom:12px; margin-bottom:50px;">
+      Introduction to Physical Chemistry ⚗️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Physical Chemistry</strong> explores <span style="color:#10b981; font-weight:600;">how matter behaves at atomic and molecular levels</span>. 
+        It merges <span style="color:#0ea5e9; font-weight:600;">physics</span> and <span style="color:#0ea5e9; font-weight:600;">chemistry</span> principles 
+        to understand <span style="color:#f97316; font-weight:600;">energy changes</span>, <span style="color:#f97316; font-weight:600;">reaction mechanisms</span>, 
+        and properties of substances.
+      </p>
+      <p>
+        Mastery of physical chemistry is essential for developing <span style="background-color:#fef9c3; padding:2px 6px; border-radius:4px;">new materials</span>, optimizing 
+        <span style="background-color:#fef9c3; padding:2px 6px; border-radius:4px;">industrial processes</span>, and analyzing biological systems at the molecular level.
+      </p>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#0ea5e9; font-size:28px; margin-bottom:15px;">Key Branches of Physical Chemistry</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        The field includes several core areas, each addressing different aspects of chemical behavior:
+      </p>
+    </section>
+
+    ${[
+      {
+        title: "Thermodynamics 🔥",
+        img: "thermo.avif",
+        desc: `Studies <span style="color:#f43f5e; font-weight:600;">energy transformations</span> and the spontaneity of reactions. 
+        Key concepts include <span style="color:#f97316; font-weight:600;">enthalpy</span>, <span style="color:#f97316; font-weight:600;">entropy</span>, 
+        and <span style="color:#f97316; font-weight:600;">Gibbs free energy</span>, which allow prediction of whether reactions proceed naturally.`
+      },
+      {
+        title: "Kinetics ⚡",
+        img: "Kinetics.jpg",
+        desc: `Focuses on <span style="color:#f43f5e; font-weight:600;">reaction rates</span> and the influence of <span style="color:#0ea5e9; font-weight:600;">temperature</span>, 
+        <span style="color:#0ea5e9; font-weight:600;">concentration</span>, and <span style="color:#0ea5e9; font-weight:600;">catalysts</span>. 
+        Explains phenomena such as how hydrogen reacts rapidly with oxygen to form water.`
+      },
+      {
+        title: "Quantum Chemistry ⚛️",
+        img: "quantum-chemistry.avif",
+        desc: `Uses <span style="color:#f43f5e; font-weight:600;">quantum mechanics</span> to describe atomic and molecular structure. 
+        Predicts <span style="color:#f97316; font-weight:600;">electron configurations</span>, molecular orbitals, and bonding behavior.`
+      },
+      {
+        title: "Chemical Equilibrium ⚖️",
+        img: "came.jpg",
+        desc: `Studies reversible reactions and the conditions for coexistence of reactants and products. 
+        Important principle: <span style="color:#f43f5e; font-weight:600;">Le Châtelier’s principle</span>. 
+        Example: ammonia production via the Haber process.`
+      },
+      {
+        title: "Electrochemistry 🔋",
+        img: "electro.jpg",
+        desc: `Explores the relationship between <span style="color:#f43f5e; font-weight:600;">chemical reactions</span> and <span style="color:#f43f5e; font-weight:600;">electricity</span>. 
+        Applications include <span style="color:#f97316; font-weight:600;">batteries</span>, <span style="color:#f97316; font-weight:600;">fuel cells</span>, and electroplating.`
+      }
+    ].map(topic => `
+      <section style="display:flex; flex-direction:row-reverse; align-items:center; gap:30px; margin-bottom:50px; flex-wrap:wrap;">
+        <img src="${topic.img}" style="width:300px; max-width:100%; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12);">
+        <div style="flex:1; min-width:250px;">
+          <h4 style="color:#0ea5e9; margin-bottom:12px; font-size:22px;">${topic.title}</h4>
+          <p style="font-size:17px; line-height:1.7;">${topic.desc}</p>
+        </div>
+      </section>
+    `).join('')}
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#0ea5e9; font-size:28px; margin-bottom:15px;">Additional Topics</h3>
+      <ul style="font-size:17px; line-height:1.7; padding-left:20px;">
+        <li><strong>Statistical Mechanics:</strong> Connects microscopic particle motion with macroscopic thermodynamic properties.</li>
+        <li><strong>Surface Chemistry:</strong> Investigates chemical phenomena at surfaces and interfaces, critical for catalysis.</li>
+        <li><strong>Spectroscopy:</strong> Analyzes substances by their interaction with electromagnetic radiation.</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Physical chemistry explains the <span style="color:#f97316; font-weight:600;">why</span> and <span style="color:#f97316; font-weight:600;">how</span> of chemical reactions, bridging physics and chemistry. 
+        Its principles are essential for modern technologies such as <span style="color:#f97316; font-weight:600;">energy storage</span>, <span style="color:#f97316; font-weight:600;">materials science</span>, 
+        <span style="color:#f97316; font-weight:600;">pharmaceuticals</span>, and <span style="color:#f97316; font-weight:600;">industrial innovations</span>.
+      </p>
+    </section>
+  `,
+
+ quiz: [
+  {
+    q: "What does physical chemistry primarily study?",
+    options: ["Living organisms", "Energy and matter behavior", "Planets", "Historical chemistry"],
+    answer: 1,
+    html: `
+      <div style="border:2px solid #10b981; border-radius:12px; padding:20px; margin-bottom:20px; background-color:#f0fdf4;">
+        <p style="font-weight:600; font-size:18px; color:#065f46;">Q1: What does physical chemistry primarily study?</p>
+        <ul style="list-style:none; padding-left:0; margin-top:12px;">
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#d1fae5';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Living organisms</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#d1fae5';" 
+              onmouseout="this.style.backgroundColor='#ffffff';"><strong>Energy and matter behavior</strong></li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#d1fae5';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Planets</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#d1fae5';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Historical chemistry</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    q: "Which branch studies reaction rates and their influencing factors?",
+    options: ["Thermodynamics", "Kinetics", "Biology", "Optics"],
+    answer: 1,
+    html: `
+      <div style="border:2px solid #0ea5e9; border-radius:12px; padding:20px; margin-bottom:20px; background-color:#f0f9ff;">
+        <p style="font-weight:600; font-size:18px; color:#0369a1;">Q2: Which branch studies reaction rates and their influencing factors?</p>
+        <ul style="list-style:none; padding-left:0; margin-top:12px;">
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#bae6fd';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Thermodynamics</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#bae6fd';" 
+              onmouseout="this.style.backgroundColor='#ffffff';"><strong>Kinetics</strong></li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#bae6fd';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Biology</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#bae6fd';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Optics</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    q: "Quantum chemistry helps predict?",
+    options: ["Macroscopic objects", "Electric circuits", "Atomic and molecular behavior", "Plant processes"],
+    answer: 2,
+    html: `
+      <div style="border:2px solid #f43f5e; border-radius:12px; padding:20px; margin-bottom:20px; background-color:#fff1f2;">
+        <p style="font-weight:600; font-size:18px; color:#b91c1c;">Q3: Quantum chemistry helps predict?</p>
+        <ul style="list-style:none; padding-left:0; margin-top:12px;">
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#fecdd3';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Macroscopic objects</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#fecdd3';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Electric circuits</li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#fecdd3';" 
+              onmouseout="this.style.backgroundColor='#ffffff';"><strong>Atomic and molecular behavior</strong></li>
+          <li style="margin-bottom:10px; padding:10px 15px; border-radius:8px; background-color:#ffffff; cursor:pointer; transition:0.3s;"
+              onmouseover="this.style.backgroundColor='#fecdd3';" 
+              onmouseout="this.style.backgroundColor='#ffffff';">Plant processes</li>
+        </ul>
+      </div>
+    `
+  }
+]
+},
+{
+  title: "The Kinetic Molecular Theory of Gases",
+
+  content: `
+    <h2 style="font-size:40px; color:#0ea5e9; border-bottom:5px solid #0369a1; padding-bottom:12px; margin-bottom:50px;">
+      The Kinetic Molecular Theory of Gases ⚛️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        The <strong>Kinetic Molecular Theory (KMT)</strong> explains the behavior of gases in terms of 
+        <span style="color:#10b981; font-weight:600;">motion of particles</span>. 
+        It connects macroscopic properties like <span style="color:#f97316; font-weight:600;">pressure</span>, 
+        <span style="color:#f97316; font-weight:600;">temperature</span>, and <span style="color:#f97316; font-weight:600;">volume</span> 
+        with microscopic motion of molecules.
+      </p>
+      <p>
+        Gases are composed of tiny particles that are in <span style="color:#0ea5e9; font-weight:600;">constant, random motion</span>. 
+        The theory helps explain phenomena such as <span style="color:#f97316; font-weight:600;">diffusion</span>, <span style="color:#f97316; font-weight:600;">effusion</span>, 
+        and <span style="color:#f97316; font-weight:600;">pressure changes</span> with temperature or volume.
+      </p>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#0ea5e9; font-size:28px; margin-bottom:15px;">Core Postulates of Kinetic Molecular Theory</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Particle motion:</strong> Gas molecules are in constant random motion.</li>
+        <li><strong>Negligible volume:</strong> The volume of individual molecules is negligible compared to container volume.</li>
+        <li><strong>No intermolecular forces:</strong> Molecules exert negligible attractive or repulsive forces.</li>
+        <li><strong>Elastic collisions:</strong> Collisions between molecules and with container walls are perfectly elastic.</li>
+        <li><strong>Temperature dependence:</strong> Average kinetic energy of molecules is proportional to temperature in Kelvin.</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#0ea5e9; font-size:28px; margin-bottom:15px;">Applications and Implications</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        The theory allows calculation of macroscopic properties from molecular behavior:
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Pressure:</strong> Results from collisions of molecules with container walls.</li>
+        <li><strong>Temperature:</strong> Proportional to average kinetic energy of molecules.</li>
+        <li><strong>Diffusion:</strong> Random motion leads to mixing of gases.</li>
+        <li><strong>Gas laws:</strong> Explains relationships in <span style="color:#f97316; font-weight:600;">Boyle’s, Charles’s, and Avogadro’s laws</span>.</li>
+      </ul>
+      <img src="kinetic-molecular.jpg" style="width:100%; max-width:600px; margin-top:20px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12);">
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        The Kinetic Molecular Theory bridges microscopic motion and macroscopic gas behavior. 
+        It is essential for understanding <span style="color:#f97316; font-weight:600;">gas laws</span>, 
+        <span style="color:#f97316; font-weight:600;">thermodynamics</span>, and applications in 
+        <span style="color:#f97316; font-weight:600;">engineering</span> and <span style="color:#f97316; font-weight:600;">physical chemistry experiments</span>.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "According to KMT, what is the main cause of gas pressure?",
+      options: ["Gravity", "Molecular collisions with walls", "Temperature only", "Molecular mass"],
+      answer: 1
+    },
+    {
+      q: "Which postulate states that collisions are perfectly elastic?",
+      options: ["Negligible volume", "No intermolecular forces", "Elastic collisions", "Random motion"],
+      answer: 2
+    },
+    {
+      q: "Average kinetic energy of gas molecules depends on?",
+      options: ["Volume of container", "Temperature in Kelvin", "Gas type only", "Pressure only"],
+      answer: 1
+    },
+    {
+      q: "Which phenomenon results from random motion of gas molecules?",
+      options: ["Diffusion", "Condensation", "Freezing", "Melting"],
+      answer: 0
+    },
+    {
+      q: "Which gas law can KMT explain?",
+      options: ["Boyle’s Law", "Newton’s Law", "Hooke’s Law", "Ohm’s Law"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Thermodynamics: Laws of Energy",
+
+  content: `
+    <h2 style="font-size:40px; color:#f97316; border-bottom:5px solid #f59e0b; padding-bottom:12px; margin-bottom:50px;">
+      Thermodynamics: Laws of Energy 🔥
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Thermodynamics</strong> is the study of <span style="color:#10b981; font-weight:600;">energy transformations</span> in chemical and physical processes. 
+        It allows us to predict whether reactions are <span style="color:#f97316; font-weight:600;">spontaneous</span> or require external energy.
+      </p>
+      <p>
+        Energy in thermodynamic systems exists in various forms: <span style="color:#0ea5e9; font-weight:600;">kinetic</span>, <span style="color:#0ea5e9; font-weight:600;">potential</span>, 
+        <span style="color:#f97316; font-weight:600;">chemical</span>, and <span style="color:#f97316; font-weight:600;">thermal</span>. 
+        Thermodynamics bridges the microscopic behavior of molecules with macroscopic observations such as <span style="color:#f97316; font-weight:600;">heat flow</span> and <span style="color:#f97316; font-weight:600;">work</span>.
+      </p>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#f59e0b; font-size:28px; margin-bottom:15px;">The Laws of Thermodynamics</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>First Law (Law of Energy Conservation):</strong> Energy cannot be created or destroyed, only transformed. 
+          Example: Heat added to a system increases internal energy or performs work.</li>
+        <li><strong>Second Law:</strong> Entropy of the universe always increases; spontaneous processes increase disorder. 
+          Example: Heat flows naturally from hot to cold objects.</li>
+        <li><strong>Third Law:</strong> Entropy of a perfect crystal approaches zero at absolute zero temperature.</li>
+        <li><strong>Zeroeth Law:</strong> If two systems are in thermal equilibrium with a third system, they are in equilibrium with each other.</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#f59e0b; font-size:28px; margin-bottom:15px;">Applications in Chemistry and Daily Life</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Heat engines:</strong> Convert chemical energy to mechanical work efficiently.</li>
+        <li><strong>Refrigerators:</strong> Use work to transfer heat against a temperature gradient.</li>
+        <li><strong>Biological systems:</strong> Metabolism obeys thermodynamic laws.</li>
+        <li><strong>Chemical reactions:</strong> Predict spontaneity using Gibbs free energy (\(\Delta G = \Delta H - T\Delta S\)).</li>
+      </ul>
+      <img src="thermodynamics.jpg" style="width:100%; max-width:600px; margin-top:20px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12);">
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Thermodynamics explains <span style="color:#f97316; font-weight:600;">energy flow</span> and <span style="color:#f97316; font-weight:600;">reaction feasibility</span>. 
+        Its laws underpin modern chemistry, engineering, biology, and technology, allowing us to design energy-efficient processes and understand natural phenomena.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "What does the First Law of Thermodynamics state?",
+      options: ["Entropy always increases", "Energy can be created", "Energy is conserved", "Heat flows spontaneously"],
+      answer: 2
+    },
+    {
+      q: "Which law explains why heat flows from hot to cold objects?",
+      options: ["First Law", "Second Law", "Third Law", "Zeroeth Law"],
+      answer: 1
+    },
+    {
+      q: "Entropy of a perfect crystal at absolute zero is?",
+      options: ["Maximum", "Zero", "Undefined", "Infinite"],
+      answer: 1
+    },
+    {
+      q: "Gibbs free energy predicts?",
+      options: ["Work done by a gas", "Spontaneity of reactions", "Temperature only", "Volume changes"],
+      answer: 1
+    },
+    {
+      q: "Zeroeth Law is essential for?",
+      options: ["Defining temperature", "Calculating energy", "Predicting entropy", "Measuring pressure"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Heat and Temperature",
+
+  content: `
+    <h2 style="font-size:40px; color:#f59e0b; border-bottom:5px solid #f97316; padding-bottom:12px; margin-bottom:50px;">
+      Heat and Temperature 🔥🌡️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Heat</strong> is the transfer of <span style="color:#10b981; font-weight:600;">energy due to temperature differences</span> between systems. 
+        <strong>Temperature</strong> measures the <span style="color:#0ea5e9; font-weight:600;">average kinetic energy of particles</span> in a substance.
+      </p>
+      <p>
+        Understanding heat and temperature is crucial for predicting <span style="color:#f97316; font-weight:600;">energy changes</span> in chemical reactions, phase changes, and physical processes.
+      </p>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#f97316; font-size:28px; margin-bottom:15px;">Heat Transfer Methods</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Conduction:</strong> Transfer of heat through direct contact of particles (e.g., metal rod heated at one end).</li>
+        <li><strong>Convection:</strong> Transfer of heat by movement of fluids (e.g., boiling water circulates heat).</li>
+        <li><strong>Radiation:</strong> Transfer of energy via electromagnetic waves (e.g., sunlight warming the earth).</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#f97316; font-size:28px; margin-bottom:15px;">Temperature Scales and Measurement</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Common temperature scales include:
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Celsius (°C):</strong> Based on freezing (0°C) and boiling (100°C) of water at 1 atm.</li>
+        <li><strong>Kelvin (K):</strong> Absolute scale starting at 0 K (absolute zero), K = °C + 273.15.</li>
+        <li><strong>Fahrenheit (°F):</strong> Used mainly in the US, water freezes at 32°F and boils at 212°F.</li>
+      </ul>
+      <img src="heat-temp.jpg" style="width:100%; max-width:600px; margin-top:20px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12);">
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#f97316; font-size:28px; margin-bottom:15px;">Heat Capacity and Specific Heat</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        <strong>Specific heat (c)</strong> is the amount of heat required to raise 1 g of a substance by 1°C.  
+        Formula: <span style="color:#10b981; font-weight:600;">Q = mcΔT</span> where:
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Q = heat added/removed</li>
+        <li>m = mass of the substance</li>
+        <li>c = specific heat capacity</li>
+        <li>ΔT = temperature change</li>
+      </ul>
+      <p>
+        Heat capacity allows prediction of how substances respond to thermal energy and is crucial in calorimetry and engineering processes.
+      </p>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Heat is energy in transit; temperature measures particle motion. Understanding these concepts is essential for studying 
+        <span style="color:#f97316; font-weight:600;">thermodynamics</span>, <span style="color:#f97316; font-weight:600;">phase changes</span>, and practical energy applications.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "What does temperature measure?",
+      options: ["Total energy", "Average kinetic energy of particles", "Chemical potential", "Heat capacity"],
+      answer: 1
+    },
+    {
+      q: "Which method involves energy transfer via particle collisions?",
+      options: ["Conduction", "Convection", "Radiation", "Evaporation"],
+      answer: 0
+    },
+    {
+      q: "What is the formula to calculate heat transfer?",
+      options: ["Q = m/v", "Q = mcΔT", "Q = P/V", "Q = E/Δt"],
+      answer: 1
+    },
+    {
+      q: "Absolute zero corresponds to?",
+      options: ["0°C", "273 K", "0 K", "100 K"],
+      answer: 2
+    },
+    {
+      q: "Which heat transfer method does sunlight use?",
+      options: ["Conduction", "Convection", "Radiation", "All of the above"],
+      answer: 2
+    }
+  ]
+},
+{
+  title: "Chemical Equilibrium",
+
+  content: `
+    <h2 style="font-size:40px; color:#1e40af; border-bottom:5px solid #3b82f6; padding-bottom:12px; margin-bottom:50px;">
+      Chemical Equilibrium ⚖️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Chemical equilibrium</strong> occurs when the rates of the forward and reverse reactions are equal, so the concentrations of reactants and products remain constant over time.  
+        It is a dynamic balance, not a static one.
+      </p>
+      <p>
+        Mastery of equilibrium is essential for understanding <span style="color:#1e3a8a; font-weight:600;">reaction optimization</span>, 
+        <span style="color:#1e3a8a; font-weight:600;">industrial chemical production</span>, and biological processes.
+      </p>
+    </section>
+
+    <section style="margin-bottom:35px;">
+      <h3 style="color:#3b82f6; font-size:28px; margin-bottom:15px;">Key Concepts</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Equilibrium constant (K):</strong> Ratio of product concentrations to reactant concentrations at equilibrium.  
+          Example: For aA + bB ⇌ cC + dD → \( K_c = \frac{[C]^c [D]^d}{[A]^a [B]^b} \)
+        </li>
+        <li><strong>Le Châtelier’s Principle:</strong> If a system at equilibrium is disturbed, it shifts to counteract the disturbance.</li>
+        <li><strong>Reaction Quotient (Q):</strong> Same formula as K, but at any point during reaction.  
+          Comparing Q and K predicts the direction of shift.
+        </li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#1e3a8a; font-size:28px; margin-bottom:15px;">Tutorial Example</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Consider the Haber process for ammonia synthesis:  
+        N₂(g) + 3H₂(g) ⇌ 2NH₃(g)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Initial concentrations: [N₂] = 1.0 M, [H₂] = 3.0 M, [NH₃] = 0.5 M</li>
+        <li>Equilibrium constant: K = 4.0</li>
+        <li>Calculate whether the reaction will shift forward or backward.</li>
+      </ul>
+      <p style="font-size:18px; line-height:1.7;">
+        Step 1: Compute reaction quotient Q = \(\frac{[NH₃]^2}{[N₂][H₂]^3}\) = \(\frac{0.5^2}{1.0 * 3.0^3} = \frac{0.25}{27} \approx 0.0093\)  
+        Step 2: Compare Q and K → Q < K, so the reaction shifts forward to produce more NH₃.
+      </p>
+      <img src="chemical-equilibrium.jpg" style="width:100%; max-width:600px; margin-top:20px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12);">
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#1e40af; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Chemical equilibrium is a balance of forward and reverse reactions.  
+        Le Châtelier’s principle predicts system shifts when disturbed.  
+        Understanding K and Q helps in reaction prediction and industrial optimization.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "What defines chemical equilibrium?",
+      options: ["No reactants left", "Equal rates of forward and reverse reactions", "Temperature is zero", "All reactants converted"],
+      answer: 1
+    },
+    {
+      q: "If Q < K, the reaction will?",
+      options: ["Shift forward", "Shift backward", "Remain unchanged", "Stop"],
+      answer: 0
+    },
+    {
+      q: "Le Châtelier’s principle explains?",
+      options: ["Reaction speed", "Equilibrium shift when disturbed", "Reaction heat only", "Catalyst effects"],
+      answer: 1
+    },
+    {
+      q: "In the Haber process example, the reaction shifts to?",
+      options: ["Produce more NH₃", "Consume more NH₃", "No shift", "Produce H₂ only"],
+      answer: 0
+    },
+    {
+      q: "Equilibrium constant (K) depends on?",
+      options: ["Concentration only", "Temperature", "Pressure only", "Catalyst presence"],
+      answer: 1
+    }
+  ]
+},
+{
+  title: "Reaction Rates and Kinetics",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:50px;">
+      Reaction Rates and Kinetics ⚡
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Kinetics</strong> studies how fast reactions occur and the factors that influence their rates.  
+        Key factors include <span style="color:#065f46; font-weight:600;">concentration</span>, <span style="color:#065f46; font-weight:600;">temperature</span>, 
+        <span style="color:#065f46; font-weight:600;">catalysts</span>, and <span style="color:#065f46; font-weight:600;">surface area</span>.
+      </p>
+      <p>
+        Understanding kinetics is critical for <span style="color:#0f766e; font-weight:600;">industrial chemical optimization</span>, 
+        <span style="color:#0f766e; font-weight:600;">drug design</span>, and predicting <span style="color:#0f766e; font-weight:600;">reaction behavior</span>.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Key Concepts</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Rate of reaction:</strong> Change in concentration of reactants/products per unit time.</li>
+        <li><strong>Rate law:</strong> Expresses rate as function of reactant concentrations: <br>
+          Rate = k [A]^m [B]^n, where m and n are reaction orders.
+        </li>
+        <li><strong>Activation energy (Ea):</strong> Minimum energy needed for reaction. Lower Ea → faster reaction.</li>
+        <li><strong>Catalysts:</strong> Increase reaction rate by lowering Ea without being consumed.</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Tutorial Example 1: Decomposition of Hydrogen Peroxide</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Reaction: 2 H₂O₂ → 2 H₂O + O₂  
+        Given: Initial [H₂O₂] = 0.5 M, k = 0.1 s⁻¹  
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Step 1: Identify order → first-order reaction</li>
+        <li>Step 2: Rate law → Rate = k[H₂O₂]</li>
+        <li>Step 3: Calculate concentration after t seconds: [H₂O₂] = [H₂O₂]_0 * e^(-kt)</li>
+        <li>Step 4: For t = 10 s → [H₂O₂] = 0.5 * e^(-0.1*10) ≈ 0.184 M</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 2: Effect of Temperature on Rate</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Reaction rate doubles when temperature increases by 10°C.  
+        If initial rate = 0.05 M/s at 25°C, what is the rate at 35°C?
+      </p>
+      <p style="font-size:18px; line-height:1.7;">
+        Step 1: Rate at 35°C = 2 × 0.05 = 0.1 M/s  
+        Step 2: Higher temperature → more particles exceed activation energy → faster reaction
+      </p>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#065f46; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Kinetics explains <span style="color:#065f46; font-weight:600;">how and why reactions occur at certain rates</span>.  
+        Factors like <span style="color:#065f46; font-weight:600;">concentration, temperature, and catalysts</span> influence speed.  
+        Rate laws and activation energy calculations help in <span style="color:#065f46; font-weight:600;">industrial and laboratory applications</span>.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "Kinetics studies?",
+      options: ["Reaction speed and influencing factors", "Equilibrium only", "Temperature of planets", "Molecular structure"],
+      answer: 0
+    },
+    {
+      q: "Which factor does NOT affect reaction rate?",
+      options: ["Concentration", "Catalyst", "Surface area", "Color of reactants"],
+      answer: 3
+    },
+    {
+      q: "Rate law for reaction A + B → C is Rate = k[A]^1[B]^2. What is order of reaction?",
+      options: ["1", "2", "3", "0"],
+      answer: 2
+    },
+    {
+      q: "What is the role of a catalyst?",
+      options: ["Consumed in reaction", "Slows reaction", "Speeds reaction by lowering Ea", "Changes products"],
+      answer: 2
+    },
+    {
+      q: "For first-order reaction, [A]_t = [A]_0 * e^(-kt). If k=0.1 s⁻¹, [A]_0=0.5 M, t=10 s, [A]_t=?",
+      options: ["0.184 M", "0.5 M", "0.25 M", "0.1 M"],
+      answer: 0
+    },
+    {
+      q: "Reaction rate doubles for every 10°C increase. If initial rate = 0.05 M/s at 25°C, rate at 45°C?",
+      options: ["0.2 M/s", "0.1 M/s", "0.15 M/s", "0.05 M/s"],
+      answer: 0
+    },
+    {
+      q: "Activation energy is?",
+      options: ["Energy released", "Energy needed to initiate reaction", "Energy of products", "Catalyst energy"],
+      answer: 1
+    }
+  ]
+},
+{
+  title: "Electrochemistry",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:50px;">
+      Electrochemistry ⚡🔋
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Electrochemistry</strong> studies the relationship between <span style="color:#065f46; font-weight:600;">chemical reactions</span> and <span style="color:#065f46; font-weight:600;">electric current</span>.  
+        It involves <span style="color:#10b981; font-weight:600;">redox reactions</span>, <span style="color:#10b981; font-weight:600;">galvanic cells</span>, and <span style="color:#10b981; font-weight:600;">electrolytic cells</span>.
+      </p>
+      <p>
+        Applications include <span style="color:#0f766e; font-weight:600;">batteries</span>, <span style="color:#0f766e; font-weight:600;">corrosion prevention</span>, and <span style="color:#0f766e; font-weight:600;">electroplating</span>.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Key Concepts 🔑</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Redox reactions:</strong> Oxidation (loss of e⁻) and Reduction (gain of e⁻).</li>
+        <li><strong>Electrodes:</strong> Anode (oxidation) & Cathode (reduction).</li>
+        <li><strong>Electromotive force (EMF):</strong> Voltage of a cell. E°cell = E°cathode − E°anode</li>
+        <li><strong>Faraday’s laws:</strong> Relate mass deposited to charge passed: m = (Q × M)/(n × F)</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Tutorial Example 1: Zinc-Copper Galvanic Cell 🧪</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Reaction: Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)  
+        Given: E°(Zn²⁺/Zn) = -0.76 V, E°(Cu²⁺/Cu) = +0.34 V  
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Step 1: Identify anode → Zn (oxidation)</li>
+        <li>Step 2: Identify cathode → Cu (reduction)</li>
+        <li>Step 3: Calculate cell potential → E°cell = 0.34 - (-0.76) = 1.10 V</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 2: Electrolysis of Copper Sulfate ⚡</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Electrolytic reaction: CuSO₄ → Cu(s) + SO₄²⁻(aq)  
+        Current: 2 A, Time: 1 hour, M(Cu) = 63.5 g/mol, n=2  
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Step 1: Total charge: Q = I × t = 2 × 3600 = 7200 C</li>
+        <li>Step 2: Mass deposited: m = (Q × M)/(n × F) = (7200 × 63.5)/(2 × 96485) ≈ 2.37 g</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Tutorial Example 3: Predicting Spontaneity 🔮</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        If E°cell > 0, reaction is spontaneous.  
+        Example: Zn-Cu cell → E°cell = +1.10 V → spontaneous reaction
+      </p>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Electrochemistry links <span style="color:#065f46; font-weight:600;">chemical changes</span> and <span style="color:#065f46; font-weight:600;">electricity</span>.  
+        Galvanic cells produce voltage spontaneously, electrolytic cells require external current, and Faraday’s laws allow quantitative calculations.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "Electrochemistry studies?",
+      options: ["Chemical reactions & electric current", "Temperature changes", "Molecular motion", "Acid-base reactions"],
+      answer: 0
+    },
+    {
+      q: "In a galvanic cell, where does oxidation occur?",
+      options: ["Anode", "Cathode", "Electrolyte", "Salt bridge"],
+      answer: 0
+    },
+    {
+      q: "EMF of cell =?",
+      options: ["E°cathode − E°anode", "E°anode − E°cathode", "Sum of reactant potentials", "Always 0"],
+      answer: 0
+    },
+    {
+      q: "Mass deposited in electrolysis is calculated using?",
+      options: ["m = (Q × M)/(n × F)", "Rate law", "E°cell formula", "Concentration formula"],
+      answer: 0
+    },
+    {
+      q: "Zn-Cu cell, E°cell = +1.10 V → reaction is?",
+      options: ["Spontaneous", "Non-spontaneous", "At equilibrium", "Impossible"],
+      answer: 0
+    },
+    {
+      q: "Electrolytic cell requires?",
+      options: ["External current", "No current", "Spontaneous reaction", "Heat only"],
+      answer: 0
+    },
+    {
+      q: "Redox reaction involves?",
+      options: ["Electron transfer", "Proton transfer", "Heat only", "Pressure change"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Ideal Gas Law",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:50px;">
+      Ideal Gas Law 💨⚗️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        The <strong>Ideal Gas Law</strong> describes the relationship between <span style="color:#065f46; font-weight:600;">pressure (P)</span>, 
+        <span style="color:#065f46; font-weight:600;">volume (V)</span>, <span style="color:#10b981; font-weight:600;">temperature (T)</span>, 
+        and <span style="color:#10b981; font-weight:600;">number of moles (n)</span> of an ideal gas:
+      </p>
+      <p style="font-size:20px; font-weight:600; color:#065f46;">PV = nRT</p>
+      <p>
+        Where <span style="color:#10b981; font-weight:600;">R</span> is the universal gas constant, <span style="color:#10b981; font-weight:600;">0.0821 L·atm/(mol·K)</span> or <span style="color:#10b981; font-weight:600;">8.314 J/(mol·K)</span>.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Key Concepts 🔑</h3>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li><strong>Pressure:</strong> Force per unit area (atm, Pa)</li>
+        <li><strong>Volume:</strong> Space occupied by gas (L, m³)</li>
+        <li><strong>Temperature:</strong> Must be in Kelvin (K)</li>
+        <li><strong>Moles (n):</strong> Amount of substance (mol)</li>
+        <li><strong>Gas constant (R):</strong> Links energy units with gas behavior</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Tutorial Example 1: Calculating Pressure 🧪</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        A 2.0 L container holds 0.50 mol of an ideal gas at 300 K. Find the pressure (P).  
+        Use R = 0.0821 L·atm/(mol·K)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>P = nRT / V = (0.50 × 0.0821 × 300) / 2.0</li>
+        <li>P ≈ 6.16 atm</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 2: Calculating Volume ⚖️</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        1.0 mol of gas at 298 K exerts 1.5 atm pressure. Find volume (V).  
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>V = nRT / P = (1 × 0.0821 × 298) / 1.5</li>
+        <li>V ≈ 16.3 L</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Tutorial Example 3: Temperature Change 🔥</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        A gas occupies 5.0 L at 300 K and 2.0 atm. If the volume is compressed to 3.0 L at constant moles, find the new temperature.  
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Use PV = nRT → T₂ = (P₂ V₂) / (nR)</li>
+        <li>T₂ = (2 × 3.0) / (2 × 0.0821) ≈ 36.5 K (adjust units if needed)</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#10b981; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        The Ideal Gas Law allows calculation of pressure, volume, temperature, or moles of an ideal gas.  
+        Ensure temperature is in Kelvin and units match the gas constant R.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "The Ideal Gas Law equation is?",
+      options: ["PV = nRT", "P + V = nT", "PV = n/T", "P = nV/T"],
+      answer: 0
+    },
+    {
+      q: "What units should temperature be in?",
+      options: ["Kelvin", "Celsius", "Fahrenheit", "Atmosphere"],
+      answer: 0
+    },
+    {
+      q: "If V increases at constant n and T, pressure will?",
+      options: ["Decrease", "Increase", "Stay the same", "Cannot determine"],
+      answer: 0
+    },
+    {
+      q: "R in PV = nRT can be expressed as?",
+      options: ["0.0821 L·atm/mol·K", "1 Pa", "9.8 m/s²", "8 L·mol/K"],
+      answer: 0
+    },
+    {
+      q: "0.50 mol gas, V = 2 L, T = 300 K, P = ?",
+      options: ["6.16 atm", "2 atm", "1.5 atm", "12 atm"],
+      answer: 0
+    },
+    {
+      q: "If P = 2 atm, V = 3 L, n = 1 mol, R = 0.0821, T = ?",
+      options: ["73.2 K", "300 K", "298 K", "36.5 K"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Colligative Properties",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:50px;">
+      Colligative Properties 🧪❄️
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Colligative properties</strong> depend only on the <span style="color:#10b981; font-weight:600;">number of solute particles</span> in a solution, 
+        not on their identity. The main properties are:
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Vapor Pressure Lowering 🌫️</li>
+        <li>Boiling Point Elevation 🔥</li>
+        <li>Freezing Point Depression ❄️</li>
+        <li>Osmotic Pressure 💧</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Vapor Pressure Lowering 🌫️</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Adding a non-volatile solute reduces the solvent’s vapor pressure:  
+        <span style="color:#065f46; font-weight:600;">Pₐ = Xₐ Pₐ°</span>  
+        Where <span style="color:#10b981; font-weight:600;">Xₐ</span> is mole fraction of solvent and <span style="color:#10b981; font-weight:600;">Pₐ°</span> is pure solvent vapor pressure.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Boiling Point Elevation 🔥</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Boiling point increases when solute is added:  
+        <span style="color:#065f46; font-weight:600;">ΔT_b = K_b · m · i</span>  
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>ΔT_b = Boiling point elevation</li>
+          <li>K_b = ebullioscopic constant (°C·kg/mol)</li>
+          <li>m = molality (mol/kg)</li>
+          <li>i = van’t Hoff factor (# of particles per formula unit)</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Freezing Point Depression ❄️</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Freezing point decreases when solute is added:  
+        <span style="color:#065f46; font-weight:600;">ΔT_f = K_f · m · i</span>  
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>K_f = cryoscopic constant (°C·kg/mol)</li>
+          <li>m = molality (mol/kg)</li>
+          <li>i = van’t Hoff factor</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Osmotic Pressure 💧</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Pressure needed to stop solvent flow across a semipermeable membrane:  
+        <span style="color:#065f46; font-weight:600;">π = i M R T</span>  
+        Where <span style="color:#10b981; font-weight:600;">M</span> = molarity, <span style="color:#10b981; font-weight:600;">R</span> = gas constant, <span style="color:#10b981; font-weight:600;">T</span> = temperature in Kelvin.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 1 🔹</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Calculate the freezing point of a solution made by dissolving 2.0 mol NaCl in 500 g water.  
+        K_f for water = 1.86 °C·kg/mol, i = 2 (Na⁺ + Cl⁻)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>m = 2 / 0.5 = 4 mol/kg</li>
+        <li>ΔT_f = 1.86 × 4 × 2 = 14.88 °C</li>
+        <li>Freezing point = 0 - 14.88 ≈ -14.9 °C</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 2 🔹</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Osmotic pressure of 0.1 M glucose solution at 300 K? (i = 1, R = 0.0821 L·atm/mol·K)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>π = i M R T = 1 × 0.1 × 0.0821 × 300 ≈ 2.46 atm</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#065f46; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Colligative properties depend on the number of solute particles, not their identity.  
+        Remember the formulas: ΔT_b, ΔT_f, π = iMRT, and vapor pressure lowering Pₐ = Xₐ Pₐ°.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "Colligative properties depend on?",
+      options: ["Number of solute particles", "Type of solute", "Color of solution", "Pressure"],
+      answer: 0
+    },
+    {
+      q: "Formula for boiling point elevation?",
+      options: ["ΔT_b = K_b m i", "ΔT_b = K_f m i", "π = i M R T", "P = X P°"],
+      answer: 0
+    },
+    {
+      q: "Freezing point of water decreases when solute is added?",
+      options: ["Yes", "No", "Sometimes", "Never"],
+      answer: 0
+    },
+    {
+      q: "Osmotic pressure formula?",
+      options: ["π = i M R T", "ΔT_f = K_f m i", "P = X P°", "ΔT_b = K_b m i"],
+      answer: 0
+    },
+    {
+      q: "NaCl dissociates into how many particles for colligative calculations?",
+      options: ["2", "1", "3", "4"],
+      answer: 0
+    },
+    {
+      q: "Vapor pressure of solvent decreases when?",
+      options: ["Non-volatile solute is added", "Pressure increases", "Temperature decreases", "Volume decreases"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Quantum Chemistry",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:50px;">
+      Quantum Chemistry ⚛️🔬
+    </h2>
+
+    <section style="margin-bottom:40px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Quantum chemistry</strong> studies the behavior of atoms and molecules using quantum mechanics. Key principles include:
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>Wave-particle duality 🌊⚡</li>
+        <li>Quantization of energy levels 🟢</li>
+        <li>Schrödinger equation solutions 📝</li>
+        <li>Orbitals and electron configurations 🌀</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Wave-Particle Duality 🌊⚡</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Light and matter exhibit both particle and wave properties.  
+        <span style="color:#065f46; font-weight:600;">λ = h / p</span> (de Broglie wavelength)  
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>λ = wavelength</li>
+          <li>h = Planck's constant</li>
+          <li>p = momentum of particle</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:15px;">Schrödinger Equation 📝</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Describes how the quantum state of a system evolves:  
+        <span style="color:#065f46; font-weight:600;">Ĥψ = Eψ</span>  
+        Where <span style="color:#10b981; font-weight:600;">Ĥ</span> is Hamiltonian, <span style="color:#10b981; font-weight:600;">ψ</span> is wavefunction, <span style="color:#10b981; font-weight:600;">E</span> is energy.
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Orbitals and Electron Configurations 🌀</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Electrons occupy orbitals based on energy levels:  
+        <span style="color:#065f46; font-weight:600;">1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p ...</span>  
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>Aufbau principle: fill lower energy first</li>
+          <li>Pauli exclusion principle: max 2 electrons per orbital</li>
+          <li>Hund's rule: maximize unpaired electrons</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 1 🔹</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Find the de Broglie wavelength of an electron moving at 2 × 10^6 m/s. (h = 6.626 × 10^-34 Js, m = 9.11 × 10^-31 kg)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>p = m × v = 9.11 × 10^-31 × 2 × 10^6 = 1.822 × 10^-24 kg·m/s</li>
+        <li>λ = h / p = 6.626 × 10^-34 / 1.822 × 10^-24 ≈ 3.64 × 10^-10 m</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:50px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:15px;">Tutorial Example 2 🔹</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Write the electron configuration of Oxygen (8 electrons)
+      </p>
+      <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+        <li>1s² 2s² 2p⁴</li>
+        <li>Oxygen has 2 unpaired electrons in 2p orbitals</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom:60px;">
+      <h3 style="color:#065f46; font-size:28px;">Summary 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Quantum chemistry explains atomic and molecular behavior using quantum mechanics.  
+        Key formulas: λ = h/p, Ĥψ = Eψ, and electron configuration rules.
+      </p>
+    </section>
+  `,
+
+  quiz: [
+    {
+      q: "What does de Broglie wavelength depend on?",
+      options: ["Momentum of particle", "Color of particle", "Temperature", "Volume"],
+      answer: 0
+    },
+    {
+      q: "Schrödinger equation is?",
+      options: ["Ĥψ = Eψ", "ΔT = K m i", "π = i M R T", "P = X P°"],
+      answer: 0
+    },
+    {
+      q: "Maximum electrons in one orbital?",
+      options: ["2", "4", "6", "1"],
+      answer: 0
+    },
+    {
+      q: "Hund's rule states?",
+      options: ["Maximize unpaired electrons", "Fill paired first", "Fill upper orbitals first", "Electrons have same spin always"],
+      answer: 0
+    },
+    {
+      q: "Electron configuration of Oxygen?",
+      options: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s¹ 2p⁵", "1s² 2s² 2p²"],
+      answer: 0
+    },
+    {
+      q: "Wave-particle duality means?",
+      options: ["Matter and light have wave and particle nature", "Only waves exist", "Only particles exist", "Particles have no mass"],
+      answer: 0
+    }
+  ]
+},
+{
+  title: "Introduction to Inorganic Chemistry",
+
+  content: `
+    <h2 style="font-size:40px; color:#065f46; border-bottom:5px solid #10b981; padding-bottom:12px; margin-bottom:40px;">
+      Introduction to Inorganic Chemistry ⚗️🧪
+    </h2>
+
+    <section style="margin-bottom:30px; font-size:18px; line-height:1.8;">
+      <p>
+        <strong>Inorganic chemistry</strong> is the branch of chemistry that deals with the study of all chemical compounds except the vast class of organic compounds (carbon-based compounds).  
+        It focuses on metals, minerals, salts, and non-carbon molecules that play a critical role in materials, catalysts, and biological systems.
+      </p>
+    </section>
+
+    <section style="margin-bottom:30px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:10px;">Scope of Inorganic Chemistry 🔹</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Inorganic chemistry covers:
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>Transition metals and coordination compounds 🟢</li>
+          <li>Acids, bases, and salts ⚪</li>
+          <li>Industrial inorganic chemicals 🏭</li>
+          <li>Mineral extraction and metallurgy ⛏️</li>
+          <li>Bioinorganic chemistry, e.g., hemoglobin and enzymes 🧬</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:30px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:10px;">Importance of Inorganic Chemistry 🌟</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Inorganic chemistry is essential because:
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>It helps develop new materials like superconductors and ceramics 🏗️</li>
+          <li>It provides catalysts for chemical reactions ⚡</li>
+          <li>It explains the behavior of metals, minerals, and nonmetals in nature 🌍</li>
+          <li>It forms the foundation for understanding environmental chemistry and industrial processes ♻️</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:30px;">
+      <h3 style="color:#10b981; font-size:28px; margin-bottom:10px;">Branches of Inorganic Chemistry 🧩</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Key branches include:
+        <ul style="font-size:18px; line-height:1.7; padding-left:20px;">
+          <li>Coordination Chemistry – study of metal complexes 🟢</li>
+          <li>Bioinorganic Chemistry – role of metals in biology 🧬</li>
+          <li>Solid State Chemistry – study of crystalline solids 🏢</li>
+          <li>Industrial Chemistry – production of inorganic chemicals 🏭</li>
+        </ul>
+      </p>
+    </section>
+
+    <section style="margin-bottom:30px;">
+      <h3 style="color:#065f46; font-size:28px; margin-bottom:10px;">Conclusion 📌</h3>
+      <p style="font-size:18px; line-height:1.7;">
+        Inorganic chemistry provides the foundation to understand the properties, structures, and reactions of non-organic substances.  
+        It is a key field for materials science, catalysis, environmental chemistry, and industrial applications.
+      </p>
+    </section>
+  `
+}
+];
+
+
+let currentLessonIndex = 0;
+
+function showLesson(index){
+  const container = document.getElementById('physical-chemistry');
+  const lesson = lessons[index];
+  container.innerHTML = `
+    ${lesson.content}
+    <hr style="margin:30px 0;">
+    <div id="quizContainer"></div>
+    <div id="lessonNav" style="display:flex; justify-content:space-between; margin-top:40px;">
+      <button id="prevLessonBtn" ${index===0?'disabled':''} style="padding:10px 20px; border:none; border-radius:8px; background:#f97316; color:#fff; cursor:pointer;">⏮ Previous</button>
+      <button id="nextLessonBtn" ${index===lessons.length-1?'disabled':''} style="padding:10px 20px; border:none; border-radius:8px; background:#0ea5e9; color:#fff; cursor:pointer;">Next ⏭</button>
+    </div>
+  `;
+  startQuiz(lesson.quiz);
+
+  document.getElementById('prevLessonBtn').addEventListener('click', ()=>{
+    if(currentLessonIndex>0){currentLessonIndex--; showLesson(currentLessonIndex);}
+  });
+  document.getElementById('nextLessonBtn').addEventListener('click', ()=>{
+    if(currentLessonIndex<lessons.length-1){currentLessonIndex++; showLesson(currentLessonIndex);}
+  });
+}
+
+function showLessons(){
+  document.querySelector('.hero').style.display='none';
+  document.querySelector('.sections').style.display='none';
+  document.getElementById('lessons-sidebar').style.display='block';
+  document.getElementById('physical-chemistry').style.display='block'; // FIXED visibility
+  currentLessonIndex=0;
+  showLesson(currentLessonIndex);
+
+  // Make sidebar items clickable
+  document.querySelectorAll('#lessons-sidebar li').forEach((li, idx)=>{
+    li.addEventListener('click', ()=>{
+      currentLessonIndex = idx;
+      showLesson(currentLessonIndex);
+    });
+  });
+}
+
+function startQuiz(questions){
+  let current=0, score=0;
+  const container=document.getElementById('quizContainer');
+  function loadQuestion(){
+    if(current>=questions.length){
+      container.innerHTML=`<h3>🎉 Quiz Completed!</h3><p>Your Score: ${score} / ${questions.length}</p>`;
+      return;
+    }
+    const q=questions[current];
+    container.innerHTML=`
+      <div class="quiz-box">
+        <p><strong>Q${current+1}:</strong> ${q.q}</p>
+        ${q.options.map((opt,i)=>`<label class="option"><input type="radio" name="quizOption" value="${i}">${opt}</label>`).join('')}
+        <button id="submitBtn">Submit</button>
+        <p id="feedback"></p>
+      </div>
+    `;
+    document.getElementById('submitBtn').addEventListener('click', ()=>{
+      const selected=document.querySelector('input[name="quizOption"]:checked');
+      if(!selected){alert("Please select an answer!"); return;}
+      const answer=parseInt(selected.value), feedback=document.getElementById('feedback');
+      if(answer===q.answer){feedback.textContent="✅ Correct!"; feedback.style.color="green"; score++;} 
+      else {feedback.textContent=`❌ Wrong! Correct: ${q.options[q.answer]}`; feedback.style.color="red";}
+      setTimeout(()=>{current++; loadQuestion();}, 1200);
+    });
+  }
+  loadQuestion();
+}
+
+</script>
+
+</body>
+</html>
