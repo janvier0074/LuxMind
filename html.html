@@ -1,0 +1,3599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 HTML Mastery Academy | W3Schools Style Complete Course</title>
+    <style>
+       * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fb; color: #1e293b; }
+.app-layout { display: flex; height: 100vh; overflow: hidden; }
+.sidebar { width: 300px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; overflow-y: auto; box-shadow: 4px 0 25px rgba(0,0,0,0.2); }
+.sidebar-header { background: linear-gradient(135deg, #e34c26, #f06529); color: white; padding: 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); }
+.lesson-item { padding: 0.9rem 1.2rem; margin: 0.3rem 0.8rem; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; color: #e2e8f0; display: flex; align-items: center; gap: 12px; }
+.lesson-item:hover { background: rgba(227, 76, 38, 0.3); color: white; transform: translateX(5px); }
+.lesson-item.active { background: linear-gradient(135deg, #e34c26, #f06529); color: white; box-shadow: 0 4px 15px rgba(227, 76, 38, 0.4); }
+.main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: #f8fafc; }
+.top-bar { background: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px; }
+.nav-group { display: flex; gap: 12px; }
+.nav-btn { background: #f1f5f9; border: none; padding: 0.5rem 1.2rem; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.nav-btn-primary { background: #e34c26; color: white; }
+.nav-btn-primary:hover { background: #c23d1a; transform: translateY(-2px); }
+.nav-btn:hover { background: #e2e8f0; transform: translateY(-1px); }
+.lesson-content { padding: 2rem; overflow-y: auto; }
+.lesson-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #0f172a; border-left: 6px solid #e34c26; padding-left: 1.2rem; }
+.lesson-sub { color: #475569; margin-bottom: 2rem; font-size: 1rem; }
+.tutorial-card { background: white; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #eef2ff; }
+.tutorial-card h3 { color: #e34c26; margin-bottom: 1rem; font-size: 1.5rem; }
+.code-box { background:#1e293b; border-radius:1rem; margin:1rem 0; overflow:hidden; max-width:450px; width:100%; display:block; margin-left:0; }
+.code-header { background: #0f172a; padding: 0.6rem 1rem; color: #94a3b8; font-size: 0.8rem; font-family: monospace; border-bottom: 1px solid #334155; }
+
+.code-box { background: #0f172a; border-radius: 12px; margin: 1.2rem 0; overflow-x: auto; max-width: 450px; width: 100%; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: 0.2s ease; }
+.code-box:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(0,0,0,0.25); }
+.code-box pre { margin: 0; padding: 1rem; color: #e5e7eb; font-family: "Fira Code", monospace; font-size: 0.78rem; line-height: 1.6; white-space: pre; overflow-x: auto; }
+.try-editor { background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 1.2rem; border: 1px solid #e2e8f0; margin-top: 1.5rem; max-width: 750px; width: 80%; margin-left: auto; margin-right: auto; padding: 1.2rem; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08); transition: all 0.25s ease; }
+.try-editor:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12); }
+.editor-header { background: #f1f5f9; padding: 0.8rem 1rem; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+textarea { width: 100%; min-height: 180px; background: #0b1220; color: #e2e8f0; font-family: "Fira Code", monospace; padding: 1rem; border: none; resize: vertical; outline: none; font-size: 0.78rem; line-height: 1.6; }
+.output-preview { background: #ffffff; border-top: 1px solid #e2e8f0; padding: 1rem; min-height: 180px; max-width: 450px; width: 100%; margin: 0; font-size: 0.95rem; color: #0f172a; }
+.run-code-btn { background: #10b981; color: white; border: none; padding: 0.6rem 1.5rem; margin: 1rem; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.1s; }
+.output-preview { background: white; border-top: 2px solid #e2e8f0; padding: 1rem; min-height: 180px; }
+.quiz-option { background: white; padding: 0.8rem 1rem; margin: 0.5rem 0; border-radius: 60px; cursor: pointer; border: 1px solid #e2e8f0; transition: 0.1s; }
+.quiz-option:hover { background: #eef2ff; }
+.quiz-option input[type="radio"] { accent-color: #e34c26; width: 18px; height: 18px; cursor: pointer; }
+.quiz-option label { cursor: pointer; }
+.quiz-feedback { margin: 1rem 0; padding: 0.8rem; border-radius: 1rem; }
+.correct-highlight { background: #bbf7d0 !important; border: 2px solid #22c55e; }
+.bottom-nav { display: flex; justify-content: space-between; padding: 1rem 2rem; background: white; border-top: 1px solid #e2e8f0; }
+@media (max-width: 768px) { .sidebar { width: 250px; } .lesson-title { font-size: 1.8rem; } }
+#homepage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background-image: url('hare.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; padding: 2rem; }
+#homepage::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); z-index: 1; }
+.home-hero, .course-grid { position: relative; z-index: 2; }
+.home-hero { text-align: center; margin-bottom: 3rem; }
+.home-hero h1 { font-size: 3rem; color: white; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.home-hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+.start-learning-btn { background: #e34c26; color: white; border: none; padding: 1rem 2rem; font-size: 1.2rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: transform 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.start-learning-btn:hover { transform: scale(1.05); }
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1200px; width: 100%; padding: 0 1rem; }
+.grid-item { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-radius: 1.5rem; padding: 1.8rem; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+.grid-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #e34c26, #ff8c5a); transform: scaleX(0); transition: transform 0.3s; }
+.grid-item:hover::before { transform: scaleX(1); }
+.grid-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+.grid-icon { font-size: 3rem; margin-bottom: 1rem; }
+.grid-item h3 { color: #e34c26; margin: 0.5rem 0; font-size: 1.3rem; }
+.grid-item p { color: #64748b; font-size: 0.9rem; margin-bottom: 1rem; }
+.grid-lessons { display: inline-block; background: rgba(227, 76, 38, 0.1); color: #e34c26; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+.hidden { display: none; }
+#mainApp { display: none; }
+.global-footer { text-align: center; padding: 0.3rem 1rem; background: linear-gradient(135deg, #1e293b, #0f172a); border-top: 1px solid rgba(255,255,255,0.1); width: 100%; display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.global-footer p { color: white; font-size: 0.65rem; margin: 0; }
+.global-footer .signature { color: #ffcc00; font-weight: 600; font-size: 0.7rem; }
+.social-links { display: inline-flex; align-items: center; gap: 0.3rem; }
+.social-links a { color: white; text-decoration: none; font-size: 0.65rem; }
+.social-links a:hover { color: #ffcc00; }
+.separator { color: #475569; font-size: 0.5rem; }
+@media (max-width: 600px) { .global-footer { flex-direction: column; gap: 0.2rem; padding: 0.3rem; } }
+html { scroll-behavior: smooth; }
+.loader { border: 3px solid #f3f3f3; border-top: 3px solid #e34c26; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.sidebar { width: 320px; background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); border-right: 1px solid rgba(227, 76, 38, 0.2); display: flex; flex-direction: column; overflow-y: auto; box-shadow: 4px 0 20px rgba(0,0,0,0.2); position: relative; }
+.sidebar-header { background: linear-gradient(135deg, #e34c26, #f06529); padding: 1.5rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.logo-area { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.logo-icon { font-size: 2rem; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); }
+.sidebar-header h2 { font-size: 1.3rem; color: white; margin: 0; letter-spacing: -0.5px; }
+.course-badge { background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; margin-top: 8px; text-align: center; }
+.search-container { margin: 15px 0 10px 0; }
+.search-input { width: 100%; padding: 10px 12px; border: none; border-radius: 25px; background: rgba(255,255,255,0.15); color: white; font-size: 0.85rem; outline: none; transition: all 0.3s; }
+.search-input::placeholder { color: rgba(255,255,255,0.6); }
+.search-input:focus { background: rgba(255,255,255,0.25); box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+.progress-container { margin-top: 12px; }
+.progress-stats { display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.9); margin-bottom: 5px; }
+.progress-bar-bg { background: rgba(0,0,0,0.3); border-radius: 10px; height: 6px; overflow: hidden; }
+.progress-bar-fill { background: #ffcc00; width: 0%; height: 100%; border-radius: 10px; transition: width 0.3s ease; box-shadow: 0 0 5px #ffcc00; }
+.lessons-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(15, 23, 42, 0.5); border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+.lesson-count { background: rgba(227, 76, 38, 0.3); padding: 2px 8px; border-radius: 20px; color: #e34c26; font-weight: bold; }
+.lessons-list { list-style: none; padding: 0.5rem 0; flex: 1; }
+.lesson-item { padding: 0.8rem 1.2rem; margin: 0.2rem 0.8rem; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; color: #cbd5e1; display: flex; align-items: center; gap: 12px; position: relative; }
+.lesson-item::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 0; background: #e34c26; transition: height 0.3s; }
+.lesson-item:hover::before { height: 60%; }
+.lesson-item:hover { background: rgba(227, 76, 38, 0.15); color: white; transform: translateX(5px); }
+.lesson-item.active { background: linear-gradient(135deg, rgba(227, 76, 38, 0.2), rgba(240, 101, 41, 0.1)); color: white; border: 1px solid rgba(227, 76, 38, 0.3); }
+.lesson-item.active::before { height: 70%; }
+.lesson-num { font-weight: 700; background: rgba(255,255,255,0.1); width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 30px; font-size: 0.75rem; }
+.lesson-item.active .lesson-num { background: #e34c26; box-shadow: 0 0 10px rgba(227, 76, 38, 0.5); }
+.sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; display: flex; justify-content: space-around; background: rgba(0,0,0,0.2); }
+.stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; color: #94a3b8; }
+.stat-item span:first-child { font-size: 1.1rem; }
+.stat-item span:nth-child(2) { color: #ffcc00; font-weight: bold; font-size: 0.9rem; }
+.stat-item small { font-size: 0.6rem; color: #64748b; }
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-track { background: #1e293b; }
+.sidebar::-webkit-scrollbar-thumb { background: #e34c26; border-radius: 5px; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: #f06529; }
+.dark-mode { background: #0f172a; color: #e2e8f0; }
+.dark-mode .main-content { background: #0f172a; }
+.dark-mode .top-bar { background: #1e293b; border-bottom-color: #334155; }
+.dark-mode .bottom-nav { background: #1e293b; border-top-color: #334155; }
+.dark-mode .tutorial-card { background: #1e293b; border-color: #334155; }
+.dark-mode .code-box { background: #0f172a; }
+.dark-mode .try-editor { background: #1e293b; border-color: #334155; }
+.dark-mode .output-preview { background: #1e293b; color: #e2e8f0; }
+.dark-mode .quiz-wrapper { background: #1e293b; border-color: #e34c26; }
+.dark-mode .quiz-option { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+.dark-mode .lesson-title { color: #f1f5f9; }
+.dark-mode .lesson-sub { color: #94a3b8; }
+.dark-mode .nav-btn { background: #334155; color: #e2e8f0; }
+.dark-mode .grid-item { background: #1e293b; }
+.dark-mode-toggle { position: fixed; bottom: 20px; right: 20px; background: #e34c26; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+<!-- HOMEPAGE -->
+<!-- HOMEPAGE -->
+<div id="homepage">
+    <div class="home-hero">
+        <h1>📚 LuxMind <span style="color: #e34c26;">HTML</span> Mastery Academy</h1>
+        <p>Learn HTML from beginner to advanced with interactive lessons, quizzes, and live code editor</p>
+        <button class="start-learning-btn" id="startBtn">🚀 Start Learning →</button>
+    </div>
+    
+    <div class="course-grid">
+        <div class="grid-item">
+            <div style="font-size: 3rem;">🏷️</div>
+            <h3>HTML Basics</h3>
+            <p>Tags, elements & attributes</p>
+            <span class="lesson-badge">6 lessons</span>
+        </div>
+        <div class="grid-item">
+            <div style="font-size: 3rem;">🎨</div>
+            <h3>Forms & Inputs</h3>
+            <p>Interactive forms with validation</p>
+            <span class="lesson-badge">5 lessons</span>
+        </div>
+        <div class="grid-item">
+            <div style="font-size: 3rem;">📊</div>
+            <h3>Tables & Lists</h3>
+            <p>Organize data effectively</p>
+            <span class="lesson-badge">4 lessons</span>
+        </div>
+        <div class="grid-item">
+            <div style="font-size: 3rem;">🔗</div>
+            <h3>Links & Media</h3>
+            <p>Navigation, images & video</p>
+            <span class="lesson-badge">5 lessons</span>
+        </div>
+       
+        
+    </div>
+</div>
+<!-- MAIN APP (HIDDEN INITIALLY) -->
+<div id="mainApp">
+    <div class="app-layout">
+      <aside class="sidebar" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-right: 1px solid rgba(227, 76, 38, 0.3); box-shadow: 4px 0 25px rgba(0,0,0,0.4);">
+    <div class="sidebar-header" style="background: linear-gradient(135deg, #e34c26, #f06529); padding: 1.5rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <div class="logo-area" style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div class="logo-icon" style="font-size: 2rem;">📖</div>
+            <h2 style="color: white; font-size: 1.3rem; margin: 0;">HTML Master Course</h2>
+        </div>
+        <p class="course-badge" id="totalLessonsCount" style="background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; margin-top: 8px; text-align: center; color: white;">loading lessons...</p>
+        
+        <!-- Search Bar -->
+        <div class="search-container" style="margin: 15px 0 10px 0;">
+            <input type="text" id="lessonSearch" placeholder="🔍 Search lessons..." class="search-input" style="width: 100%; padding: 10px 12px; border: none; border-radius: 25px; background: rgba(255,255,255,0.15); color: white; font-size: 0.85rem; outline: none;">
+        </div>
+        
+        <!-- Progress Tracker -->
+        <div class="progress-container" style="margin-top: 12px;">
+            <div class="progress-stats" style="display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.9); margin-bottom: 5px;">
+                <span>📊 Your Progress</span>
+                <span id="progressPercent" style="color: #ffcc00;">0%</span>
+            </div>
+            <div class="progress-bar-bg" style="background: rgba(0,0,0,0.4); border-radius: 10px; height: 6px; overflow: hidden;">
+                <div class="progress-bar-fill" id="progressBarFill" style="background: #ffcc00; width: 0%; height: 100%; border-radius: 10px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lessons-header" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px;">
+        <span>📚 All Lessons</span>
+        <span id="lessonCount" class="lesson-count" style="background: rgba(227, 76, 38, 0.3); padding: 2px 8px; border-radius: 20px; color: #e34c26; font-weight: bold;"></span>
+    </div>
+    
+    <ul id="lessonsList" class="lessons-list" style="list-style: none; padding: 0.5rem 0; flex: 1;"></ul>
+    
+    <!-- Quick Stats Footer -->
+    <div class="sidebar-footer" style="border-top: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; display: flex; justify-content: space-around; background: rgba(0,0,0,0.3);">
+        <div class="stat-item" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; color: #94a3b8;">
+            <span style="font-size: 1.1rem;">🏆</span>
+            <span id="completedCount" style="color: #ffcc00; font-weight: bold; font-size: 0.9rem;">0</span>
+            <small style="font-size: 0.6rem; color: #64748b;">Completed</small>
+        </div>
+        <div class="stat-item" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; color: #94a3b8;">
+            <span style="font-size: 1.1rem;">⭐</span>
+            <span id="quizScore" style="color: #ffcc00; font-weight: bold; font-size: 0.9rem;">0</span>
+            <small style="font-size: 0.6rem; color: #64748b;">Quiz Score</small>
+        </div>
+        <div class="stat-item" style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; color: #94a3b8;">
+            <span style="font-size: 1.1rem;">🔥</span>
+            <span id="streakDays" style="color: #ffcc00; font-weight: bold; font-size: 0.9rem;">0</span>
+            <small style="font-size: 0.6rem; color: #64748b;">Day Streak</small>
+        </div>
+    </div>
+</aside>
+
+        <div class="main-content">
+            <div class="lesson-content" id="lessonContent">
+                <div class="top-bar">
+                    <div class="nav-group">
+                        <div class="nav-group" style="display: flex; justify-content: space-between; width: 100%;">
+                            <button id="prevLessonBtn" class="nav-btn" style="background: #3b82f6; color: white;">◀ Previous</button>
+                            <button id="nextLessonBtn" class="nav-btn" style="background: #10b981; color: white;">Next ▶</button>
+                        </div>
+                <div class="nav-group" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <button id="homeResetBtn" class="nav-btn nav-btn-primary" style="margin-right: 0;">🏠 Home</button>
+        <button id="darkModeToggle" style="background: #e34c26; border: none; font-size: 1rem; cursor: pointer; padding: 5px 10px; border-radius: 40px; color: white; font-weight: 600;">🌙</button>
+        <span id="lessonCounter" style="font-weight: 600; margin-left: 8px;">Lesson 1 / 0</span>
+    </div>
+</div>         </div>
+            </div>
+            <div class="bottom-nav">
+                <button id="bottomPrev" class="nav-btn" style="background: #3b82f6; color: white;">◀ Previous</button>
+                <button id="bottomNext" class="nav-btn" style="background: #10b981; color: white;">Next ▶</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER - Appears on BOTH pages -->
+<!-- FOOTER - Extra Compact -->
+<div class="global-footer">
+    <p>❤ <strong class="signature">xavier_janvier</strong></p>
+    <div class="social-links">
+        <a href="#">GitHub</a>
+        <span class="separator">|</span>
+        <a href="#">Twitter</a>
+        <span class="separator">|</span>
+        <a href="#">LinkedIn</a>
+    </div>
+    <p>© 2024 LuxMind</p>
+</div>
+
+<script>
+    // ============================================================
+    // COMPLETE HTML COURSE - Beginner to Advanced (W3Schools Style)
+    // Covering: tags, attributes, headings, paragraphs, links, images, tables, lists, forms, div, semantic, etc.
+    // ============================================================
+    const lessonsData = [
+ {
+  id: 1,
+  title: "HTML Introduction ",
+  sub: "Understanding HTML step by step: structure, meaning, and how browsers read it",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <div style="margin-bottom:18px;">
+      <h2 style="margin:0; font-size:1.7rem; color:#1d4ed8;">🌐 What is HTML?</h2>
+      <p style="margin:6px 0 0; color:#64748b;">Start from zero → understand like a pro</p>
+    </div>
+
+   <p style="font-size: 1rem; line-height: 1.7; color: #1e293b; margin-bottom: 1rem;">
+    <strong style="color: #dc2626; font-size: 1.1rem;">HTML (HyperText Markup Language)</strong> 
+    is the core language used to create and structure web pages. It defines the 
+    <span style="background: #fef08a; padding: 2px 8px; border-radius: 6px; font-weight: 600; color: #854d0e;">structure, meaning, and relationships of content</span> 
+    that browsers interpret and display.
+</p>
+
+<p style="font-size: 1rem; line-height: 1.7; color: #1e293b; margin-bottom: 1rem;">
+    When a browser loads a webpage, it reads the HTML source and builds an internal representation called the 
+    <span style="background: #bfdbfe; padding: 2px 8px; border-radius: 6px; font-weight: 600; color: #1e40af;">DOM (Document Object Model)</span>.
+    This allows the browser to understand what content exists and how it should be structured.
+</p>
+
+<div style="margin: 1rem 0; padding: 12px 16px; background: #e0f2fe; border-left: 4px solid #0284c7; border-radius: 8px; color: #0c4a6e;">
+    💡 <strong>Key Insight:</strong> HTML is not about appearance — it's about meaning and structure.
+</div>
+
+<p style="font-size: 1rem; line-height: 1.7; color: #1e293b; margin-bottom: 0.5rem;">
+    HTML assigns meaning to elements, not just visual display:
+</p>
+
+<ul style="font-size: 1rem; line-height: 1.8; color: #1e293b; background: #f1f5f9; padding: 12px 16px 12px 32px; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 1rem;">
+    <li>📌 <strong style="color: #16a34a;">Headings</strong> — represent document hierarchy</li>
+    <li>📌 <strong style="color: #ea580c;">Paragraphs</strong> — group blocks of text</li>
+    <li>📌 <strong style="color: #dc2626;">Links</strong> — define navigation between resources</li>
+</ul>
+
+<div style="margin: 1rem 0; padding: 12px 16px; background: #1e1b4b; color: #e0e7ff; border-radius: 10px; text-align: center; font-weight: 600;">
+    🧠 HTML → DOM → CSS + JS → Final Rendered Page
+</div>
+
+<p style="font-size: 1rem; line-height: 1.7; color: #1e293b; margin-bottom: 0.5rem;">
+    In simple terms, HTML answers two fundamental questions:
+</p>
+
+<ul style="font-size: 1rem; line-height: 1.8; color: #1e293b; background: #d1fae5; padding: 12px 16px 12px 32px; border-radius: 10px; margin-bottom: 1rem;">
+    <li>✓ <span style="font-weight: 600; color: #065f46;">What content exists?</span></li>
+    <li>✓ <span style="font-weight: 600; color: #065f46;">What does each part mean?</span></li>
+</ul>
+
+<p style="font-size: 1rem; line-height: 1.7; color: #1e293b;">
+    Because of this, HTML is often called the 
+    <span style="background: #fecaca; padding: 2px 8px; border-radius: 6px; font-weight: 700; color: #991b1b;">skeleton of the web</span>. 
+    Without it, browsers would have no structure to organize or display content.
+</p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px; border-left:4px solid #0ea5e9;">
+      💡 Think of HTML as the <strong>skeleton</strong> of a website.
+    </div>
+
+    <h3 style="color:#0ea5e9; margin-top:20px;">🧱 Basic Building Blocks</h3>
+    <p>HTML is made of <strong>tags</strong> (also called elements).</p>
+
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>&lt;h1&gt;</code> → Big heading</li>
+      <li><code>&lt;p&gt;</code> → Paragraph</li>
+      <li><code>&lt;a&gt;</code> → Link</li>
+      <li><code>&lt;img&gt;</code> → Image</li>
+    </ul>
+
+    <p>Example:</p>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;p&gt;This is text&lt;/p&gt;
+    </pre>
+
+    <h3 style="color:#f59e0b;">📦 Structure of Every HTML Page</h3>
+    <p>All HTML pages follow the same basic structure:</p>
+
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li><code>&lt;!DOCTYPE html&gt;</code> → Tells browser “this is modern HTML”</li>
+      <li><code>&lt;html&gt;</code> → The whole page</li>
+      <li><code>&lt;head&gt;</code> → Hidden info (title, settings)</li>
+      <li><code>&lt;body&gt;</code> → Everything you SEE</li>
+    </ul>
+
+    <div style="background:#ecfeff; padding:12px; border-radius:12px;">
+      👀 Only the <strong>&lt;body&gt;</strong> content is visible to users.
+    </div>
+
+    <h3 style="color:#10b981;">🧠 How the Browser Understands HTML</h3>
+    <p>When you open a webpage, the browser:</p>
+
+    <ol style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li>Reads the HTML code</li>
+      <li>Understands each tag</li>
+      <li>Builds a structure (called the <strong>DOM</strong>)</li>
+      <li>Displays it on screen</li>
+    </ol>
+
+    <div style="background:#fefce8; padding:12px; border-radius:12px;">
+      💡 DOM = a tree structure of your page
+    </div>
+
+    <h3 style="color:#8b5cf6;">🌳 Example DOM Tree</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:14px; border-radius:12px;">
+html
+ ├── head
+ │    └── title
+ └── body
+      ├── h1
+      └── p
+    </pre>
+
+    <h3 style="color:#14b8a6;">🎯 Why HTML is Important</h3>
+    <ul style="background:#ecfeff; padding:14px; border-radius:12px;">
+      <li>Every website uses HTML</li>
+      <li>It is required before CSS & JavaScript</li>
+      <li>Defines structure and meaning</li>
+      <li>Helps search engines understand your site</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Beginner Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Forgetting closing tags</li>
+      <li>Putting content inside &lt;head&gt;</li>
+      <li>Using HTML for styling</li>
+      <li>Using too many &lt;div&gt; instead of proper tags</li>
+    </ul>
+
+    <h3 style="color:#6366f1;">🚀 Moving Toward Advanced</h3>
+    <p>
+      At a deeper level, HTML is defined by a specification and parsed into the DOM.
+      This allows JavaScript to interact with elements and CSS to style them.
+    </p>
+
+    <div style="background:#eef2ff; padding:12px; border-radius:12px;">
+      💡 HTML = structure<br>
+      🎨 CSS = design<br>
+      ⚡ JavaScript = behavior
+    </div>
+
+    <h3 style="color:#22c55e;">🧪 What This Code Does</h3>
+    <ul style="background:#f0fdf4; padding:14px; border-radius:12px;">
+      <li><code>&lt;title&gt;</code> → Tab name</li>
+      <li><code>&lt;h1&gt;</code> → Main title</li>
+      <li><code>&lt;p&gt;</code> → Text paragraph</li>
+    </ul>
+
+  </div>
+  `,
+codeExample: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First HTML Page</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is my first HTML page.</p>
+    <p>I'm xavier_janvier LuxMind owner</p>
+</body>
+</html>
+  ` ,
+
+  quiz: [
+    {
+      q:"What does HTML stand for?",
+      opts:["Hyper Text Markup Language","Home Tool Markup Language","High Tech Modern Language","Hyper Tool Multi Language"],
+      correct:0
+    },
+    {
+      q:"Which part of HTML is visible?",
+      opts:["<head>","<body>","<html>","<meta>"],
+      correct:1
+    },
+    {
+      q:"What does <h1> represent?",
+      opts:["Paragraph","Main heading","Link","Image"],
+      correct:1
+    },
+    {
+      q:"What does the browser build from HTML?",
+      opts:["DOM tree","CSS file","Database","Script"],
+      correct:0
+    },
+    {
+      q:"HTML is used for:",
+      opts:["Styling","Structure","Animation","Database"],
+      correct:1
+    }
+  ]
+},
+       {
+  id: 2,
+  title: "HTML Tags & Elements (Complete Guide)",
+  sub: "Understanding opening, closing, self-closing tags, and how elements work",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <div style="margin-bottom:18px;">
+      <h2 style="margin:0; font-size:1.7rem; color:#1d4ed8;">🏷️ HTML Tags & Elements</h2>
+      <p style="margin:6px 0 0; color:#64748b;">The core building blocks of every webpage</p>
+    </div>
+
+    <p>
+      HTML is built using <strong>tags</strong> and <strong>elements</strong>. These define the structure and meaning of content.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px; border-left:4px solid #0ea5e9;">
+      💡 Tag = syntax • Element = complete structure
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 What is a Tag?</h3>
+    <p>
+      A <strong>tag</strong> is a keyword inside angle brackets:
+    </p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;p&gt;
+&lt;h1&gt;
+&lt;img&gt;
+    </pre>
+
+    <h3 style="color:#10b981;">📦 What is an Element?</h3>
+    <p>
+      An <strong>element</strong> includes:
+    </p>
+
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li>Opening tag</li>
+      <li>Content</li>
+      <li>Closing tag</li>
+    </ul>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;p&gt;This is a paragraph&lt;/p&gt;
+    </pre>
+
+    <h3 style="color:#f59e0b;">🔓 Opening & Closing Tags</h3>
+    <p>
+      Most HTML elements come in pairs:
+    </p>
+
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li><code>&lt;p&gt;</code> → Opening tag</li>
+      <li><code>&lt;/p&gt;</code> → Closing tag</li>
+    </ul>
+
+    <div style="background:#fefce8; padding:12px; border-radius:12px;">
+      💡 Closing tags always have a <strong>/</strong>
+    </div>
+
+    <h3 style="color:#ef4444;">⚡ Self-Closing Tags</h3>
+    <p>
+      Some elements do not wrap content. These are called <strong>void (self-closing) elements</strong>.
+    </p>
+
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li><code>&lt;img&gt;</code> → Image</li>
+      <li><code>&lt;br&gt;</code> → Line break</li>
+      <li><code>&lt;hr&gt;</code> → Horizontal line</li>
+    </ul>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;img src="image.jpg"&gt;
+&lt;br&gt;
+&lt;hr&gt;
+    </pre>
+
+    <h3 style="color:#8b5cf6;">🧬 Nesting Elements</h3>
+    <p>
+      Elements can be placed inside other elements. This is called <strong>nesting</strong>.
+    </p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;p&gt;
+  This is a &lt;strong&gt;bold&lt;/strong&gt; word
+&lt;/p&gt;
+    </pre>
+
+    <div style="background:#eef2ff; padding:12px; border-radius:12px;">
+      💡 Always close tags in the correct order!
+    </div>
+
+    <h3 style="color:#14b8a6;">📚 Common HTML Tags</h3>
+    <ul style="background:#ecfeff; padding:14px; border-radius:12px;">
+      <li><code>&lt;h1&gt; - &lt;h6&gt;</code> → Headings</li>
+      <li><code>&lt;p&gt;</code> → Paragraph</li>
+      <li><code>&lt;a&gt;</code> → Link</li>
+      <li><code>&lt;img&gt;</code> → Image</li>
+      <li><code>&lt;div&gt;</code> → Container</li>
+    </ul>
+
+    <h3 style="color:#22c55e;">🌐 Why Tags Matter</h3>
+    <ul style="background:#f0fdf4; padding:14px; border-radius:12px;">
+      <li>Define structure of the page</li>
+      <li>Help browsers render content correctly</li>
+      <li>Improve accessibility (screen readers)</li>
+      <li>Help search engines understand content</li>
+    </ul>
+
+    <h3 style="color:#f97316;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li>Forgetting closing tags</li>
+      <li>Incorrect nesting</li>
+      <li>Using wrong tags for content</li>
+      <li>Adding closing tags to self-closing elements</li>
+    </ul>
+
+    <h3 style="color:#6366f1;">🧪 What This Example Shows</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>&lt;h1&gt;</code> → Page heading</li>
+      <li><code>&lt;p&gt;</code> → Text content</li>
+      <li><code>&lt;img&gt;</code> → Displays image</li>
+      <li><code>&lt;br&gt;</code> → Line break</li>
+      <li><code>&lt;a&gt;</code> → Clickable link</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Tags Example</h1>
+    <p>This is a paragraph.</p>
+    <img src="https://picsum.photos/id/1/150/100" alt="Sample">
+    <br>
+    <a href="#">This is a link</a>
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q:"Which is a self-closing tag?",
+      opts:["<p>","<div>","<img>","<h1>"],
+      correct:2
+    },
+    {
+      q:"What is the correct closing tag for <h1>?",
+      opts:["</h1>","<h1/>","<h1end>","</heading>"],
+      correct:0
+    },
+    {
+      q:"Which tag defines a hyperlink?",
+      opts:["<link>","<a>","<href>","<url>"],
+      correct:1
+    },
+    {
+      q:"Which tag creates a line break?",
+      opts:["<lb>","<break>","<br>","<hr>"],
+      correct:2
+    },
+    {
+      q:"What are HTML tags surrounded by?",
+      opts:["{ }","[ ]","< >","( )"],
+      correct:2
+    }
+  ]
+},{
+  id: 3,
+  title: "HTML Attributes (Complete Guide)",
+  sub: "Adding extra information and controlling element behavior",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">🔧 What are HTML Attributes?</h2>
+
+    <p>
+      <strong>Attributes</strong> provide extra information about HTML elements.
+      They are always written inside the <strong>opening tag</strong>.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Attributes = extra settings for elements
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 Syntax</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;tag attribute="value"&gt;
+    </pre>
+
+    <p>Example:</p>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;a href="https://google.com"&gt;Visit&lt;/a&gt;
+    </pre>
+
+    <h3 style="color:#10b981;">📚 Common Attributes</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li><strong>href</strong> → Link destination</li>
+      <li><strong>src</strong> → Image source</li>
+      <li><strong>alt</strong> → Image description (important for accessibility)</li>
+      <li><strong>style</strong> → Inline CSS styling</li>
+      <li><strong>title</strong> → Tooltip text</li>
+      <li><strong>id</strong> → Unique identifier</li>
+      <li><strong>class</strong> → Group elements for styling</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">🎯 Why Attributes Matter</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li>Control behavior (links, images)</li>
+      <li>Improve accessibility</li>
+      <li>Enable CSS styling</li>
+      <li>Allow JavaScript interaction</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Forgetting quotes around values</li>
+      <li>Using wrong attribute for element</li>
+      <li>Overusing inline styles</li>
+    </ul>
+
+    <h3 style="color:#6366f1;">🧪 Example Breakdown</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>href</code> → where link goes</li>
+      <li><code>src</code> → image URL</li>
+      <li><code>alt</code> → fallback text</li>
+      <li><code>style</code> → visual styling</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+    <a href="https://www.google.com" title="Go to Google">Google</a><br>
+
+    <img src="https://picsum.photos/id/10/200/120" 
+         alt="Nature" 
+         width="200" 
+         style="border-radius:10px;">
+
+    <p style="color:#e34c26; font-size:20px;">
+        Styled paragraph with inline style attribute.
+    </p>
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which attribute specifies the URL for a link?", opts:["src","href","link","url"], correct:1 },
+    { q:"Which attribute provides alternative text for images?", opts:["title","alt","src","longdesc"], correct:1 },
+    { q:"How do you add inline CSS?", opts:["class=''","style=''","css=''","design=''"], correct:1 },
+    { q:"Which attribute uniquely identifies an element?", opts:["class","id","name","type"], correct:1 },
+    { q:"What does the 'title' attribute do?", opts:["Shows tooltip","Sets title tag","Changes font","Adds caption"], correct:0 }
+  ]
+},
+{
+  id: 4,
+  title: "HTML Headings & Paragraphs (Text Structure)",
+  sub: "Organizing content with headings, paragraphs, and spacing",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">📝 Structuring Text in HTML</h2>
+
+    <p>
+      HTML provides special tags to organize text content clearly.
+      The most important ones are <strong>headings</strong> and <strong>paragraphs</strong>.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Structure makes content readable and meaningful
+    </div>
+
+    <h3 style="color:#0ea5e9;">🔠 Headings (h1 → h6)</h3>
+    <p>Headings define importance levels:</p>
+
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>&lt;h1&gt;</code> → Most important (main title)</li>
+      <li><code>&lt;h2&gt;</code> → Section title</li>
+      <li><code>&lt;h3&gt;</code> → Subsection</li>
+      <li><code>&lt;h6&gt;</code> → Least important</li>
+    </ul>
+
+    <div style="background:#ecfeff; padding:12px; border-radius:12px;">
+      ⚠️ Usually only ONE &lt;h1&gt; per page
+    </div>
+
+    <h3 style="color:#10b981;">📄 Paragraphs</h3>
+    <p>
+      Paragraphs are created using the <code>&lt;p&gt;</code> tag.
+      Browsers automatically add spacing between them.
+    </p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;p&gt;This is a paragraph&lt;/p&gt;
+    </pre>
+
+    <h3 style="color:#f59e0b;">↩️ Line Breaks</h3>
+    <p>Use <code>&lt;br&gt;</code> to break a line without starting a new paragraph.</p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+Line 1&lt;br&gt;
+Line 2
+    </pre>
+
+    <h3 style="color:#8b5cf6;">📐 Preformatted Text</h3>
+    <p>
+      The <code>&lt;pre&gt;</code> tag keeps spaces and line breaks exactly as written.
+    </p>
+
+    <div style="background:#f5f3ff; padding:12px; border-radius:12px;">
+      Useful for code and formatted text
+    </div>
+
+    <h3 style="color:#14b8a6;">🎯 Why This Matters</h3>
+    <ul style="background:#ecfeff; padding:14px; border-radius:12px;">
+      <li>Improves readability</li>
+      <li>Helps search engines (SEO)</li>
+      <li>Supports accessibility tools</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Using headings just for size</li>
+      <li>Skipping heading levels (h1 → h4)</li>
+      <li>Using &lt;br&gt; instead of paragraphs</li>
+    </ul>
+
+    <h3 style="color:#6366f1;">🧪 Example Explained</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>&lt;h1&gt;</code> → Main title</li>
+      <li><code>&lt;h2&gt;</code> → Section title</li>
+      <li><code>&lt;p&gt;</code> → Text block</li>
+      <li><code>&lt;pre&gt;</code> → Preserved formatting</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Main Title (h1)</h1>
+    <h2>Section Heading (h2)</h2>
+    <h3>Subsection (h3)</h3>
+
+    <p>This is a paragraph with <br> a line break inside.</p>
+
+    <pre>
+Preformatted
+  text preserves spaces.
+    </pre>
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which heading is largest?", opts:["<h1>","<h6>","<heading>","<h0>"], correct:0 },
+    { q:"How many heading levels exist?", opts:["3","4","5","6"], correct:3 },
+    { q:"Which tag defines a paragraph?", opts:["<para>","<p>","<pg>","<text>"], correct:1 },
+    { q:"What does <br> do?", opts:["Bold text","Line break","New paragraph","Horizontal rule"], correct:1 },
+    { q:"Which tag preserves spaces?", opts:["<p>","<div>","<pre>","<code>"], correct:2 }
+  ]
+},  {
+  id: 5,
+  title: "HTML Links (Anchor Tags - Complete Guide)",
+  sub: "Navigation, linking strategies, and real-world usage",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">🔗 What is a Link?</h2>
+    <p>
+      Links are the foundation of the web. They connect pages, files, and sections.
+      Created using the <code>&lt;a&gt;</code> (anchor) tag.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 The web = documents connected by links
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 Basic Syntax</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;a href="URL"&gt;Link Text&lt;/a&gt;
+    </pre>
+
+    <h3 style="color:#10b981;">📚 Types of Links</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li><strong>Absolute:</strong> https://example.com</li>
+      <li><strong>Relative:</strong> about.html</li>
+      <li><strong>Email:</strong> mailto:user@email.com</li>
+      <li><strong>Phone:</strong> tel:+123456</li>
+      <li><strong>Internal:</strong> #section</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">🧭 Navigation Behavior</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li><code>target="_blank"</code> → new tab</li>
+      <li><code>target="_self"</code> → same tab (default)</li>
+    </ul>
+
+    <h3 style="color:#8b5cf6;">📌 Internal Navigation (Bookmarks)</h3>
+    <p>Jump to parts of the same page using IDs:</p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;a href="#section"&gt;Go&lt;/a&gt;
+
+&lt;h2 id="section"&gt;Target&lt;/h2&gt;
+    </pre>
+
+    <h3 style="color:#14b8a6;">🎯 Best Practices</h3>
+    <ul style="background:#ecfeff; padding:14px; border-radius:12px;">
+      <li>Use clear link text (not "click here")</li>
+      <li>Use HTTPS links</li>
+      <li>Use <code>rel="noopener"</code> with target="_blank"</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Missing href attribute</li>
+      <li>Broken links</li>
+      <li>Using links for buttons incorrectly</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<a href="https://www.w3schools.com" target="_blank">
+    Visit W3Schools (new tab)
+</a><br>
+
+<a href="mailto:test@example.com">Send Email</a><br>
+
+<a href="#section">Jump to Section</a>
+
+<h2 id="section">Bookmarked Section</h2>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which tag creates a link?", opts:["<link>","<a>","<href>","<url>"], correct:1 },
+    { q:"What attribute specifies the URL?", opts:["src","url","href","link"], correct:2 },
+    { q:"Open in new tab?", opts:["target='_new'","target='_blank'","open='tab'","new='true'"], correct:1 },
+    { q:"What does mailto: do?", opts:["Send email","Download","Call","Open file"], correct:0 },
+    { q:"Can you link to a section?", opts:["Yes (id)","No","Only JS","Only external"], correct:0 }
+  ]
+},
+ {
+  id: 6,
+  title: "HTML Images (Complete Guide)",
+  sub: "Displaying, optimizing, and making images accessible",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">🖼️ What is an Image Element?</h2>
+    <p>
+      The <code>&lt;img&gt;</code> tag is used to display images on a webpage.
+      It is a <strong>self-closing tag</strong>.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Images make content engaging and visual
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 Basic Syntax</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;img src="image.jpg" alt="description"&gt;
+    </pre>
+
+    <h3 style="color:#10b981;">📚 Important Attributes</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li><strong>src</strong> → image source</li>
+      <li><strong>alt</strong> → alternative text</li>
+      <li><strong>width / height</strong> → size</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">♿ Accessibility</h3>
+    <p>
+      The <code>alt</code> attribute helps:
+    </p>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li>Screen readers</li>
+      <li>SEO ranking</li>
+      <li>Fallback when image fails</li>
+    </ul>
+
+    <h3 style="color:#8b5cf6;">📦 Image Formats</h3>
+    <ul style="background:#f5f3ff; padding:14px; border-radius:12px;">
+      <li>JPEG → photos</li>
+      <li>PNG → transparency</li>
+      <li>SVG → vector graphics</li>
+      <li>WebP → modern optimized format</li>
+    </ul>
+
+    <h3 style="color:#14b8a6;">📱 Responsive Images</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+img {
+  max-width: 100%;
+  height: auto;
+}
+    </pre>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Missing alt attribute</li>
+      <li>Using huge image sizes</li>
+      <li>Wrong file formats</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Image Gallery</h2>
+
+<img src="https://picsum.photos/id/15/200/150"
+     alt="Green nature"
+     style="border-radius:12px; margin:5px;">
+
+<img src="https://picsum.photos/id/26/200/150"
+     alt="Waterfall"
+     style="border-radius:12px;">
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which tag displays images?", opts:["<img>","<image>","<src>","<picture>"], correct:0 },
+    { q:"What attribute is fallback text?", opts:["title","caption","alt","desc"], correct:2 },
+    { q:"Image source attribute?", opts:["href","src","link","file"], correct:1 },
+    { q:"Why is alt important?", opts:["SEO","Accessibility","Fallback","All"], correct:3 },
+    { q:"Responsive images?", opts:["width=100%","max-width:100%","Both","height:auto"], correct:2 }
+  ]
+},
+   {
+  id: 7,
+  title: "HTML Lists (Structured Data)",
+  sub: "Ordered, unordered, nested, and description lists",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">📋 What are Lists?</h2>
+    <p>
+      Lists organize content into structured groups.
+      They improve readability and clarity.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Lists = structured information blocks
+    </div>
+
+    <h3 style="color:#0ea5e9;">🔹 Unordered Lists</h3>
+    <p>Bullet points using <code>&lt;ul&gt;</code></p>
+
+    <h3 style="color:#10b981;">🔢 Ordered Lists</h3>
+    <p>Numbered lists using <code>&lt;ol&gt;</code></p>
+
+    <h3 style="color:#f59e0b;">📖 Description Lists</h3>
+    <p>Used for terms and definitions:</p>
+
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Markup language&lt;/dd&gt;
+&lt;/dl&gt;
+    </pre>
+
+    <h3 style="color:#8b5cf6;">🧩 Nested Lists</h3>
+    <p>Lists can contain other lists:</p>
+
+    <div style="background:#f5f3ff; padding:12px; border-radius:12px;">
+      Useful for menus and categories
+    </div>
+
+    <h3 style="color:#14b8a6;">🎯 Best Practices</h3>
+    <ul style="background:#ecfeff; padding:14px; border-radius:12px;">
+      <li>Use lists for grouped content</li>
+      <li>Keep hierarchy clear</li>
+      <li>Avoid deep nesting</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Forgetting &lt;li&gt; inside lists</li>
+      <li>Using lists for layout</li>
+      <li>Over-nesting lists</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Shopping List</h3>
+<ul>
+  <li>Apples</li>
+  <li>Milk</li>
+  <li>Bread</li>
+</ul>
+
+<h3>Steps</h3>
+<ol>
+  <li>Open editor</li>
+  <li>Write HTML</li>
+  <li>Save file</li>
+</ol>
+
+<h3>Nested List</h3>
+<ul>
+  <li>Frontend
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+    </ul>
+  </li>
+</ul>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Bullet list?", opts:["<ol>","<ul>","<li>","<list>"], correct:1 },
+    { q:"Numbered list?", opts:["<ul>","<ol>","<dl>","<nl>"], correct:1 },
+    { q:"List item tag?", opts:["<item>","<li>","<it>","<list-item>"], correct:1 },
+    { q:"Can lists be nested?", opts:["Yes","No","Only ol","Only ul"], correct:0 },
+    { q:"<dl> is used for?", opts:["Definition","Dropdown","Data","Double"], correct:0 }
+  ]
+},   {
+  id: 8,
+  title: "HTML Tables (Structured Data Display)",
+  sub: "Rows, columns, and real-world data representation",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">📊 What is a Table?</h2>
+    <p>
+      HTML tables organize data into structured rows and columns.
+      They are used for displaying <strong>structured information</strong>, not layout design.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Tables = structured data (not page layout)
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 Table Structure</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li><code>&lt;table&gt;</code> → container</li>
+      <li><code>&lt;tr&gt;</code> → row</li>
+      <li><code>&lt;th&gt;</code> → header cell</li>
+      <li><code>&lt;td&gt;</code> → data cell</li>
+    </ul>
+
+    <h3 style="color:#10b981;">📐 Table Features</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li><code>colspan</code> → merge columns</li>
+      <li><code>rowspan</code> → merge rows</li>
+      <li><code>border-collapse</code> → cleaner borders</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">🎯 Best Practices</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li>Use tables only for data</li>
+      <li>Always include headers (<code>&lt;th&gt;</code>)</li>
+      <li>Prefer CSS over old attributes like cellpadding</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Using tables for layout design</li>
+      <li>Missing table headers</li>
+      <li>Ignoring accessibility structure</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<table style="border-collapse: collapse; width: 100%;">
+
+<tr style="background:#e34c26; color:white;">
+  <th style="padding:12px; border:1px solid #ddd;">Name</th>
+  <th style="padding:12px; border:1px solid #ddd;">Age</th>
+  <th style="padding:12px; border:1px solid #ddd;">City</th>
+</tr>
+
+<tr>
+  <td style="padding:8px; border:1px solid #ddd;">Alice</td>
+  <td style="padding:8px; border:1px solid #ddd;">25</td>
+  <td style="padding:8px; border:1px solid #ddd;">NYC</td>
+</tr>
+
+<tr>
+  <td style="padding:8px; border:1px solid #ddd;">Bob</td>
+  <td style="padding:8px; border:1px solid #ddd;">30</td>
+  <td style="padding:8px; border:1px solid #ddd;">LA</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which tag defines a row?", opts:["<td>","<tr>","<th>","<row>"], correct:1 },
+    { q:"Which is a header cell?", opts:["<td>","<th>","<thead>","<headcell>"], correct:1 },
+    { q:"What merges columns?", opts:["rowspan","colspan","merge","span"], correct:1 },
+    { q:"Which is data cell?", opts:["<th>","<td>","<tr>","<cell>"], correct:1 },
+    { q:"Tables should be used for?", opts:["Layout","Data","Styling","Scripts"], correct:1 }
+  ]
+},
+ {
+  id: 9,
+  title: "HTML Forms & Inputs (User Data Collection)",
+  sub: "Building interactive input systems for websites",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">🧾 What is a Form?</h2>
+    <p>
+      Forms are used to collect user input and send it to a server.
+      They are the foundation of login pages, registrations, and surveys.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Forms = user interaction system
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 Basic Structure</h3>
+    <pre style="background:#0f172a; color:#e2e8f0; padding:12px; border-radius:12px;">
+&lt;form&gt;
+  &lt;input&gt;
+&lt;/form&gt;
+    </pre>
+
+    <h3 style="color:#10b981;">📚 Input Types</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li>text → single line input</li>
+      <li>email → email validation</li>
+      <li>password → hidden input</li>
+      <li>radio → single choice</li>
+      <li>checkbox → multiple choice</li>
+      <li>submit → send form</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">⚙️ Important Attributes</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li><code>name</code> → data key</li>
+      <li><code>required</code> → must fill</li>
+      <li><code>placeholder</code> → hint text</li>
+      <li><code>method</code> → GET / POST</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">🔐 GET vs POST</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li><strong>GET</strong> → shows data in URL</li>
+      <li><strong>POST</strong> → hides data (secure)</li>
+    </ul>
+
+    <h3 style="color:#6366f1;">⚠️ Common Mistakes</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li>Missing name attribute</li>
+      <li>Using GET for passwords</li>
+      <li>Not validating inputs</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<form style="background:#f0f4f8; padding:20px; border-radius:20px;">
+
+<label>Name:</label><br>
+<input type="text" name="username" placeholder="Full name"><br><br>
+
+<label>Email:</label><br>
+<input type="email" name="email" required><br><br>
+
+<label>Gender:</label><br>
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female<br><br>
+
+<input type="submit" value="Register"
+style="background:#e34c26; color:white; border:none; padding:10px 24px; border-radius:30px;">
+
+</form>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Which tag creates a form?", opts:["<input>","<form>","<field>","<submit>"], correct:1 },
+    { q:"Which input is email?", opts:["text","email","mail","string"], correct:1 },
+    { q:"Which makes field required?", opts:["mandatory","required","must","force"], correct:1 },
+    { q:"Radio buttons allow?", opts:["Multiple","Single choice","Text","Numbers"], correct:1 },
+    { q:"POST method does what?", opts:["Shows data","Hides data","Deletes data","Encrypts UI"], correct:1 }
+  ]
+},
+   {
+  id: 10,
+  title: "HTML Div & Span (Layout Containers)",
+  sub: "Grouping elements for structure and styling",
+
+  tutorial: `
+  <div style="font-family:Segoe UI, system-ui, sans-serif; color:#0f172a; line-height:1.8; padding:20px; background:#ffffff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+    <h2 style="color:#1d4ed8;">📦 What are Containers?</h2>
+    <p>
+      HTML uses containers to group elements together.
+      The two most important are <code>div</code> and <code>span</code>.
+    </p>
+
+    <div style="background:#f0f9ff; padding:12px; border-radius:12px;">
+      💡 Containers help organize layouts
+    </div>
+
+    <h3 style="color:#0ea5e9;">🧱 div (Block Element)</h3>
+    <ul style="background:#eef2ff; padding:14px; border-radius:12px;">
+      <li>Takes full width</li>
+      <li>Starts on new line</li>
+      <li>Used for layout sections</li>
+    </ul>
+
+    <h3 style="color:#10b981;">🧩 span (Inline Element)</h3>
+    <ul style="background:#ecfdf5; padding:14px; border-radius:12px;">
+      <li>Only takes needed space</li>
+      <li>Used inside text</li>
+      <li>Used for styling small parts</li>
+    </ul>
+
+    <h3 style="color:#f59e0b;">🎯 Real Use Cases</h3>
+    <ul style="background:#fff7ed; padding:14px; border-radius:12px;">
+      <li>Page sections (div)</li>
+      <li>Navbar, footer, cards</li>
+      <li>Highlight words (span)</li>
+    </ul>
+
+    <h3 style="color:#ef4444;">⚠️ Common Mistakes</h3>
+    <ul style="background:#fff1f2; padding:14px; border-radius:12px;">
+      <li>Using div everywhere without structure</li>
+      <li>Using span for layouts</li>
+      <li>No semantic HTML usage</li>
+    </ul>
+
+  </div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<div style="background:#eef2ff; padding:20px; border-radius:20px;">
+  <h3>Header inside div</h3>
+  <p>This is a <span style="color:#e34c26; font-weight:bold;">highlighted word</span> inside text.</p>
+</div>
+
+<div style="background:#fef9e3; padding:15px; border-radius:20px; margin-top:10px;">
+  Another container block
+</div>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q:"Div is?", opts:["Block","Inline","Text","None"], correct:0 },
+    { q:"Span is?", opts:["Block","Inline","Grid","Flex"], correct:1 },
+    { q:"Div stands for?", opts:["Division","Divide","Digital","Design"], correct:0 },
+    { q:"Can divs be nested?", opts:["Yes","No"], correct:0 },
+    { q:"Span is used for?", opts:["Small styling","Layout","Pages","Forms"], correct:0 }
+  ]
+} 
+];
+
+   const advancedLessons = [
+  {
+    id: 11,
+    title: "HTML Semantic Elements (Deep Dive)",
+    sub: "Document structure, meaning, accessibility, SEO impact",
+
+    tutorial: `
+<p>
+HTML semantic elements are structural tags that clearly describe their purpose to both browsers and developers.
+Instead of using generic containers like <code>&lt;div&gt;</code>, semantic HTML adds meaning to the document.
+</p>
+
+<h3>🧠 Why Semantic HTML matters</h3>
+<ul>
+  <li><strong>SEO:</strong> search engines understand page structure better</li>
+  <li><strong>Accessibility:</strong> screen readers interpret layout correctly</li>
+  <li><strong>Maintainability:</strong> code becomes self-explanatory</li>
+</ul>
+
+<h3>🏗️ Core Semantic Layout</h3>
+<ul>
+  <li><code>&lt;header&gt;</code> → Intro / branding / navigation</li>
+  <li><code>&lt;nav&gt;</code> → Navigation links</li>
+  <li><code>&lt;main&gt;</code> → Primary content (only one per page)</li>
+  <li><code>&lt;article&gt;</code> → Independent content block</li>
+  <li><code>&lt;section&gt;</code> → Thematic grouping</li>
+  <li><code>&lt;aside&gt;</code> → Side content (ads, links)</li>
+  <li><code>&lt;footer&gt;</code> → Bottom metadata</li>
+</ul>
+
+<h3>⚠️ Important Concept</h3>
+<p>
+Semantic elements do NOT change appearance by default — they change meaning.
+Layout is handled by CSS, not semantics.
+</p>
+    `,
+
+    codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+  <h1>My Website</h1>
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Blog</a>
+</nav>
+
+<main>
+  <article>
+    <h2>Article Title</h2>
+    <p>This is a meaningful content block.</p>
+  </article>
+</main>
+
+<aside>
+  <p>Related links or ads</p>
+</aside>
+
+<footer>
+  © 2026 My Website
+</footer>
+
+</body>
+</html>
+    `,
+
+    quiz: [
+      {
+        q: "What is the main purpose of semantic HTML?",
+        opts: ["Styling pages", "Adding meaning to structure", "Speed optimization", "Creating animations"],
+        correct: 1
+      },
+      {
+        q: "Which tag represents independent content?",
+        opts: ["<section>", "<article>", "<div>", "<span>"],
+        correct: 1
+      },
+      {
+        q: "Which element is used for navigation?",
+        opts: ["<nav>", "<header>", "<menu>", "<links>"],
+        correct: 0
+      },
+      {
+        q: "Does semantic HTML affect visual styling by default?",
+        opts: ["Yes", "No"],
+        correct: 1
+      },
+      {
+        q: "Which tag should appear once per page for main content?",
+        opts: ["<main>", "<body>", "<section>", "<article>"],
+        correct: 0
+      }
+    ]
+  },
+
+  {
+    id: 12,
+    title: "HTML Iframes & Embedding External Content",
+    sub: "Security, sandboxing, and embedded resources",
+
+    tutorial: `
+<p>
+The <code>&lt;iframe&gt;</code> element embeds another HTML document inside the current page.
+It is commonly used for videos, maps, and external web apps.
+</p>
+
+<h3>⚙️ Core Attributes</h3>
+<ul>
+  <li><code>src</code> → URL of embedded page</li>
+  <li><code>width / height</code> → size control</li>
+  <li><code>title</code> → accessibility description</li>
+  <li><code>sandbox</code> → security restrictions</li>
+</ul>
+
+<h3>🔐 Security Concept</h3>
+<p>
+Iframes can execute external code, so browsers isolate them using sandboxing rules.
+Without restrictions, they may pose security risks.
+</p>
+
+<h3>📌 Common Use Cases</h3>
+<ul>
+  <li>YouTube video embedding</li>
+  <li>Google Maps integration</li>
+  <li>External dashboards or widgets</li>
+</ul>
+    `,
+
+    codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Embedded Page</h2>
+
+<iframe 
+  src="https://www.example.com"
+  width="100%"
+  height="200"
+  title="Example Site"
+  style="border:1px solid #ccc; border-radius:12px;">
+</iframe>
+
+<h2>Video Embed</h2>
+
+<iframe 
+  width="100%"
+  height="250"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  title="YouTube video"
+  allowfullscreen>
+</iframe>
+
+</body>
+</html>
+    `,
+
+    quiz: [
+      {
+        q: "What does an iframe do?",
+        opts: ["Embeds external content", "Creates image", "Styles page", "Stores data"],
+        correct: 0
+      },
+      {
+        q: "Which attribute defines the embedded URL?",
+        opts: ["href", "src", "link", "url"],
+        correct: 1
+      },
+      {
+        q: "Why is sandbox used?",
+        opts: ["Security restrictions", "Styling", "Performance boost", "SEO"],
+        correct: 0
+      },
+      {
+        q: "Which is a common iframe use case?",
+        opts: ["Videos", "Forms only", "CSS layout", "Database"],
+        correct: 0
+      },
+      {
+        q: "Can iframes embed external websites?",
+        opts: ["Yes", "No", "Only same domain", "Only HTML5 pages"],
+        correct: 0
+      }
+    ]
+  },{
+  id: 13,
+  title: "HTML File Paths",
+  sub: "Understanding how files are linked in websites (relative vs absolute paths)",
+
+  tutorial: `
+<p>
+In HTML, a <strong>file path</strong> describes the location of a file (image, page, CSS, video, etc.).
+It tells the browser where to find resources used in your webpage.
+</p>
+
+<h3>📌 Why File Paths Matter</h3>
+<ul>
+  <li>They connect pages and assets in a website</li>
+  <li>They define how images, CSS, and scripts are loaded</li>
+  <li>Incorrect paths = broken images or links</li>
+</ul>
+
+<h3>🌍 Two Main Types of File Paths</h3>
+
+<h4>1. Absolute File Path</h4>
+<p>
+A full URL that includes the domain name.
+It always points to the same location no matter where you use it.
+</p>
+<code>https://www.example.com/images/pic.jpg</code>
+
+<h4>2. Relative File Path</h4>
+<p>
+A path relative to the current file location.
+Used in almost all real websites.
+</p>
+
+<ul>
+  <li><code>image.jpg</code> → same folder</li>
+  <li><code>images/pic.jpg</code> → inside folder</li>
+  <li><code>../image.jpg</code> → one folder up</li>
+</ul>
+
+<h3>📁 Folder Example Structure</h3>
+<pre>
+website/
+ ├── index.html
+ ├── about.html
+ ├── images/
+ │     └── logo.png
+ └── pages/
+       └── contact.html
+</pre>
+
+<h3>🧠 Key Concept</h3>
+<p>
+Browsers do NOT “search” files. They follow exact paths.
+One wrong folder name breaks the resource.
+</p>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>File Path Examples</h2>
+
+<!-- Absolute Path -->
+<img src="https://picsum.photos/200/120" alt="Absolute path image">
+
+<br><br>
+
+<!-- Relative Path (same folder) -->
+<img src="image.jpg" alt="Same folder image">
+
+<br><br>
+
+<!-- Relative Path (inside folder) -->
+<img src="images/pic.jpg" alt="Inside folder image">
+
+<br><br>
+
+<!-- Link to another page -->
+<a href="pages/about.html">Go to About Page</a>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What is a file path in HTML?",
+      opts: [
+        "A CSS style",
+        "A location of a file",
+        "A JavaScript function",
+        "A browser setting"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which is an absolute path?",
+      opts: [
+        "image.jpg",
+        "images/pic.jpg",
+        "https://example.com/image.jpg",
+        "../image.jpg"
+      ],
+      correct: 2
+    },
+    {
+      q: "What does '../' mean in a path?",
+      opts: [
+        "Same folder",
+        "Go inside folder",
+        "Go one level up",
+        "Delete file"
+      ],
+      correct: 2
+    },
+    {
+      q: "Where is a relative path used?",
+      opts: [
+        "Only CSS",
+        "Only JavaScript",
+        "Inside project structure",
+        "Only databases"
+      ],
+      correct: 2
+    },
+    {
+      q: "What happens if a file path is wrong?",
+      opts: [
+        "Browser fixes it",
+        "File loads slower",
+        "Resource breaks (not found)",
+        "Nothing happens"
+      ],
+      correct: 2
+    }
+  ]
+},{
+  id: 14,
+  title: "HTML Head & Meta Data",
+  sub: "Controlling SEO, browser settings, and page information",
+
+  tutorial: `
+<p>
+The <code>&lt;head&gt;</code> section contains <strong>metadata</strong> — information about the webpage that is NOT visible to users but is essential for browsers, search engines, and social platforms.
+</p>
+
+<h3>🧠 Why the Head Section Matters</h3>
+<ul>
+  <li>Defines how the page is displayed in the browser tab</li>
+  <li>Controls mobile responsiveness</li>
+  <li>Improves SEO (search engine ranking)</li>
+  <li>Provides information for sharing (social media previews)</li>
+</ul>
+
+<h3>📦 Core Elements Inside &lt;head&gt;</h3>
+
+<h4>1. Title</h4>
+<p>Displayed in browser tab and search results.</p>
+
+<h4>2. Meta Charset</h4>
+<p>Defines character encoding (important for symbols and languages).</p>
+
+<h4>3. Viewport Meta Tag</h4>
+<p>Controls responsiveness on mobile devices.</p>
+
+<h4>4. Meta Description</h4>
+<p>Short summary used by search engines.</p>
+
+<h4>5. Favicon</h4>
+<p>Small icon shown in browser tab.</p>
+
+<h3>📊 Key Concept</h3>
+<div style="background:#f1f5f9; padding:10px; border-radius:10px;">
+The <code>&lt;head&gt;</code> does NOT display content — it controls how content behaves.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Page Title -->
+    <title>My Website</title>
+
+    <!-- Character Encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Mobile Responsive View -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Description -->
+    <meta name="description" content="Learn HTML step by step with examples">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+
+</head>
+
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>This is visible content.</p>
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What is the purpose of the <head> section?",
+      opts: [
+        "Display content",
+        "Store visible text",
+        "Store metadata",
+        "Run JavaScript only"
+      ],
+      correct: 2
+    },
+    {
+      q: "Which tag defines the browser tab title?",
+      opts: [
+        "<meta>",
+        "<title>",
+        "<head>",
+        "<h1>"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does viewport meta tag control?",
+      opts: [
+        "SEO ranking",
+        "Mobile responsiveness",
+        "Image size",
+        "Link behavior"
+      ],
+      correct: 1
+    },
+    {
+      q: "Where is meta description used?",
+      opts: [
+        "Browser console",
+        "Search engines",
+        "CSS styling",
+        "JavaScript runtime"
+      ],
+      correct: 1
+    },
+    {
+      q: "Does content inside <head> appear on the page?",
+      opts: [
+        "Yes",
+        "No",
+        "Only on mobile",
+        "Only in iframe"
+      ],
+      correct: 1
+    }
+  ]
+},{
+  id: 15,
+  title: "HTML Audio & Video",
+  sub: "Embedding multimedia content directly in HTML",
+
+  tutorial: `
+<p>
+HTML provides built-in elements for playing audio and video without external software.
+These are <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code>.
+</p>
+
+<h3>🎧 Why Media Elements Matter</h3>
+<ul>
+  <li>Enable native media playback in browsers</li>
+  <li>No need for Flash or external plugins</li>
+  <li>Used in modern websites, streaming apps, and portfolios</li>
+</ul>
+
+<h3>🔊 Audio Element</h3>
+<p>The <code>&lt;audio&gt;</code> tag is used for sound files like music or effects.</p>
+
+<h3>🎬 Video Element</h3>
+<p>The <code>&lt;video&gt;</code> tag is used for video playback with controls.</p>
+
+<h3>⚙️ Common Attributes</h3>
+<ul>
+  <li><code>controls</code> → show play/pause buttons</li>
+  <li><code>autoplay</code> → start automatically</li>
+  <li><code>loop</code> → repeat playback</li>
+  <li><code>muted</code> → silence audio</li>
+  <li><code>poster</code> → thumbnail image for video</li>
+</ul>
+
+<h3>📌 Important Concept</h3>
+<div style="background:#fef3c7; padding:10px; border-radius:10px;">
+Browsers block autoplay with sound by default for user experience reasons.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Audio Example</h2>
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
+
+<h2>Video Example</h2>
+<video width="320" height="240" controls>
+  <source src="movie.mp4" type="video/mp4">
+  Your browser does not support video.
+</video>
+
+<h2>YouTube Embed (iframe)</h2>
+<iframe width="320" height="240"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  title="YouTube video"
+  allowfullscreen>
+</iframe>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "Which tag is used for audio?",
+      opts: ["<sound>", "<audio>", "<music>", "<media>"],
+      correct: 1
+    },
+    {
+      q: "Which attribute shows play controls?",
+      opts: ["display", "controls", "play", "ui"],
+      correct: 1
+    },
+    {
+      q: "Which tag is used for video?",
+      opts: ["<movie>", "<media>", "<video>", "<clip>"],
+      correct: 2
+    },
+    {
+      q: "Why do browsers block autoplay with sound?",
+      opts: [
+        "To save memory",
+        "For security",
+        "For user experience",
+        "Because it's outdated"
+      ],
+      correct: 2
+    },
+    {
+      q: "What does <source> do?",
+      opts: [
+        "Displays text",
+        "Provides media file path",
+        "Creates controls",
+        "Adds styling"
+      ],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 16,
+  title: "HTML Accessibility (ARIA Basics)",
+  sub: "Making web pages usable for screen readers and assistive technologies",
+
+  tutorial: `
+<p>
+Accessibility means designing HTML so that all users — including people using screen readers, keyboard navigation, or assistive devices — can understand and interact with your content.
+</p>
+
+<h3>♿ Why Accessibility Matters</h3>
+<ul>
+  <li>Improves usability for visually impaired users</li>
+  <li>Required in professional and government websites</li>
+  <li>Improves SEO and overall structure quality</li>
+</ul>
+
+<h3>🧠 Core Idea</h3>
+<p>
+HTML should be <strong>meaningful without visuals</strong>. Screen readers interpret structure, not colors or layouts.
+</p>
+
+<h3>🏷️ ARIA (Accessible Rich Internet Applications)</h3>
+<p>
+ARIA attributes help describe elements when HTML alone is not enough.
+</p>
+
+<h4>Common ARIA attributes:</h4>
+<ul>
+  <li><code>aria-label</code> → gives an element a readable name</li>
+  <li><code>aria-hidden="true"</code> → hides element from screen readers</li>
+  <li><code>role</code> → defines element purpose (button, navigation, etc.)</li>
+</ul>
+
+<h3>⌨️ Keyboard Navigation</h3>
+<p>
+Users should be able to navigate using <strong>Tab, Enter, and Arrow keys</strong> without a mouse.
+</p>
+
+<h3>📌 Best Practices</h3>
+<ul>
+  <li>Always use <code>&lt;label&gt;</code> for form inputs</li>
+  <li>Use semantic tags instead of only divs</li>
+  <li>Provide alt text for images</li>
+</ul>
+
+<h3>⚠️ Important Rule</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+ARIA should enhance HTML — not replace proper semantic elements.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Accessibility Example</h2>
+
+<button aria-label="Close dialog">X</button>
+
+<img src="image.jpg" alt="A sunset over mountains">
+
+<nav aria-label="Main navigation">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+</nav>
+
+<form>
+  <label for="name">Name:</label>
+  <input id="name" type="text">
+</form>
+
+<p aria-hidden="true">This text is hidden from screen readers</p>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What is the main goal of accessibility?",
+      opts: [
+        "Faster websites",
+        "Better animations",
+        "Usability for all users",
+        "Better colors"
+      ],
+      correct: 2
+    },
+    {
+      q: "What does aria-label do?",
+      opts: [
+        "Adds CSS styling",
+        "Gives readable name to element",
+        "Creates link",
+        "Hides element"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which tag is essential for form accessibility?",
+      opts: ["<input>", "<label>", "<form>", "<fieldset>"],
+      correct: 1
+    },
+    {
+      q: "Should ARIA replace semantic HTML?",
+      opts: ["Yes", "No"],
+      correct: 1
+    },
+    {
+      q: "What does aria-hidden=true do?",
+      opts: [
+        "Deletes element",
+        "Hides from screen readers",
+        "Hides from browser",
+        "Adds animation"
+      ],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 17,
+  title: "HTML Forms Advanced (Validation & Constraints)",
+  sub: "User input validation, constraints, and real-world form behavior",
+
+  tutorial: `
+<p>
+HTML forms are used to collect user input, but advanced forms also include built-in validation rules that ensure correct and safe data entry before submission.
+</p>
+
+<h3>🧠 Why Form Validation Matters</h3>
+<ul>
+  <li>Prevents invalid or incomplete data</li>
+  <li>Improves user experience (UX)</li>
+  <li>Reduces server-side errors</li>
+  <li>Essential for real-world applications (login, signup, payments)</li>
+</ul>
+
+<h3>⚙️ Key Validation Attributes</h3>
+
+<h4>1. required</h4>
+<p>Makes a field mandatory before submission.</p>
+
+<h4>2. minlength / maxlength</h4>
+<p>Sets allowed character limits.</p>
+
+<h4>3. min / max</h4>
+<p>Used for numbers and dates.</p>
+
+<h4>4. pattern</h4>
+<p>Uses regex rules to validate input format.</p>
+
+<h4>5. type-based validation</h4>
+<p>email, url, tel automatically enforce format rules.</p>
+
+<h3>📌 UX Best Practices</h3>
+<ul>
+  <li>Always use <code>&lt;label&gt;</code> for inputs</li>
+  <li>Give clear placeholder hints</li>
+  <li>Show validation feedback early</li>
+  <li>Avoid over-restricting users</li>
+</ul>
+
+<h3>⚠️ Important Concept</h3>
+<div style="background:#fef3c7; padding:10px; border-radius:10px;">
+HTML validation is the first layer — but backend validation is always required for security.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Advanced Form Example</h2>
+
+<form>
+
+  <label>Username:</label><br>
+  <input type="text" name="username" required minlength="3" maxlength="12">
+  <br><br>
+
+  <label>Email:</label><br>
+  <input type="email" name="email" required>
+  <br><br>
+
+  <label>Password:</label><br>
+  <input type="password" name="password" required minlength="6">
+  <br><br>
+
+  <label>Age:</label><br>
+  <input type="number" name="age" min="18" max="60">
+  <br><br>
+
+  <label>Phone:</label><br>
+  <input type="tel" name="phone" pattern="[0-9]{10}">
+  <br><br>
+
+  <input type="submit" value="Register">
+
+</form>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What does the required attribute do?",
+      opts: [
+        "Makes field optional",
+        "Makes field mandatory",
+        "Formats text",
+        "Adds styling"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which attribute limits minimum characters?",
+      opts: ["maxlength", "minlength", "limit", "size"],
+      correct: 1
+    },
+    {
+      q: "What does pattern attribute use?",
+      opts: ["CSS rules", "JavaScript", "Regular expressions", "Images"],
+      correct: 2
+    },
+    {
+      q: "Which input type validates email automatically?",
+      opts: ["text", "mail", "email", "string"],
+      correct: 2
+    },
+    {
+      q: "Is HTML validation enough for security?",
+      opts: ["Yes", "No"],
+      correct: 1
+    }
+  ]
+},{
+  id: 18,
+  title: "HTML Layout Structure (Real Website Building Patterns)",
+  sub: "Building full-page layouts using semantic structure and sections",
+
+  tutorial: `
+<p>
+A real website is not a collection of random tags — it is a structured layout composed of repeated sections such as header, navigation, content, sidebar, and footer.
+</p>
+
+<h3>🏗️ Core Layout Concept</h3>
+<p>
+Most modern websites follow a predictable structure:
+</p>
+
+<ul>
+  <li><strong>Header:</strong> logo, title, navigation</li>
+  <li><strong>Hero Section:</strong> main introduction area</li>
+  <li><strong>Main Content:</strong> articles, services, data</li>
+  <li><strong>Sidebar (optional):</strong> extra links or ads</li>
+  <li><strong>Footer:</strong> copyright and links</li>
+</ul>
+
+<h3>🧠 Key Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+HTML defines structure — CSS defines layout — JavaScript adds behavior.
+</div>
+
+<h3>📌 Layout Thinking Rule</h3>
+<p>
+Always think in sections, not tags. Each section has a purpose.
+</p>
+
+<h3>⚙️ Semantic Layout Advantage</h3>
+<ul>
+  <li>Cleaner code organization</li>
+  <li>Easier maintenance</li>
+  <li>Better SEO ranking</li>
+  <li>Improved accessibility</li>
+</ul>
+
+<h3>⚠️ Common Beginner Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Using only <code>&lt;div&gt;</code> for everything instead of semantic layout elements.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Website Layout</title>
+</head>
+
+<body>
+
+<header>
+  <h1>My Website</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h2>Hero Section</h2>
+  <p>Welcome to my professional website layout.</p>
+</section>
+
+<main>
+  <article>
+    <h2>Main Article</h2>
+    <p>This is the main content area of the page.</p>
+  </article>
+</main>
+
+<aside>
+  <h3>Sidebar</h3>
+  <p>Extra links or ads go here.</p>
+</aside>
+
+<footer>
+  <p>© 2026 My Website</p>
+</footer>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What is the purpose of HTML layout structure?",
+      opts: [
+        "Styling elements",
+        "Organizing full page sections",
+        "Adding animations",
+        "Storing data"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which tag represents main content?",
+      opts: ["<main>", "<content>", "<body>", "<section>"],
+      correct: 0
+    },
+    {
+      q: "What is typically inside the header?",
+      opts: [
+        "Database queries",
+        "Logo and navigation",
+        "Only text",
+        "Forms only"
+      ],
+      correct: 1
+    },
+    {
+      q: "What should NOT be used for everything in layout?",
+      opts: ["<div>", "<section>", "<article>", "<header>"],
+      correct: 0
+    },
+    {
+      q: "HTML layout mainly defines what?",
+      opts: [
+        "Design colors",
+        "Structure of page",
+        "Animations",
+        "Server logic"
+      ],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 19,
+  title: "HTML Responsive Design Basics (Viewport & Mobile-First Thinking)",
+  sub: "How web pages adapt to different screen sizes",
+
+  tutorial: `
+<p>
+Responsive design means your HTML pages automatically adjust to different screen sizes like phones, tablets, and desktops.
+</p>
+
+<h3>📱 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+One HTML structure → Multiple device layouts
+</div>
+
+<h3>🧠 Viewport Concept</h3>
+<p>
+The viewport is the visible area of a web page on a device. Without it, mobile browsers scale pages incorrectly.
+</p>
+
+<h3>⚙️ Why Viewport Matters</h3>
+<ul>
+  <li>Controls page scaling on mobile</li>
+  <li>Prevents zoomed-out desktop view on phones</li>
+  <li>Essential for modern web design</li>
+</ul>
+
+<h3>📌 Mobile-First Thinking</h3>
+<p>
+Modern development starts designing for small screens first, then expands for larger screens.
+</p>
+
+<h3>⚠️ Common Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Ignoring viewport meta tag → broken mobile layout
+</div>
+
+<h3>🌍 Real Impact</h3>
+<ul>
+  <li>Better user experience</li>
+  <li>Higher SEO ranking (Google prioritizes mobile-friendly sites)</li>
+  <li>Faster interaction on devices</li>
+</ul>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page</title>
+
+  <style>
+    body {
+      font-family: system-ui;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .box {
+      background: #eef2ff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Responsive Design Example</h1>
+
+  <div class="box">
+    This box will scale properly on mobile and desktop devices.
+  </div>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What does responsive design mean?",
+      opts: [
+        "Fixed layout for all devices",
+        "Adapts to different screen sizes",
+        "Only works on desktop",
+        "Only uses JavaScript"
+      ],
+      correct: 1
+    },
+    {
+      q: "What is the viewport?",
+      opts: [
+        "Database storage",
+        "Visible area of a webpage",
+        "Server location",
+        "CSS file"
+      ],
+      correct: 1
+    },
+    {
+      q: "Why is the viewport meta tag important?",
+      opts: [
+        "Adds colors",
+        "Controls mobile scaling",
+        "Improves database speed",
+        "Loads images"
+      ],
+      correct: 1
+    },
+    {
+      q: "Mobile-first design means:",
+      opts: [
+        "Design desktop first",
+        "Design mobile first then scale up",
+        "Ignore mobile",
+        "Use only CSS Grid"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which is a benefit of responsive design?",
+      opts: [
+        "Worse SEO",
+        "Better user experience",
+        "Slower pages",
+        "No HTML needed"
+      ],
+      correct: 1
+    }
+  ]
+},{
+  id: 20,
+  title: "HTML Text Utilities",
+  sub: "<hr>, <br>, whitespace handling, and comments",
+
+  tutorial: `
+<p>
+HTML provides small utility tags that control how content is visually separated and structured.
+</p>
+
+<h3>📌 <hr> (Horizontal Rule)</h3>
+<p>Creates a thematic break between sections.</p>
+
+<h3>📌 <br> (Line Break)</h3>
+<p>Forces a new line without starting a new paragraph.</p>
+
+<h3>📌 White Space Rule</h3>
+<p>HTML collapses multiple spaces into one by default.</p>
+
+<h3>📌 Comments</h3>
+<p>Invisible notes for developers: <code>&lt;!-- comment --&gt;</code></p>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Section 1</h2>
+<p>This is line one<br>This is line two</p>
+
+<hr>
+
+<h2>Section 2</h2>
+<p>HTML ignores     extra spaces.</p>
+
+<!-- This is a developer comment -->
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q: "What does <br> do?", opts: ["Adds space", "Line break", "Bold text", "New page"], correct: 1 },
+    { q: "What does <hr> represent?", opts: ["Image", "Horizontal line", "Header", "Link"], correct: 1 },
+    { q: "How does HTML treat extra spaces?", opts: ["Preserves them", "Removes them", "Duplicates them", "Errors"], correct: 1 },
+    { q: "How do you write a comment?", opts: ["// comment", "<!-- -->", "/* */", "# comment"], correct: 1 },
+    { q: "Are comments visible to users?", opts: ["Yes", "No"], correct: 1 }
+  ]
+},
+{
+  id: 21,
+  title: "HTML Contact Links",
+  sub: "Email and phone link integration",
+
+  tutorial: `
+<p>
+HTML allows direct communication links using special URL schemes.
+</p>
+
+<h3>📧 Email Links</h3>
+<p>Use <code>mailto:</code> to open email apps automatically.</p>
+
+<h3>📞 Phone Links</h3>
+<p>Use <code>tel:</code> for direct calling on mobile devices.</p>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<a href="mailto:test@example.com?subject=Hello&body=Hi there">
+Send Email
+</a>
+
+<br><br>
+
+<a href="tel:+123456789">
+Call Now
+</a>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    { q: "What does mailto do?", opts: ["Calls phone", "Sends email", "Opens file", "Downloads"], correct: 1 },
+    { q: "What does tel do?", opts: ["Email", "Call phone", "Open website", "Print page"], correct: 1 },
+    { q: "Can mailto include subject?", opts: ["Yes", "No"], correct: 0 },
+    { q: "Where is tel mostly used?", opts: ["Desktop", "Mobile", "Server", "CSS"], correct: 1 },
+    { q: "Which tag is used?", opts: ["<email>", "<a>", "<link>", "<call>"], correct: 1 }
+  ]
+},
+{
+  id: 22,
+  title: "HTML Forms & Input Types",
+  sub: "User input collection system",
+
+  tutorial: `
+<p>
+Forms are used to collect user data and send it to a server.
+</p>
+
+<h3>📌 Core Elements</h3>
+<ul>
+<li>&lt;form&gt;</li>
+<li>&lt;input&gt;</li>
+<li>&lt;label&gt;</li>
+<li>&lt;button&gt;</li>
+</ul>
+  `,
+
+  codeExample: `
+<form>
+  <input type="text" placeholder="Name">
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button type="submit">Submit</button>
+</form>
+  `,
+
+  quiz: [
+    { q: "Which tag creates a form?", opts: ["<form>", "<input>", "<data>", "<send>"], correct: 0 },
+    { q: "Which input type is for email?", opts: ["text", "email", "mail", "string"], correct: 1 },
+    { q: "What is input used for?", opts: ["Display", "User data", "Styling", "Navigation"], correct: 1 },
+    { q: "Which tag submits form?", opts: ["<submit>", "<button>", "<send>", "<form>"], correct: 1 },
+    { q: "Can forms collect data?", opts: ["Yes", "No"], correct: 0 }
+  ]
+},
+{
+  id: 23,
+  title: "HTML Forms Advanced (Validation & Constraints)",
+  sub: "Form validation, constraints, and user input rules",
+
+  tutorial: `
+<p>
+HTML form validation allows the browser to check user input before submitting data to a server.
+</p>
+
+<h3>🧠 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Validation = rules applied to input fields before submission
+</div>
+
+<h3>📌 Built-in Validation Attributes</h3>
+<ul>
+  <li><code>required</code> → field must be filled</li>
+  <li><code>minlength</code> / <code>maxlength</code> → text length limits</li>
+  <li><code>min</code> / <code>max</code> → numeric limits</li>
+  <li><code>pattern</code> → regex rule matching</li>
+</ul>
+
+<h3>⚙️ Why Validation Matters</h3>
+<ul>
+  <li>Prevents invalid data submission</li>
+  <li>Improves user experience</li>
+  <li>Reduces server errors</li>
+</ul>
+
+<h3>⚠️ Important Rule</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+HTML validation is client-side only — it can be bypassed. Server validation is still required.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Registration Form</h2>
+
+<form>
+
+  <label>Username:</label><br>
+  <input type="text" name="username" required minlength="4" maxlength="12">
+  <br><br>
+
+  <label>Email:</label><br>
+  <input type="email" name="email" required>
+  <br><br>
+
+  <label>Age:</label><br>
+  <input type="number" name="age" min="18" max="60">
+  <br><br>
+
+  <label>Password:</label><br>
+  <input type="password" name="password"
+         required minlength="6"
+         pattern=".{6,}">
+  <br><br>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What does 'required' do?",
+      opts: [
+        "Makes field optional",
+        "Forces input before submit",
+        "Adds styling",
+        "Encrypts data"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which attribute limits text length?",
+      opts: ["max", "limit", "maxlength", "length"],
+      correct: 2
+    },
+    {
+      q: "Is HTML validation enough for security?",
+      opts: ["Yes", "No"],
+      correct: 1
+    },
+    {
+      q: "What does 'pattern' do?",
+      opts: [
+        "Adds style",
+        "Validates regex format",
+        "Stores data",
+        "Encrypts input"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which runs first: HTML validation or server validation?",
+      opts: ["Server", "HTML", "Both same", "None"],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 24,
+  title: "HTML Media Elements (Video & Audio)",
+  sub: "Embedding video and audio content in web pages",
+
+  tutorial: `
+<p>
+HTML supports native multimedia playback using <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> elements.
+</p>
+
+<h3>🎬 Video Element</h3>
+<p>The <code>&lt;video&gt;</code> tag is used to embed video files directly into a webpage.</p>
+
+<h3>🎧 Audio Element</h3>
+<p>The <code>&lt;audio&gt;</code> tag is used for playing sound files like music or voice recordings.</p>
+
+<h3>📌 Core Attributes</h3>
+<ul>
+  <li><code>controls</code> → shows play/pause UI</li>
+  <li><code>autoplay</code> → starts automatically</li>
+  <li><code>loop</code> → repeats media</li>
+  <li><code>muted</code> → starts silent</li>
+</ul>
+
+<h3>🧠 Important Concept</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Always provide multiple formats using <code>&lt;source&gt;</code> for browser compatibility.
+</div>
+
+<h3>⚠️ Browser Note</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Autoplay often requires <code>muted</code> to work in modern browsers.
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Video Example</h2>
+
+<video width="320" controls>
+  <source src="movie.mp4" type="video/mp4">
+  Your browser does not support video.
+</video>
+
+<h2>Audio Example</h2>
+
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "Which tag is used for video?",
+      opts: ["<media>", "<video>", "<movie>", "<play>"],
+      correct: 1
+    },
+    {
+      q: "Which attribute shows play controls?",
+      opts: ["ui", "controls", "play", "show"],
+      correct: 1
+    },
+    {
+      q: "Which tag is used for audio?",
+      opts: ["<sound>", "<audio>", "<music>", "<mp3>"],
+      correct: 1
+    },
+    {
+      q: "Why use <source> inside media tags?",
+      opts: [
+        "For styling",
+        "For multiple formats",
+        "For captions",
+        "For layout"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which attribute disables sound?",
+      opts: ["silent", "mute", "muted", "quiet"],
+      correct: 2
+    }
+  ]
+},
+{
+  id: 25,
+  title: "HTML Semantic Elements (Deep Dive)",
+  sub: "Meaningful structure: article, section, aside, figure, figcaption",
+
+  tutorial: `
+<p>
+Semantic HTML means using elements that clearly describe their meaning instead of generic containers like <code>&lt;div&gt;</code>.
+</p>
+
+<h3>🧠 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Semantic HTML = structure that both humans and machines understand
+</div>
+
+<h3>📌 Key Semantic Elements</h3>
+
+<ul>
+  <li><code>&lt;article&gt;</code> → independent content (blog post, news)</li>
+  <li><code>&lt;section&gt;</code> → grouped content inside a page</li>
+  <li><code>&lt;aside&gt;</code> → side content (ads, sidebar)</li>
+  <li><code>&lt;figure&gt;</code> → media container (image, diagram)</li>
+  <li><code>&lt;figcaption&gt;</code> → caption for figure</li>
+</ul>
+
+<h3>🌐 Why Semantic HTML Matters</h3>
+
+<ul>
+  <li>Improves SEO ranking</li>
+  <li>Better accessibility (screen readers)</li>
+  <li>Cleaner code structure</li>
+  <li>Easier maintenance in large projects</li>
+</ul>
+
+<h3>⚠️ Common Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Using <code>&lt;div&gt;</code> for everything instead of meaningful structure elements
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+  <h1>My Blog</h1>
+</header>
+
+<article>
+  <h2>Learning HTML</h2>
+  <p>This is a blog post about HTML semantics.</p>
+
+  <figure>
+    <img src="https://picsum.photos/300/150" alt="Sample image">
+    <figcaption>Example image with caption</figcaption>
+  </figure>
+
+</article>
+
+<section>
+  <h3>Related Topics</h3>
+  <p>CSS, JavaScript, Web Design</p>
+</section>
+
+<aside>
+  <p>Advertisement or sidebar content here</p>
+</aside>
+
+<footer>
+  <p>© 2026 My Website</p>
+</footer>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What does <article> represent?",
+      opts: [
+        "A navigation bar",
+        "Independent content block",
+        "A footer",
+        "A script"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which tag is used for side content?",
+      opts: ["<aside>", "<side>", "<extra>", "<section>"],
+      correct: 0
+    },
+    {
+      q: "What is <figure> used for?",
+      opts: [
+        "Forms",
+        "Images/media grouping",
+        "Tables",
+        "Links"
+      ],
+      correct: 1
+    },
+    {
+      q: "What is <figcaption>?",
+      opts: [
+        "Image source",
+        "Caption for media",
+        "Footer text",
+        "Heading"
+      ],
+      correct: 1
+    },
+    {
+      q: "Why use semantic HTML?",
+      opts: [
+        "Only for styling",
+        "SEO and accessibility",
+        "Faster JavaScript",
+        "Reduces images"
+      ],
+      correct: 1
+    }
+  ]
+},{
+  id: 26,
+  title: "HTML Global Attributes",
+  sub: "Attributes that work on all HTML elements",
+
+  tutorial: `
+<p>
+Global attributes are attributes that can be used on almost any HTML element, regardless of its type.
+They help control styling, identification, behavior, and metadata.
+</p>
+
+<h3>🧠 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Global attributes = universal controls for HTML elements
+</div>
+
+<h3>📌 Most Important Global Attributes</h3>
+
+<ul>
+  <li><code>id</code> → unique identifier for an element</li>
+  <li><code>class</code> → group elements for styling</li>
+  <li><code>style</code> → inline CSS styling</li>
+  <li><code>title</code> → tooltip text on hover</li>
+  <li><code>hidden</code> → hides element from view</li>
+  <li><code>data-*</code> → custom data storage</li>
+  <li><code>tabindex</code> → keyboard navigation order</li>
+</ul>
+
+<h3>⚙️ Why Global Attributes Matter</h3>
+
+<ul>
+  <li>Enable CSS targeting (class, id)</li>
+  <li>Support JavaScript interaction</li>
+  <li>Improve accessibility (tabindex, title)</li>
+  <li>Allow custom metadata (data-*)</li>
+</ul>
+
+<h3>⚠️ Common Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Using the same <code>id</code> on multiple elements (must be unique)
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2 id="mainTitle" class="title" title="This is a heading">
+HTML Global Attributes Example
+</h2>
+
+<p class="text" style="color:blue;">
+This paragraph uses class and inline style.
+</p>
+
+<p hidden>
+This text is hidden using the hidden attribute.
+</p>
+
+<div data-user="12345" class="box">
+Custom data attribute example
+</div>
+
+<button tabindex="1">First</button>
+<button tabindex="2">Second</button>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "Which attribute must be unique?",
+      opts: ["class", "id", "style", "data"],
+      correct: 1
+    },
+    {
+      q: "What does class do?",
+      opts: [
+        "Hides element",
+        "Groups elements",
+        "Creates links",
+        "Runs script"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does hidden do?",
+      opts: [
+        "Deletes element",
+        "Hides element",
+        "Styles element",
+        "Moves element"
+      ],
+      correct: 1
+    },
+    {
+      q: "What is data-* used for?",
+      opts: [
+        "Styling only",
+        "Custom data storage",
+        "Navigation",
+        "Images"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does tabindex control?",
+      opts: [
+        "Image size",
+        "Keyboard navigation order",
+        "Text color",
+        "Link speed"
+      ],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 27,
+  title: "HTML Accessibility Basics (ARIA + alt + Roles)",
+  sub: "Making web content usable for everyone",
+
+  tutorial: `
+<p>
+Accessibility (a11y) ensures that websites can be used by people with disabilities, including visual, motor, and cognitive impairments.
+</p>
+
+<h3>🧠 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Good HTML = readable by humans + understandable by machines (screen readers)
+</div>
+
+<h3>📌 Key Accessibility Features</h3>
+
+<ul>
+  <li><code>alt</code> → description for images</li>
+  <li><code>aria-label</code> → accessible label for elements</li>
+  <li><code>role</code> → defines element purpose</li>
+  <li><code>tabindex</code> → keyboard navigation order</li>
+</ul>
+
+<h3>🌐 Why Accessibility Matters</h3>
+
+<ul>
+  <li>Supports screen readers</li>
+  <li>Improves usability for all users</li>
+  <li>Required in modern web standards</li>
+  <li>Improves SEO indirectly</li>
+</ul>
+
+<h3>⚠️ Common Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Using images without <code>alt</code> text makes content inaccessible
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2 aria-label="Main heading of page">
+Welcome to Accessibility
+</h2>
+
+<img src="https://picsum.photos/200/120" alt="Mountain landscape at sunset">
+
+<button aria-label="Close dialog button">
+X
+</button>
+
+<div role="navigation">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+</div>
+
+<input type="text" placeholder="Name" aria-label="Enter your name">
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What is the purpose of alt text?",
+      opts: [
+        "Styling images",
+        "Describing images for screen readers",
+        "Loading images faster",
+        "Encrypting images"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does aria-label do?",
+      opts: [
+        "Adds color",
+        "Provides accessible description",
+        "Creates link",
+        "Hides element"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does role define?",
+      opts: [
+        "Element purpose",
+        "Image size",
+        "Font style",
+        "Page speed"
+      ],
+      correct: 0
+    },
+    {
+      q: "Who benefits from accessibility?",
+      opts: [
+        "Only developers",
+        "Only SEO bots",
+        "All users",
+        "Only browsers"
+      ],
+      correct: 2
+    },
+    {
+      q: "What happens if images have no alt?",
+      opts: [
+        "Faster loading",
+        "Inaccessible to screen readers",
+        "Better SEO",
+        "No effect"
+      ],
+      correct: 1
+    }
+  ]
+},
+{
+  id: 28,
+  title: "HTML Metadata & SEO Basics",
+  sub: "charset, viewport, description, and search optimization",
+
+  tutorial: `
+<p>
+Metadata is information about your HTML document that is not displayed directly on the page but is used by browsers, search engines, and devices.
+</p>
+
+<h3>🧠 Core Idea</h3>
+<div style="background:#eef2ff; padding:10px; border-radius:10px;">
+Meta tags control how your page behaves, scales, and appears in search results.
+</div>
+
+<h3>📌 Important Meta Tags</h3>
+
+<ul>
+  <li><code>charset</code> → defines character encoding</li>
+  <li><code>viewport</code> → controls mobile responsiveness</li>
+  <li><code>description</code> → SEO summary of page</li>
+  <li><code>keywords</code> → (legacy SEO tag)</li>
+  <li><code>author</code> → page author info</li>
+</ul>
+
+<h3>📱 Why viewport is important</h3>
+<div style="background:#ecfeff; padding:10px; border-radius:10px;">
+Without viewport meta tag, mobile websites appear zoomed out and broken.
+</div>
+
+<h3>🔍 SEO Role</h3>
+<ul>
+  <li>Search engines read meta description</li>
+  <li>Improves click-through rate</li>
+  <li>Helps indexing accuracy</li>
+</ul>
+
+<h3>⚠️ Common Mistake</h3>
+<div style="background:#fee2e2; padding:10px; border-radius:10px;">
+Missing viewport tag causes bad mobile experience
+</div>
+  `,
+
+  codeExample: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Learn HTML step by step with interactive lessons">
+  <meta name="author" content="HTML Mastery Pro">
+
+  <title>Meta Tags Example</title>
+
+</head>
+<body>
+
+<h1>Metadata Demo</h1>
+<p>This page includes SEO and responsive meta tags.</p>
+
+</body>
+</html>
+  `,
+
+  quiz: [
+    {
+      q: "What does charset define?",
+      opts: [
+        "Page layout",
+        "Character encoding",
+        "Font style",
+        "Image format"
+      ],
+      correct: 1
+    },
+    {
+      q: "What does viewport control?",
+      opts: [
+        "SEO ranking",
+        "Mobile scaling",
+        "Image size",
+        "Server response"
+      ],
+      correct: 1
+    },
+    {
+      q: "Which meta tag improves SEO?",
+      opts: [
+        "description",
+        "img",
+        "div",
+        "span"
+      ],
+      correct: 0
+    },
+    {
+      q: "Where do meta tags go?",
+      opts: [
+        "body",
+        "footer",
+        "head",
+        "nav"
+      ],
+      correct: 2
+    },
+    {
+      q: "What happens without viewport meta tag?",
+      opts: [
+        "Faster site",
+        "Broken mobile layout",
+        "Better SEO",
+        "No effect"
+      ],
+      correct: 1
+    }
+  ]
+}
+
+];
+    // ============================================================
+// COMBINE LESSONS (Add this after your lessonsData and advancedLessons)
+// ============================================================
+let fullCourse = [...lessonsData, ...advancedLessons];
+    let currentIndex = 0;
+    let quizState = { current: 0, answers: [], finished: false };
+
+    // ============================================================
+    // RENDER SIDEBAR FUNCTION
+    // ============================================================
+    function renderSidebar() {
+        const list = document.getElementById('lessonsList');
+        if (!list) return;
+        list.innerHTML = '';
+        fullCourse.forEach((lesson, idx) => {
+            const li = document.createElement('li');
+            li.className = `lesson-item ${idx === currentIndex ? 'active' : ''}`;
+            li.innerHTML = `<span class="lesson-num">${lesson.id}</span><span>${lesson.title}</span>`;
+            li.addEventListener('click', () => { currentIndex = idx; loadLesson(); });
+            list.appendChild(li);
+        });
+    }
+
+    // ============================================================
+    // UPDATE COUNTERS
+    // ============================================================
+    function updateLessonCounters() {
+        const total = fullCourse.length;
+        const totalCountElem = document.getElementById('totalLessonsCount');
+        if (totalCountElem) {
+            totalCountElem.innerText = `${total} complete lessons`;
+        }
+    }
+
+    // ============================================================
+    // QUIZ FUNCTIONS (ADDED BACK - THESE WERE MISSING!)
+    // ============================================================
+    function resetQuizForLesson(quizArr) {
+        const questions = quizArr || fullCourse[currentIndex].quiz;
+        quizState = { current: 0, answers: new Array(questions.length).fill(null), finished: false, questions: questions };
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+    const wrapper = document.getElementById('quizWrapper');
+    if (!wrapper) return;
+    if (quizState.finished) {
+        let score = 0;
+        quizState.answers.forEach((ans, idx) => { if (ans === quizState.questions[idx].correct) score++; });
+        wrapper.innerHTML = `<h3>📊 Quiz Complete</h3><div style="background:#d1fae5; padding:1rem; border-radius:1rem;">Score: ${score}/${quizState.questions.length}<br><button id="retryQuiz" style="margin-top:10px; background:#e34c26; color:white; border:none; padding:8px 20px; border-radius:40px;">Retry Quiz</button></div>`;
+        document.getElementById('retryQuiz')?.addEventListener('click', () => resetQuizForLesson(quizState.questions));
+        return;
+    }
+    const q = quizState.questions[quizState.current];
+    const selected = quizState.answers[quizState.current];
+    let feedback = '';
+    if (selected !== null) {
+        const isCorrect = (selected === q.correct);
+        feedback = `<div class="quiz-feedback" style="background:${isCorrect ? '#d1fae5' : '#fee2e2'}">${isCorrect ? '✅ Correct!' : `❌ Wrong! Correct answer: ${escapeHtml(q.opts[q.correct])}`}</div>`;
+    }
+    let optsHtml = '';
+    q.opts.forEach((opt, idx) => {
+        const escapedOpt = escapeHtml(opt);
+        const isChecked = (selected === idx) ? 'checked' : '';
+        const isCorrectHighlight = (selected !== null && idx === q.correct && selected !== q.correct) ? 'style="background:#bbf7d0; border:2px solid #22c55e;"' : '';
+        
+        optsHtml += `
+            <div class="quiz-option" data-opt="${idx}" ${isCorrectHighlight}>
+                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; width: 100%;">
+                    <input type="radio" name="quiz_option" value="${idx}" ${isChecked} style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>${escapedOpt}</span>
+                </label>
+            </div>
+        `;
+    });
+    const escapedQuestion = escapeHtml(q.q);
+    wrapper.innerHTML = `<h3>📝 Quick Quiz (${quizState.current+1}/${quizState.questions.length})</h3><div class="quiz-question">${escapedQuestion}</div><div id="quizOptions">${optsHtml}</div>${feedback}<div style="margin-top:1rem;"><button id="quizNextBtn" class="run-code-btn" style="background:#e34c26;">${quizState.current+1 === quizState.questions.length ? 'Finish' : 'Next →'}</button></div>`;
+    
+    // Add event listeners to radio buttons
+    document.querySelectorAll('input[name="quiz_option"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (quizState.answers[quizState.current] !== null) return;
+            const chosen = parseInt(e.target.value);
+            quizState.answers[quizState.current] = chosen;
+            renderQuiz();
+        });
+    });
+    
+    document.getElementById('quizNextBtn')?.addEventListener('click', () => {
+        if (quizState.answers[quizState.current] === null) { alert('Please select an answer!'); return; }
+        if (quizState.current + 1 === quizState.questions.length) { quizState.finished = true; renderQuiz(); }
+        else { quizState.current++; renderQuiz(); }
+    });
+}
+    // ============================================================
+    // LOAD LESSON FUNCTION
+    // ============================================================
+    function loadLesson() {
+        const lesson = fullCourse[currentIndex];
+        document.getElementById('lessonCounter').innerText = `Lesson ${currentIndex+1} / ${fullCourse.length}`;
+        const container = document.getElementById('lessonContent');
+        
+        const existingTopBar = container.querySelector('.top-bar');
+        if (existingTopBar) {
+            const newContent = document.createElement('div');
+            newContent.innerHTML = `
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-sub">${lesson.sub}</div>
+                <div class="tutorial-card"><h3>📘 Tutorial</h3>${lesson.tutorial}</div>
+                <div class="code-box"><div class="code-header">📄 Example Code</div><pre><code>${escapeHtml(lesson.codeExample)}</code></pre></div>
+                <div class="try-editor"><div class="editor-header">✏️ Try it Yourself → Edit & Run</div>
+                <textarea id="liveEditor" rows="8">${escapeHtml(lesson.codeExample)}</textarea>
+                <button id="runLiveBtn" class="run-code-btn">▶ Run Code</button>
+                <div id="liveOutput" class="output-preview">✨ Click Run to see output ✨</div></div>
+                <div class="quiz-wrapper" id="quizWrapper"></div>
+            `;
+            
+            const allChildren = Array.from(container.children);
+            allChildren.forEach(child => {
+                if (child !== existingTopBar) {
+                    child.remove();
+                }
+            });
+            container.appendChild(newContent);
+        } else {
+            container.innerHTML = `
+                <div class="top-bar">
+                    <div class="nav-group">
+                        <button id="prevLessonBtn" class="nav-btn">◀ Previous</button>
+                        <button id="nextLessonBtn" class="nav-btn">Next ▶</button>
+                        <button id="homeResetBtn" class="nav-btn nav-btn-primary">🏠 Home / Reset</button>
+                    </div>
+                    <div><span id="lessonCounter" style="font-weight: 600;">Lesson ${currentIndex+1} / ${fullCourse.length}</span></div>
+                </div>
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-sub">${lesson.sub}</div>
+                <div class="tutorial-card"><h3>📘 Tutorial</h3>${lesson.tutorial}</div>
+                <div class="code-box"><div class="code-header">📄 Example Code</div><pre><code>${escapeHtml(lesson.codeExample)}</code></pre></div>
+                <div class="try-editor"><div class="editor-header">✏️ Try it Yourself → Edit & Run</div>
+                <textarea id="liveEditor" rows="8">${escapeHtml(lesson.codeExample)}</textarea>
+                <button id="runLiveBtn" class="run-code-btn">▶ Run Code</button>
+                <div id="liveOutput" class="output-preview">✨ Click Run to see output ✨</div></div>
+                <div class="quiz-wrapper" id="quizWrapper"></div>
+            `;
+        }
+        
+        const runBtn = document.getElementById('runLiveBtn');
+        if (runBtn) {
+            runBtn.addEventListener('click', () => {
+                const code = document.getElementById('liveEditor').value;
+                const outDiv = document.getElementById('liveOutput');
+                const doc = document.implementation.createHTMLDocument();
+                doc.body.innerHTML = code;
+                outDiv.innerHTML = doc.body.innerHTML || '<p>✅ Rendered successfully</p>';
+            });
+        }
+        resetQuizForLesson(lesson.quiz);
+        renderSidebar();
+    }
+
+    // ============================================================
+    // HELPER FUNCTIONS
+    // ============================================================
+    function escapeHtml(str) { 
+        return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); 
+    }
+
+    function goPrev() { 
+        if (currentIndex > 0) { 
+            currentIndex--; 
+            loadLesson(); 
+        } else {
+            alert("You're at the first lesson!");
+        }
+    }
+
+    function goNext() { 
+        if (currentIndex < fullCourse.length - 1) { 
+            currentIndex++; 
+            loadLesson(); 
+        } else {
+            alert("🎉 Congratulations! You've completed all lessons!");
+        }
+    }
+
+    // ============================================================
+    // INITIALIZE EVERYTHING
+    // ============================================================
+    updateLessonCounters();
+
+    document.getElementById('prevLessonBtn').addEventListener('click', goPrev);
+    document.getElementById('nextLessonBtn').addEventListener('click', goNext);
+    document.getElementById('bottomPrev').addEventListener('click', goPrev);
+    document.getElementById('bottomNext').addEventListener('click', goNext);
+    document.getElementById('homeResetBtn').addEventListener('click', () => { 
+        currentIndex = 0; 
+        loadLesson(); 
+    });
+
+    loadLesson();
+    // ============================================================
+    // HOMEPAGE NAVIGATION - ADD THIS AT THE END
+    // ============================================================
+    
+    // Get elements
+    const homepage = document.getElementById('homepage');
+    const mainApp = document.getElementById('mainApp');
+    const startBtn = document.getElementById('startBtn');
+    const homeResetBtn = document.getElementById('homeResetBtn');
+    
+    // Function to show homepage
+    function showHomepage() {
+        homepage.style.display = 'flex';
+        mainApp.style.display = 'none';
+    }
+    
+    // Function to show main app
+    function showMainApp() {
+        homepage.style.display = 'none';
+        mainApp.style.display = 'block';
+        // Refresh the current lesson when showing main app
+        if (typeof loadLesson === 'function') {
+            loadLesson();
+        }
+    }
+    
+    // Start button click
+    if (startBtn) {
+        startBtn.addEventListener('click', showMainApp);
+    }
+    
+    // Home button click (update your existing homeResetBtn listener)
+    if (homeResetBtn) {
+        // Remove existing listeners and add new one
+        const newHomeBtn = homeResetBtn.cloneNode(true);
+        homeResetBtn.parentNode.replaceChild(newHomeBtn, homeResetBtn);
+        newHomeBtn.addEventListener('click', showHomepage);
+    }
+    
+    // Make grid items clickable - start from specific lesson
+    document.querySelectorAll('.grid-item').forEach((item, index) => {
+        item.addEventListener('click', () => {
+            if (typeof currentIndex !== 'undefined') {
+                currentIndex = index;
+            }
+            showMainApp();
+        });
+    });
+    
+    // Initially show 
+    // Function to show homepage
+function showHomepage() {
+    homepage.style.display = 'flex';
+    mainApp.style.display = 'none';
+    // Footer is always visible globally
+}
+
+// Function to show main app
+function showMainApp() {
+    homepage.style.display = 'none';
+    mainApp.style.display = 'block';
+    if (typeof loadLesson === 'function') {
+        loadLesson();
+    }
+    // Footer is always visible globally
+}
+// Update progress function
+function updateProgress() {
+    const total = fullCourse.length;
+    const completed = JSON.parse(localStorage.getItem('completedLessons') || '[]').length;
+    const percent = Math.round((completed / total) * 100);
+    const progressBar = document.getElementById('progressBarFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const completedCount = document.getElementById('completedCount');
+    
+    if (progressBar) progressBar.style.width = `${percent}%`;
+    if (progressPercent) progressPercent.innerText = `${percent}%`;
+    if (completedCount) completedCount.innerText = completed;
+}
+
+// Mark lesson as completed when quiz is finished
+function markLessonCompleted(lessonId) {
+    let completed = JSON.parse(localStorage.getItem('completedLessons') || '[]');
+    if (!completed.includes(lessonId)) {
+        completed.push(lessonId);
+        localStorage.setItem('completedLessons', JSON.stringify(completed));
+        updateProgress();
+    }
+}
+
+// Update lesson count display
+function updateLessonCount() {
+    const lessonCountSpan = document.getElementById('lessonCount');
+    if (lessonCountSpan) {
+        lessonCountSpan.innerText = `${fullCourse.length} lessons`;
+    }
+}
+
+// Search functionality
+const searchInput = document.getElementById('lessonSearch');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const items = document.querySelectorAll('.lesson-item');
+        let visibleCount = 0;
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                item.style.display = 'flex';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        // Optional: show no results message
+        const lessonsHeader = document.querySelector('.lessons-header span:first-child');
+        if (lessonsHeader) {
+            lessonsHeader.innerHTML = searchTerm ? `🔍 Results (${visibleCount})` : '📚 All Lessons';
+        }
+    });
+}
+
+// Call these when initializing
+updateLessonCount();
+updateProgress();
+// DARK MODE
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+// Check if dark mode was saved
+if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
+    darkModeToggle.textContent = '☀️';
+}
+
+// When button is clicked
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.textContent = '☀️';
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.textContent = '🌙';
+    }
+});
+</script>
+</body>
+</html> 
